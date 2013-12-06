@@ -1,0 +1,352 @@
+# Copyright (C) 2013 JSJ Gallery Slideshow
+# This file is distributed under the same license as the JSJ Gallery Slideshow package.
+msgid ""
+msgstr ""
+"Project-Id-Version: JSJ Gallery Slideshow 1.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/jsjSlideShow\n"
+"POT-Creation-Date: 2013-12-06 05:07:46+00:00\n"
+"PO-Revision-Date: 2013-12-06 00:08-0500\n"
+"Last-Translator: Jorge Silva-Jetter <jorge.silva@thejsj.com>\n"
+"Language-Team: Jorge Silva-Jetter <jorge.silva@thejsj.com>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: jsjSlideShow.php:46
+msgid "JSJ Gallery Slideshow Options"
+msgstr "Opciones JSJ Galería Slideshow"
+
+#. Plugin Name of the plugin/theme
+#: jsjSlideShow.php:62
+msgid "JSJ Gallery Slideshow"
+msgstr "JSJ Galería Slideshow"
+
+#: jsjSlideShow.php:65
+msgid "These are some of the settings you can change for your gallery."
+msgstr "Esta es la configuración para su galería."
+
+#: jsjSlideShow.php:66
+msgid " This plugin is based in %sJquery Cycle%s"
+msgstr " Este plugin está basado en %sJquery Cycle%s"
+
+#: jsjSlideShow.php:67
+msgid " and the options are taken from Jquery Cycle's %soptions page%s."
+msgstr ""
+" y las opciones están tomadas de %la página de opciones%s de Jquery Cycle."
+
+#: jsjSlideShow.php:68
+msgid ""
+" The visual feel of the gallery is based on %sCargo's slideshow settings%s."
+msgstr ""
+" El diseño visual de la galería está basado en %sla configuración del "
+"slideshow de Cargo%s."
+
+#: jsjSlideShow.php:69
+msgid " You can see an example of this plugin in action in my website: %s."
+msgstr " Puede ver un ejemplo de este plugin en acción en mi página web: %s."
+
+#: jsjSlideShow.php:71
+msgid ""
+"%sSettings with a Green Background%s denote settings that are probably more "
+"imoprtant."
+msgstr ""
+"%sOpciones con trasfondo verde%s son opciones que probablemente son más "
+"importantes."
+
+#: jsjSlideShow.php:86
+msgid "Your settings have been deverted back to their default."
+msgstr "Su configuración ha sido revertida a la configuración original."
+
+#: jsjSlideShow.php:155
+msgid "If pleased with your settings, go ahead and save them!"
+msgstr "Si está complacido con su configuración, guardelas."
+
+#: jsjSlideShow.php:158
+msgid "Swith To Default Settings"
+msgstr "Cambiar a opciones originales."
+
+#: jsjSlideShow.php:159
+msgid "Clear all your settings and swith to the original plugin settings."
+msgstr "Limpiar su configuración y reestablecer configuración original."
+
+#: jsjSlideShow.php:162
+msgid "Revertir a opciones originales"
+msgstr "Revertir a opciones originales"
+
+#: jsjSlideShow.php:289
+msgid "Previous"
+msgstr "Previa"
+
+#: jsjSlideShow.php:290
+msgid "Next Image"
+msgstr "Próxima imagen"
+
+#: sssettings.php:9
+msgid "Active Pager Class"
+msgstr "Clase CSS para paginador activo"
+
+#: sssettings.php:10
+msgid "Class name used for the active pager element. No Spaces!"
+msgstr ""
+"Nombre de clase CSS usasda para el elemtno activo en el paginador. Sin "
+"espacios!"
+
+#: sssettings.php:20
+msgid "Auto Stop"
+msgstr "Auto Parar"
+
+#: sssettings.php:21
+msgid "True to end slideshow after X transitions (where X == slide count) "
+msgstr ""
+"Cierto para terminar slideshow después de X tranciciones (donde X == numero "
+"de slides)."
+
+#: sssettings.php:31
+msgid "Auto Stop Count"
+msgstr "Auto Parar - Cuenta"
+
+#: sssettings.php:32
+msgid "number of transitions (optionally used with autostop to define X) "
+msgstr ""
+"Número de tranciciones (optionalmente usada con auto-parar para definer X)"
+
+#: sssettings.php:42
+msgid "Start Backwards"
+msgstr "Empezár al revés"
+
+#: sssettings.php:43
+msgid ""
+"true to start slideshow at last slide and move backwards through the stack"
+msgstr ""
+"Cierto para comenzar slideshow en el último slide y ir adelantando desde el "
+"final."
+
+#: sssettings.php:53
+msgid "Clear Type No Background"
+msgstr "Sin trasfondo cleartype"
+
+#: sssettings.php:54
+msgid ""
+"Set to true to disable extra cleartype fixing (leave false to force "
+"background color setting on slides) "
+msgstr ""
+"Coloque como cierto para remover 'exta cleartype fixing' (Deje como falso "
+"para forzar un color al trasfondo [background-color] en los slides)."
+
+#: sssettings.php:64
+msgid "Container Resize"
+msgstr "Tamaño del contendor"
+
+#: sssettings.php:65
+msgid "Resize container to fit largest slide. 0:False / 1: True"
+msgstr ""
+"Ajustar tamaño del conteneder para acomodar slide más grande. 0:Falso / 1:"
+"Cierto"
+
+#: sssettings.php:75
+msgid "Delay"
+msgstr "Retraso"
+
+#: sssettings.php:76
+msgid "Additional delay (in ms) for first transition (hint: can be negative)."
+msgstr ""
+"Retraso adicional (en ms) para primera transición (pueder ser negativo)."
+
+#: sssettings.php:86
+msgid "FastOn Event"
+msgstr "Evento FastOn"
+
+#: sssettings.php:87
+msgid ""
+"Force fast transitions when triggered manually (via pager or prev/next); "
+"value == time in ms."
+msgstr ""
+"Forzar transiciones rápidoas cuando son disparadas manualmente (via "
+"paginador o pasado/próximo). valor == tiempo en milesegundos."
+
+#: sssettings.php:97
+msgid "Fit Slides"
+msgstr "Ajustar Slides"
+
+#: sssettings.php:98
+msgid "Force slides to fit container."
+msgstr "Forzar slides para que quepan en contendor."
+
+#: sssettings.php:108
+msgid "Transition Effect"
+msgstr "Efecto de transición"
+
+#: sssettings.php:109
+msgid "Name of transition effect."
+msgstr "Nombre de efecto para transición"
+
+#: sssettings.php:119
+msgid "Slide Height"
+msgstr "Altura de slide"
+
+#: sssettings.php:120
+msgid ""
+"Container height (if the \"fit\" option is true, the slides will be set to "
+"this height as well)."
+msgstr ""
+"Altura de contendor ( si la opción para ajustar slides está en cierto, los "
+"slides serán ajustados a esta altura también)"
+
+#: sssettings.php:130
+msgid "Manual Trump"
+msgstr "Sobreponer transición manual"
+
+#: sssettings.php:131
+msgid ""
+"Causes manual transition to stop an active transition instead of being "
+"ignored."
+msgstr ""
+"Causa que una transición manual pare una transición activa en vez de ser "
+"ignorada."
+
+#: sssettings.php:141
+msgid "Data Attribute"
+msgstr "Atributo Data"
+
+#: sssettings.php:142
+msgid "data- attribute that holds the option data for the slideshow."
+msgstr "atributo data- que lleva la opción de data para el slideshow."
+
+#: sssettings.php:152
+msgid "No Wrapping"
+msgstr "Sin contenedor"
+
+#: sssettings.php:153
+msgid "True(1) to prevent slideshow from wrapping."
+msgstr "Cierto(1) para revenir que el slideshow tenga contendor."
+
+#: sssettings.php:163
+msgid "Pause Slidehow"
+msgstr "Pausar slideshow"
+
+#: sssettings.php:164
+msgid "True(1) to enable \"pause on hover\"."
+msgstr "Cierto(1) para activar pausa en hover."
+
+#: sssettings.php:174
+msgid "Pause On Pager Hover"
+msgstr "Pausar en hover del paginador"
+
+#: sssettings.php:175
+msgid "True(1) to pause when hovering over pager link."
+msgstr ""
+"Cierto(1) para pausar el slideshow cuando se esta hovering sobre el enlace "
+"del paginador"
+
+#: sssettings.php:185
+msgid "Random Slides"
+msgstr "Slides al azar"
+
+#: sssettings.php:186
+msgid "True(1) for random, false for sequence (not applicable to shuffle fx)."
+msgstr ""
+"Cierto(1) para mostar slides al azar. Falso para mostarlas en sequencia. (No "
+"aplica a shuffle fx)"
+
+#: sssettings.php:196
+msgid "Requeue OnImageNotLoaded"
+msgstr "Reordenar (requeue) OnImageNotLoaded"
+
+#: sssettings.php:197
+msgid "Requeue the slideshow if any image slides are not yet loaded ."
+msgstr "Reordenar"
+
+#: sssettings.php:207
+msgid "Requeue Timeout"
+msgstr "Timeout para reordenar (requeue)."
+
+#: sssettings.php:208
+msgid "Ms delay for requeue."
+msgstr "Retraso para realiniar(requeue) (en milisegundos)."
+
+#: sssettings.php:218
+msgid "Reverse Animation"
+msgstr "Animación en reversa"
+
+#: sssettings.php:219
+msgid ""
+"Causes animations to transition in reverse (for effects that support it such "
+"as scrollHorz/scrollVert/shuffle)."
+msgstr ""
+"Causa que las animaciones transicionen en reversa (para efectos que lo "
+"apoyan como scrollHorz/scrollVert/shuffle)"
+
+#: sssettings.php:229
+msgid "Slide Resize"
+msgstr "Reajustar tamaño de slides"
+
+#: sssettings.php:230
+msgid "Force slide width/height to fixed size before every transition)."
+msgstr ""
+"Forzar ancho/altura de los slides a un tamaño fijo antes de cada transición."
+
+#: sssettings.php:240
+msgid "Speed"
+msgstr "Velocidad"
+
+#: sssettings.php:241
+msgid "speed of the transition (any valid fx speed value) ."
+msgstr "Velocidad de la transición."
+
+#: sssettings.php:251
+msgid "Starting Slide #"
+msgstr "Número del slide inicial"
+
+#: sssettings.php:252
+msgid "Zero-based index of the first slide to be displayed."
+msgstr "Indice basado en cero del primer slide a ser enseñado."
+
+#: sssettings.php:262
+msgid "Synchronize Slides"
+msgstr "Sincronizar slides"
+
+#: sssettings.php:263
+msgid "True if in/out transitions should occur simultaneously."
+msgstr ""
+"Cierto(1) si las transiciones adentro/afure (in/out) deberían ocurrir "
+"simultaniamente."
+
+#: sssettings.php:273
+msgid "Transition Time"
+msgstr "Tiempo de transición"
+
+#: sssettings.php:274
+msgid ""
+"Milliseconds between slide transitions <strong>(0 to disable auto advance)</"
+"strong>."
+msgstr ""
+"Milisegundos entre transiciones <strong>(0 para inhabilitar auto-avance)</"
+"strong>"
+
+#: sssettings.php:284
+msgid "Width"
+msgstr "Ancho"
+
+#: sssettings.php:285
+msgid ""
+"Container width (if the \"fit\" option is true, the slides will be set to "
+"this width as well) ."
+msgstr ""
+"Ancho del contenedor (si la opción de ‘ajustar’ está en CIERTO, estos slides "
+"serán ajustados a este largo también)"
+
+#. Plugin URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "http://thejsj.com"
+msgstr "http://thejsj.com"
+
+#. Description of the plugin/theme
+msgid "A Plugin to change your slidehow."
+msgstr "Un plugin de WordPress para cambiar todos los slideshows en tu página."
+
+#. Author of the plugin/theme
+msgid "Jorge Silva Jetter"
+msgstr "Jorge Silva Jetter"

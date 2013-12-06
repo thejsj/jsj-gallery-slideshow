@@ -10,7 +10,10 @@ Author URI: http://thejsj.com
 License: GPL2
 */
 
-$jsj_gallery_slideshow_object = new JSJGallery();
+$jsj_gallery_slideshow_object = new JSJGallerySlideshow();
+
+// Hook on init
+add_action('plugins_loaded', array($jsj_gallery_slideshow_object, 'jsj_gallery_add_translations'));
 
 // Hook for adding admin menus
 add_action('admin_menu',  array($jsj_gallery_slideshow_object, 'jsj_gallery_addMenu'));
@@ -18,24 +21,21 @@ add_action('admin_menu',  array($jsj_gallery_slideshow_object, 'jsj_gallery_addM
 //call register settings function
 add_action( 'admin_init', array($jsj_gallery_slideshow_object, 'jsj_gallery_register_mysettings') );
 
-remove_shortcode('gallery');
-add_shortcode('gallery', array($jsj_gallery_slideshow_object, 'jsj_gallery_gallery_shortcode') );
-
 // Add JS scripts
 add_action( 'wp_enqueue_scripts', array($jsj_gallery_slideshow_object, 'jsj_gallery_queryScripts') );
 
 // Add JS code to the Footer   
 add_action('wp_footer', array($jsj_gallery_slideshow_object, 'jsj_slide_add_init_function'), 30); //Enqueued scripts are executed at priority level 20.
 
-require( plugin_dir_path( __FILE__ ) . '/sssettings.php');
-global $jsj_gallery_slideshow_options; 
+remove_shortcode('gallery');
+add_shortcode('gallery', array($jsj_gallery_slideshow_object, 'jsj_gallery_gallery_shortcode') );
 
-class JSJGallery{
+class JSJGallerySlideshow{
 
 	private $defined = true; 
 	private $title = 'JSJ Gallery Slideshow';
 	private $titleLowerCase = '';
-	private $instructions = 'These are some of the settings you can change for your gallery. This plugin is based in <a href="http://jquery.malsup.com/cycle/">Jquery Cycle</a> and the options are taken from Jquery Cycle\'s <a href="http://jquery.malsup.com/cycle/options.html">options page</a>. The visual feel of the gallery is based on <a href="http://cargocollective.com/slideshow">Cargo\'s slideshow settings</a>. You can see an example of this plugin in action in my website: <a href="http://thejsj.com">thejsj.com</a>.<br/><br/><span style="background-color: #ccffcc;">Settings with a Green Background</span> denote settings that are probably more imoprtant.';
+	private $instructions = '';
 	private $settings = Array();
 
 	/**
@@ -43,17 +43,35 @@ class JSJGallery{
 	* @see http://codex.wordpress.org/Function_Reference/add_options_page
 	*/
 	public function jsj_gallery_addMenu(){
-		add_options_page('JSJ Gallery Slideshow Options', 'JSJ Gallery Slideshow', 'manage_options', 'jsj_gallery', array($this, 'jsj_gallery_optionPage'));
+		add_options_page(__( 'JSJ Gallery Slideshow Options', 'jsjGallerySlideshow' ), 'JSJ Gallery Slideshow', 'manage_options', 'jsjGallerySlideshow', array($this, 'jsj_gallery_optionPage'));
 	}
 
-  // Register Settings
-  function jsj_gallery_register_mysettings() {
-  	global $jsj_gallery_slideshow_options; 
-	//register our settings
-  	for($ii = 0; $ii < count($jsj_gallery_slideshow_options); $ii++){
-  		register_setting( 'jsj_gallery-settings-group', $jsj_gallery_slideshow_options[$ii]->name );
-  	}
-  }
+	// Register Settings
+	public function jsj_gallery_register_mysettings() {
+		global $jsj_gallery_slideshow_options; 
+		//register our settings
+		for($ii = 0; $ii < count($jsj_gallery_slideshow_options); $ii++){
+			register_setting( 'jsj_gallery-settings-group', $jsj_gallery_slideshow_options[$ii]->name );
+		}
+	}
+
+	public function jsj_gallery_add_translations(){
+		global $jsj_gallery_slideshow_options;
+		load_plugin_textdomain('jsjGallerySlideshow', FALSE, dirname(plugin_basename(__FILE__)).'/languages/');
+
+		$this->title = __( 'JSJ Gallery Slideshow', 'jsjGallerySlideshow' );
+		$this->instructions  = '';
+
+		$this->instructions .= __('These are some of the settings you can change for your gallery.', 'jsjGallerySlideshow' );
+		$this->instructions .= sprintf( __(' This plugin is based in %sJquery Cycle%s', 'jsjGallerySlideshow' ), '<a href="http://jquery.malsup.com/cycle/">' , '</a>');
+		$this->instructions .= sprintf( __(' and the options are taken from Jquery Cycle\'s %soptions page%s.', 'jsjGallerySlideshow' ), '<a href="http://jquery.malsup.com/cycle/options.html">', '</a>');
+		$this->instructions .= sprintf( __(' The visual feel of the gallery is based on %sCargo\'s slideshow settings%s.', 'jsjGallerySlideshow' ), '<a href="http://cargocollective.com/slideshow">', '</a>');
+		$this->instructions .= sprintf( __(' You can see an example of this plugin in action in my website: %s.', 'jsjGallerySlideshow' ), '<a href="http://thejsj.com">thejsj.com</a>'); 
+		$this->instructions .= '<br/><br/>';
+		$this->instructions .= sprintf( __('%sSettings with a Green Background%s denote settings that are probably more imoprtant.', 'jsjGallerySlideshow' ), '<span style="background-color: #ccffcc;">', '</span>');
+
+		require( plugin_dir_path( __FILE__ ) . '/sssettings.php');
+	}
 
 	/**
 	 * This is where you add all the html and php for your option page
@@ -61,11 +79,11 @@ class JSJGallery{
 	 */
 	public function jsj_gallery_optionPage(){
 		global $jsj_gallery_slideshow_options; 
-		if($_POST['switch_default']) { 
+		if($_POST && isset($_POST['switch_default']) && $_POST['switch_default']) { 
 			for($ii = 0; $ii < count($jsj_gallery_slideshow_options); $ii++){
 				update_option($jsj_gallery_slideshow_options[$ii]->name , $jsj_gallery_slideshow_options[$ii]->default);
 			}
-			echo('<div class="updated settings-error"><p>Your settings have been deverted back to their default.</p></div>');
+			echo('<div class="updated settings-error"><p>' . __( 'Your settings have been deverted back to their default.', 'jsjGallerySlideshow' ) . '</p></div>');
 		}
 		?>  
 		<div id="<?php $this->titleLowerCase ?>" class="wrap jsj_gallery">
@@ -101,7 +119,6 @@ class JSJGallery{
 			<p class="jsj_gallery"><?php echo $this->instructions ?></p>
 			<form method="post" action="options.php" class="jsj_gallery">
 				<?php settings_fields( 'jsj_gallery-settings-group' ); ?>
-				<?php //do_settings( 'jsj_gallery-settings-group' ); ?>
 				<ul class="jsj_gallery">
 					<?php for($ii = 0; $ii < count($jsj_gallery_slideshow_options); $ii++){ ?>
 					<li class="jsj_gallery <?php echo $jsj_gallery_slideshow_options[$ii]->class ?>">
@@ -135,14 +152,14 @@ class JSJGallery{
 					<?php } ?>
 				</ul>
 				<div style="clear:both"></div>
-				<p>If pleased with your settings, go ahead and save them!</p>
+				<p><?php _e( 'If pleased with your settings, go ahead and save them!', 'jsjGallerySlideshow' ); ?></p>
 				<?php submit_button(); ?>
 			</form>
-			<h3>Swith To Default Settings</h3>
-			<p>Clear all your settings and swith to the original plugin settings.</p>
+			<p><?php _e( 'Swith To Default Settings', 'jsjGallerySlideshow' ); ?></p>
+			<p><?php _e( 'Clear all your settings and swith to the original plugin settings.', 'jsjGallerySlideshow' ); ?></p>
 			<form name="jsj_gallery_default" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
                 <input type="hidden" name="switch_default" value="1">  
-                <input type="submit" name="Submit" value="Revert Default Settings" />
+                <input type="submit" name="Submit" value="<?php _e( 'Revertir a opciones originales', 'jsjGallerySlideshow' ); ?>" />
             </form>
 	</div>
 	<? }
@@ -269,8 +286,8 @@ class JSJGallery{
 		$output .= "<div id='gallery-container-{$instance} gallery_container_jsjss-{$instance}' class='gallery-container gallery_container_jsjss'>";
 	  		// Start Navigation
 			$output .= "<div class='gallery-navigation'>";
-				$output .= "<a id='galleryPrev-{$instance}' class='gallery-prev gallery-button' href='#'>Previous</a>";
-				$output .= " / <a id='galleryNext-{$instance}' class='gallery-next gallery-button' href='#'>Next image</a>";
+				$output .= "<a id='galleryPrev-{$instance}' class='gallery-prev gallery-button' href='#'>" . __( 'Previous', 'jsjGallerySlideshow' ) . "</a>";
+				$output .= " / <a id='galleryNext-{$instance}' class='gallery-next gallery-button' href='#'>" . __( 'Next Image', 'jsjGallerySlideshow' ) . "</a>";
 				$output .= " <span id='galleryNumbering-{$instance}' class='gallery-numbering'></span>";
 			$output .= "</div>"; // Finish Navigation
 	  		// Start Gallery

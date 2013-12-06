@@ -1,0 +1,316 @@
+# Copyright (C) 2013 JSJ Gallery Slideshow
+# This file is distributed under the same license as the JSJ Gallery Slideshow package.
+msgid ""
+msgstr ""
+"Project-Id-Version: JSJ Gallery Slideshow 1.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/jsjSlideShow\n"
+"POT-Creation-Date: 2013-12-06 05:07:46+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: jsjSlideShow.php:46
+msgid "JSJ Gallery Slideshow Options"
+msgstr ""
+
+#. #-#-#-#-#  jsjGallerySlideshow.pot (JSJ Gallery Slideshow 1.0)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: jsjSlideShow.php:62
+msgid "JSJ Gallery Slideshow"
+msgstr ""
+
+#: jsjSlideShow.php:65
+msgid "These are some of the settings you can change for your gallery."
+msgstr ""
+
+#: jsjSlideShow.php:66
+msgid " This plugin is based in %sJquery Cycle%s"
+msgstr ""
+
+#: jsjSlideShow.php:67
+msgid " and the options are taken from Jquery Cycle's %soptions page%s."
+msgstr ""
+
+#: jsjSlideShow.php:68
+msgid ""
+" The visual feel of the gallery is based on %sCargo's slideshow settings%s."
+msgstr ""
+
+#: jsjSlideShow.php:69
+msgid " You can see an example of this plugin in action in my website: %s."
+msgstr ""
+
+#: jsjSlideShow.php:71
+msgid ""
+"%sSettings with a Green Background%s denote settings that are probably more "
+"imoprtant."
+msgstr ""
+
+#: jsjSlideShow.php:86
+msgid "Your settings have been deverted back to their default."
+msgstr ""
+
+#: jsjSlideShow.php:155
+msgid "If pleased with your settings, go ahead and save them!"
+msgstr ""
+
+#: jsjSlideShow.php:158
+msgid "Swith To Default Settings"
+msgstr ""
+
+#: jsjSlideShow.php:159
+msgid "Clear all your settings and swith to the original plugin settings."
+msgstr ""
+
+#: jsjSlideShow.php:162
+msgid "Revertir a opciones originales"
+msgstr ""
+
+#: jsjSlideShow.php:289
+msgid "Previous"
+msgstr ""
+
+#: jsjSlideShow.php:290
+msgid "Next Image"
+msgstr ""
+
+#: sssettings.php:9
+msgid "Active Pager Class"
+msgstr ""
+
+#: sssettings.php:10
+msgid "Class name used for the active pager element. No Spaces!"
+msgstr ""
+
+#: sssettings.php:20
+msgid "Auto Stop"
+msgstr ""
+
+#: sssettings.php:21
+msgid "True to end slideshow after X transitions (where X == slide count) "
+msgstr ""
+
+#: sssettings.php:31
+msgid "Auto Stop Count"
+msgstr ""
+
+#: sssettings.php:32
+msgid "number of transitions (optionally used with autostop to define X) "
+msgstr ""
+
+#: sssettings.php:42
+msgid "Start Backwards"
+msgstr ""
+
+#: sssettings.php:43
+msgid ""
+"true to start slideshow at last slide and move backwards through the stack"
+msgstr ""
+
+#: sssettings.php:53
+msgid "Clear Type No Background"
+msgstr ""
+
+#: sssettings.php:54
+msgid ""
+"Set to true to disable extra cleartype fixing (leave false to force "
+"background color setting on slides) "
+msgstr ""
+
+#: sssettings.php:64
+msgid "Container Resize"
+msgstr ""
+
+#: sssettings.php:65
+msgid "Resize container to fit largest slide. 0:False / 1: True"
+msgstr ""
+
+#: sssettings.php:75
+msgid "Delay"
+msgstr ""
+
+#: sssettings.php:76
+msgid "Additional delay (in ms) for first transition (hint: can be negative)."
+msgstr ""
+
+#: sssettings.php:86
+msgid "FastOn Event"
+msgstr ""
+
+#: sssettings.php:87
+msgid ""
+"Force fast transitions when triggered manually (via pager or prev/next); "
+"value == time in ms."
+msgstr ""
+
+#: sssettings.php:97
+msgid "Fit Slides"
+msgstr ""
+
+#: sssettings.php:98
+msgid "Force slides to fit container."
+msgstr ""
+
+#: sssettings.php:108
+msgid "Transition Effect"
+msgstr ""
+
+#: sssettings.php:109
+msgid "Name of transition effect."
+msgstr ""
+
+#: sssettings.php:119
+msgid "Slide Height"
+msgstr ""
+
+#: sssettings.php:120
+msgid ""
+"Container height (if the \"fit\" option is true, the slides will be set to "
+"this height as well)."
+msgstr ""
+
+#: sssettings.php:130
+msgid "Manual Trump"
+msgstr ""
+
+#: sssettings.php:131
+msgid ""
+"Causes manual transition to stop an active transition instead of being "
+"ignored."
+msgstr ""
+
+#: sssettings.php:141
+msgid "Data Attribute"
+msgstr ""
+
+#: sssettings.php:142
+msgid "data- attribute that holds the option data for the slideshow."
+msgstr ""
+
+#: sssettings.php:152
+msgid "No Wrapping"
+msgstr ""
+
+#: sssettings.php:153
+msgid "True(1) to prevent slideshow from wrapping."
+msgstr ""
+
+#: sssettings.php:163
+msgid "Pause Slidehow"
+msgstr ""
+
+#: sssettings.php:164
+msgid "True(1) to enable \"pause on hover\"."
+msgstr ""
+
+#: sssettings.php:174
+msgid "Pause On Pager Hover"
+msgstr ""
+
+#: sssettings.php:175
+msgid "True(1) to pause when hovering over pager link."
+msgstr ""
+
+#: sssettings.php:185
+msgid "Random Slides"
+msgstr ""
+
+#: sssettings.php:186
+msgid "True(1) for random, false for sequence (not applicable to shuffle fx)."
+msgstr ""
+
+#: sssettings.php:196
+msgid "Requeue OnImageNotLoaded"
+msgstr ""
+
+#: sssettings.php:197
+msgid "Requeue the slideshow if any image slides are not yet loaded ."
+msgstr ""
+
+#: sssettings.php:207
+msgid "Requeue Timeout"
+msgstr ""
+
+#: sssettings.php:208
+msgid "Ms delay for requeue."
+msgstr ""
+
+#: sssettings.php:218
+msgid "Reverse Animation"
+msgstr ""
+
+#: sssettings.php:219
+msgid ""
+"Causes animations to transition in reverse (for effects that support it such "
+"as scrollHorz/scrollVert/shuffle)."
+msgstr ""
+
+#: sssettings.php:229
+msgid "Slide Resize"
+msgstr ""
+
+#: sssettings.php:230
+msgid "Force slide width/height to fixed size before every transition)."
+msgstr ""
+
+#: sssettings.php:240
+msgid "Speed"
+msgstr ""
+
+#: sssettings.php:241
+msgid "speed of the transition (any valid fx speed value) ."
+msgstr ""
+
+#: sssettings.php:251
+msgid "Starting Slide #"
+msgstr ""
+
+#: sssettings.php:252
+msgid "Zero-based index of the first slide to be displayed."
+msgstr ""
+
+#: sssettings.php:262
+msgid "Synchronize Slides"
+msgstr ""
+
+#: sssettings.php:263
+msgid "True if in/out transitions should occur simultaneously."
+msgstr ""
+
+#: sssettings.php:273
+msgid "Transition Time"
+msgstr ""
+
+#: sssettings.php:274
+msgid ""
+"Milliseconds between slide transitions <strong>(0 to disable auto advance)</"
+"strong>."
+msgstr ""
+
+#: sssettings.php:284
+msgid "Width"
+msgstr ""
+
+#: sssettings.php:285
+msgid ""
+"Container width (if the \"fit\" option is true, the slides will be set to "
+"this width as well) ."
+msgstr ""
+
+#. #-#-#-#-#  jsjGallerySlideshow.pot (JSJ Gallery Slideshow 1.0)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  jsjGallerySlideshow.pot (JSJ Gallery Slideshow 1.0)  #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "http://thejsj.com"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "A Plugin to change your slidehow."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Jorge Silva Jetter"
+msgstr ""
