@@ -10,6 +10,10 @@ You can change almost all the options allowed by [Jquery Cycle](http://jquery.ma
 
 This plugin is inspired by [Cargo Collective’s slideshow feature](http://cargocollective.com/slideshow) and uses [Jquery Cycle](http://jquery.malsup.com/cycle/) and [Jquery Easing](http://gsgd.co.uk/sandbox/jquery/easing/) as the basis for the plugin.
 
+Available translations:
+
+- Spanish (es_ES)
+
 ## Installation
 
 1. Upload the entire jsjGallerySlideshow folder to the /wp-content/plugins/ directory.
@@ -32,7 +36,7 @@ If you have any questions, please try to add a ticket in the WordPress support f
 
 5. Options Page
 
-## Changelog ==
+## Changelog
 
 ### 1.0 
 First Version. 
