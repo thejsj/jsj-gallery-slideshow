@@ -21,12 +21,12 @@ This plugin is inspired by [Cargo Collective’s slideshow feature](http://cargo
 == Installation ==
 
 1. Upload the entire jsjGallerySlideshow folder to the /wp-content/plugins/ directory.
-2. Activate the plugin through the ‘Plugins’ menu in WordPress. At that moment, all your slideshows will be automatically converted into JSJ gallery / slidshows.
-3. Optional: If you want to change any of the options for the plugin, go to Settings -> JSJ · Gallery & Slideshow.
+2. Activate the plugin through the ‘Plugins’ menu in WordPress. At that moment, all your slideshows will be automatically converted into JSJ Gallery Slideshows.
+3. Optional: If you want to change any of the options for the plugin, go to Settings -> JSJ Gallery Slideshow.
 
 == Frequently asked questions ==
 
-If you have any questions, email me at jorge dot silva at thejsj dot com. This plugin is spanking new, so it’s bound to have some bugs. I’d be happy to fix them!
+If you have any questions, please try to add a ticket in the WordPress support forum for this plugin (http://wordpress.org/support/plugin/jsj-gallery-slideshow). Also, if you wish, email me at jorge dot silva at thejsj dot com.
 
 == Screenshots ==
 
@@ -45,10 +45,21 @@ If you have any questions, email me at jorge dot silva at thejsj dot com. This p
 = 1.0 =
 First Version. 
 
+= 1.1 =
+Added translation capabilities.
+Added Spanish(es_ES) translation to plugin.
+Created javascript function to ensure easier use with AJAX.
+Changed default image size to 'Full'.
+Fixed some HTML bugs.
+
 == Upgrade notice ==
 
 = 1.0 =
 First Version. 
+
+= 1.1 =
+Check your html doesn't break. 
+If using ajax, try using the createJSJGallerySlideshow() function to re-init your plugin. 
 
 == Online Examples ==
 
