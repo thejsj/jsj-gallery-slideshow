@@ -105,11 +105,19 @@ You can see some online examples here:
 * Width – Container width (if the ‘fit’ option is true, the slides will be set to this width as well).
 
 ## Info
+
 Contributors: jorge.silva
+
 Donate link: 
+
 Tags: slideshow, gallery, simple, jquery, easing, animation, cargo, cycle, jsj
+
 Requires at least: 3.3
+
 Tested up to: 3.5.1
-Stable tag: 1.0
+
+Stable tag: 1.1
+
 License: GPLv2 or later
+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
