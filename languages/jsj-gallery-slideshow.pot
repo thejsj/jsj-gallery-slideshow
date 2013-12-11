@@ -4,19 +4,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JSJ Gallery Slideshow 1.0\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/jsjSlideShow\n"
-"POT-Creation-Date: 2013-12-06 05:07:46+00:00\n"
+"POT-Creation-Date: 2013-12-11 02:44:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2013-12-10 22:02-0500\n"
+"Last-Translator: Jorge Silva-Jetter <jorge.silva@thejsj.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: Poedit 1.6.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en_US\n"
 
 #: jsjSlideShow.php:46
 msgid "JSJ Gallery Slideshow Options"
 msgstr ""
 
-#. #-#-#-#-#  jsjGallerySlideshow.pot (JSJ Gallery Slideshow 1.0)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: jsjSlideShow.php:62
 msgid "JSJ Gallery Slideshow"
@@ -26,31 +28,36 @@ msgstr ""
 msgid "These are some of the settings you can change for your gallery."
 msgstr ""
 
+# The two ‘%s’ denote an HTML link for Jquery Cycle’s home page : http://jquery.malsup.com/cycle/.
 #: jsjSlideShow.php:66
 msgid " This plugin is based in %sJquery Cycle%s"
 msgstr ""
 
+# The two ‘%s’ denote an HTML link for Jquery Cycle’s options page : http://jquery.malsup.com/cycle/options.html. 
 #: jsjSlideShow.php:67
 msgid " and the options are taken from Jquery Cycle's %soptions page%s."
 msgstr ""
 
+# The two ‘%s’ denote an HTML link for Cargo’s slideshow page : http://cargocollective.com/slideshow. 
 #: jsjSlideShow.php:68
 msgid ""
-" The visual feel of the gallery is based on %sCargo's slideshow settings%s."
+" The visual feel of the gallery is based on %sCargo's slideshow settingss%s."
 msgstr ""
 
+# This is blatante self promotion! A link to my own site : thejsj.com.
 #: jsjSlideShow.php:69
 msgid " You can see an example of this plugin in action in my website: %s."
 msgstr ""
 
+# The two ‘%s’ denote an a span with a green background. 
 #: jsjSlideShow.php:71
 msgid ""
 "%sSettings with a Green Background%s denote settings that are probably more "
-"imoprtant."
+"important."
 msgstr ""
 
 #: jsjSlideShow.php:86
-msgid "Your settings have been deverted back to their default."
+msgid "Your settings have been reverted back to their default."
 msgstr ""
 
 #: jsjSlideShow.php:155
@@ -58,15 +65,15 @@ msgid "If pleased with your settings, go ahead and save them!"
 msgstr ""
 
 #: jsjSlideShow.php:158
-msgid "Swith To Default Settings"
+msgid "Switch To Default Settings"
 msgstr ""
 
 #: jsjSlideShow.php:159
-msgid "Clear all your settings and swith to the original plugin settings."
+msgid "Clear all your settings and switch to the original plugin settings."
 msgstr ""
 
 #: jsjSlideShow.php:162
-msgid "Revertir a opciones originales"
+msgid "Revert back to default options"
 msgstr ""
 
 #: jsjSlideShow.php:289
@@ -199,7 +206,7 @@ msgid "True(1) to prevent slideshow from wrapping."
 msgstr ""
 
 #: sssettings.php:163
-msgid "Pause Slidehow"
+msgid "Pause Slideshow"
 msgstr ""
 
 #: sssettings.php:164
@@ -223,19 +230,19 @@ msgid "True(1) for random, false for sequence (not applicable to shuffle fx)."
 msgstr ""
 
 #: sssettings.php:196
-msgid "Requeue OnImageNotLoaded"
+msgid "Re-queue OnImageNotLoaded"
 msgstr ""
 
 #: sssettings.php:197
-msgid "Requeue the slideshow if any image slides are not yet loaded ."
+msgid "Re-queue the slideshow if any image slides are not yet loaded ."
 msgstr ""
 
 #: sssettings.php:207
-msgid "Requeue Timeout"
+msgid "Re-queue Timeout"
 msgstr ""
 
 #: sssettings.php:208
-msgid "Ms delay for requeue."
+msgid "Ms delay for re-queue."
 msgstr ""
 
 #: sssettings.php:218
@@ -300,9 +307,7 @@ msgid ""
 "this width as well) ."
 msgstr ""
 
-#. #-#-#-#-#  jsjGallerySlideshow.pot (JSJ Gallery Slideshow 1.0)  #-#-#-#-#
 #. Plugin URI of the plugin/theme
-#. #-#-#-#-#  jsjGallerySlideshow.pot (JSJ Gallery Slideshow 1.0)  #-#-#-#-#
 #. Author URI of the plugin/theme
 msgid "http://thejsj.com"
 msgstr ""

@@ -4,15 +4,15 @@ Donate link:
 Tags: slideshow, gallery, simple, jquery, easing, animation, cargo, cycle, jsj
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-JSJ Gallery Slideshow is a  Wordpress plugin that substitutes the default gallery an turns into a much nicer slideshow. 
+JSJ Gallery Slideshow is a  WordPress plugin that substitutes the default gallery an turns into a much nicer slideshow. 
 
 == Description ==
 
-JSJ Gallery Slideshow is a Wordpress plugin that substitutes the default gallery an turns into a much nicer slideshow. It does this completely automatically (really, it’s that easy!). You only have to install the plugin and all your slideshows will be automatically converted to something like [this](http://thejsj.com/#/uncategorized/jsj-%C2%B7-gallery-slideshow-example/).
+JSJ Gallery Slideshow is a WordPress plugin that substitutes the default gallery an turns into a much nicer slideshow. It does this completely automatically (really, it’s that easy!). You only have to install the plugin and all your slideshows will be automatically converted to something like [this](http://thejsj.com/#/uncategorized/jsj-%C2%B7-gallery-slideshow-example/).
 
 You can change almost all the options allowed by [Jquery Cycle](http://jquery.malsup.com/cycle/options.html) (it’s based on this Jquery plugin) such as: transition time, transition effect, timeout between transition (or no timeout), slide class, …etc.
 
@@ -24,7 +24,7 @@ Available translations:
 
 == Installation ==
 
-1. Upload the entire jsjGallerySlideshow folder to the /wp-content/plugins/ directory.
+1. Upload the entire jsj-gallery-slideshow folder to the /wp-content/plugins/ directory.
 2. Activate the plugin through the ‘Plugins’ menu in WordPress. At that moment, all your slideshows will be automatically converted into JSJ Gallery Slideshows.
 3. Optional: If you want to change any of the options for the plugin, go to Settings -> JSJ Gallery Slideshow.
 
@@ -56,6 +56,9 @@ Created javascript function to ensure easier use with AJAX.
 Changed default image size to 'Full'.
 Fixed some HTML bugs.
 
+= 1.1.1 =
+Embarrassing spelling mistakes... will I ever learn?
+
 == Upgrade notice ==
 
 = 1.0 =
@@ -63,7 +66,7 @@ First Version.
 
 = 1.1 =
 Check your html doesn't break. 
-If using ajax, try using the createJSJGallerySlideshow() function to re-init your plugin. 
+If using ajax, try using the createjsj-gallery-slideshow() function to re-init your plugin. 
 
 == Online Examples ==
 
@@ -102,8 +105,8 @@ You can see some online examples here:
 * Pause Slidehow – True(1) to enable “pause on hover”.
 * Pause On Pager Hover – True(1) to pause when hovering over pager link.
 * Random Slides – True(1) for random, false for sequence (not applicable to shuffle fx).
-* Requeue OnImageNotLoaded – Requeue the slideshow if any image slides are not yet loaded .
-* Requeue Timeout – Ms delay for requeue.
+* Requeue OnImageNotLoaded – Re-queue the slideshow if any image slides are not yet loaded .
+* Requeue Timeout – Ms delay for re-queue.
 * Reverse Animation – Causes animations to transition in reverse (for effects that support it such as scrollHorz/scrollVert/shuffle).
 * Slide Resize – Force slide width/height to fixed size before every transition).
 * Speed – speed of the transition (any valid fx speed value).

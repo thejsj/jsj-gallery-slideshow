@@ -1,4 +1,4 @@
-# JSJGallerySlideshow
+# jsj-gallery-slideshow
 
 JSJ Gallery Slideshow is a  Wordpress plugin that substitutes the default gallery an turns into a much nicer slideshow. 
 
@@ -16,7 +16,7 @@ Available translations:
 
 ## Installation
 
-1. Upload the entire jsjGallerySlideshow folder to the /wp-content/plugins/ directory.
+1. Upload the entire jsj-gallery-slideshow folder to the /wp-content/plugins/ directory.
 2. Activate the plugin through the ‘Plugins’ menu in WordPress. At that moment, all your slideshows will be automatically converted into JSJ Gallery Slideshows.
 3. Optional: If you want to change any of the options for the plugin, go to Settings -> JSJ Gallery Slideshow.
 
@@ -48,6 +48,9 @@ Created javascript function to ensure easier use with AJAX.
 Changed default image size to 'Full'.
 Fixed some HTML bugs.
 
+### 1.1.1
+Embarrassing spelling mistakes... will I ever learn?
+
 ## Upgrade notice 
 
 ### 1.0
@@ -55,7 +58,7 @@ First Version.
 
 ### 1.1 
 Check your html doesn't break. 
-If using ajax, try using the createJSJGallerySlideshow() function to re-init your plugin. 
+If using ajax, try using the createjsj-gallery-slideshow() function to re-init your plugin. 
 
 ## Online Examples
 
@@ -116,7 +119,7 @@ Requires at least: 3.3
 
 Tested up to: 3.5.1
 
-Stable tag: 1.1
+Stable tag: 1.1.1
 
 License: GPLv2 or later
 

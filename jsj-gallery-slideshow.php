@@ -4,13 +4,13 @@
 Plugin Name: JSJ Gallery Slideshow
 Plugin URI: http://thejsj.com
 Description: A Plugin to change your slidehow. 
-Version: 1.0
+Version: 1.1.1
 Author: Jorge Silva Jetter
 Author URI: http://thejsj.com
 License: GPL2
 */
 
-$jsj_gallery_slideshow_object = new JSJGallerySlideshow();
+$jsj_gallery_slideshow_object = new jsj-gallery-slideshow();
 
 // Hook on init
 add_action('plugins_loaded', array($jsj_gallery_slideshow_object, 'jsj_gallery_add_translations'));
@@ -30,7 +30,7 @@ add_action('wp_footer', array($jsj_gallery_slideshow_object, 'jsj_slide_add_init
 remove_shortcode('gallery');
 add_shortcode('gallery', array($jsj_gallery_slideshow_object, 'jsj_gallery_gallery_shortcode') );
 
-class JSJGallerySlideshow{
+class jsj-gallery-slideshow{
 
 	private $defined = true; 
 	private $title = 'JSJ Gallery Slideshow';
@@ -43,7 +43,7 @@ class JSJGallerySlideshow{
 	* @see http://codex.wordpress.org/Function_Reference/add_options_page
 	*/
 	public function jsj_gallery_addMenu(){
-		add_options_page(__( 'JSJ Gallery Slideshow Options', 'jsjGallerySlideshow' ), 'JSJ Gallery Slideshow', 'manage_options', 'jsjGallerySlideshow', array($this, 'jsj_gallery_optionPage'));
+		add_options_page(__( 'JSJ Gallery Slideshow Options', 'jsj-gallery-slideshow' ), 'JSJ Gallery Slideshow', 'manage_options', 'jsj-gallery-slideshow', array($this, 'jsj_gallery_optionPage'));
 	}
 
 	// Register Settings
@@ -57,18 +57,18 @@ class JSJGallerySlideshow{
 
 	public function jsj_gallery_add_translations(){
 		global $jsj_gallery_slideshow_options;
-		load_plugin_textdomain('jsjGallerySlideshow', FALSE, dirname(plugin_basename(__FILE__)).'/languages/');
+		load_plugin_textdomain('jsj-gallery-slideshow', FALSE, dirname(plugin_basename(__FILE__)).'/languages/');
 
-		$this->title = __( 'JSJ Gallery Slideshow', 'jsjGallerySlideshow' );
+		$this->title = __( 'JSJ Gallery Slideshow', 'jsj-gallery-slideshow' );
 		$this->instructions  = '';
 
-		$this->instructions .= __('These are some of the settings you can change for your gallery.', 'jsjGallerySlideshow' );
-		$this->instructions .= sprintf( __(' This plugin is based in %sJquery Cycle%s', 'jsjGallerySlideshow' ), '<a href="http://jquery.malsup.com/cycle/">' , '</a>');
-		$this->instructions .= sprintf( __(' and the options are taken from Jquery Cycle\'s %soptions page%s.', 'jsjGallerySlideshow' ), '<a href="http://jquery.malsup.com/cycle/options.html">', '</a>');
-		$this->instructions .= sprintf( __(' The visual feel of the gallery is based on %sCargo\'s slideshow settings%s.', 'jsjGallerySlideshow' ), '<a href="http://cargocollective.com/slideshow">', '</a>');
-		$this->instructions .= sprintf( __(' You can see an example of this plugin in action in my website: %s.', 'jsjGallerySlideshow' ), '<a href="http://thejsj.com">thejsj.com</a>'); 
+		$this->instructions .= __('These are some of the settings you can change for your gallery.', 'jsj-gallery-slideshow' );
+		$this->instructions .= sprintf( __(' This plugin is based in %sJquery Cycle%s', 'jsj-gallery-slideshow' ), '<a href="http://jquery.malsup.com/cycle/">' , '</a>');
+		$this->instructions .= sprintf( __(' and the options are taken from Jquery Cycle\'s %soptions page%s.', 'jsj-gallery-slideshow' ), '<a href="http://jquery.malsup.com/cycle/options.html">', '</a>');
+		$this->instructions .= sprintf( __(' The visual feel of the gallery is based on %sCargo\'s slideshow settingss%s.', 'jsj-gallery-slideshow' ), '<a href="http://cargocollective.com/slideshow">', '</a>');
+		$this->instructions .= sprintf( __(' You can see an example of this plugin in action in my website: %s.', 'jsj-gallery-slideshow' ), '<a href="http://thejsj.com">thejsj.com</a>'); 
 		$this->instructions .= '<br/><br/>';
-		$this->instructions .= sprintf( __('%sSettings with a Green Background%s denote settings that are probably more imoprtant.', 'jsjGallerySlideshow' ), '<span style="background-color: #ccffcc;">', '</span>');
+		$this->instructions .= sprintf( __('%sSettings with a Green Background%s denote settings that are probably more important.', 'jsj-gallery-slideshow' ), '<span style="background-color: #ccffcc;">', '</span>');
 
 		require( plugin_dir_path( __FILE__ ) . '/sssettings.php');
 	}
@@ -83,7 +83,7 @@ class JSJGallerySlideshow{
 			for($ii = 0; $ii < count($jsj_gallery_slideshow_options); $ii++){
 				update_option($jsj_gallery_slideshow_options[$ii]->name , $jsj_gallery_slideshow_options[$ii]->default);
 			}
-			echo('<div class="updated settings-error"><p>' . __( 'Your settings have been deverted back to their default.', 'jsjGallerySlideshow' ) . '</p></div>');
+			echo('<div class="updated settings-error"><p>' . __( 'Your settings have been reverted back to their default.', 'jsj-gallery-slideshow' ) . '</p></div>');
 		}
 		?>  
 		<div id="<?php $this->titleLowerCase ?>" class="wrap jsj_gallery">
@@ -152,14 +152,14 @@ class JSJGallerySlideshow{
 					<?php } ?>
 				</ul>
 				<div style="clear:both"></div>
-				<p><?php _e( 'If pleased with your settings, go ahead and save them!', 'jsjGallerySlideshow' ); ?></p>
+				<p><?php _e( 'If pleased with your settings, go ahead and save them!', 'jsj-gallery-slideshow' ); ?></p>
 				<?php submit_button(); ?>
 			</form>
-			<p><?php _e( 'Swith To Default Settings', 'jsjGallerySlideshow' ); ?></p>
-			<p><?php _e( 'Clear all your settings and swith to the original plugin settings.', 'jsjGallerySlideshow' ); ?></p>
+			<p><?php _e( 'Switch To Default Settings', 'jsj-gallery-slideshow' ); ?></p>
+			<p><?php _e( 'Clear all your settings and switch to the original plugin settings.', 'jsj-gallery-slideshow' ); ?></p>
 			<form name="jsj_gallery_default" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
                 <input type="hidden" name="switch_default" value="1">  
-                <input type="submit" name="Submit" value="<?php _e( 'Revertir a opciones originales', 'jsjGallerySlideshow' ); ?>" />
+                <input type="submit" name="Submit" value="<?php _e( 'Revert back to default options', 'jsj-gallery-slideshow' ); ?>" />
             </form>
 	</div>
 	<? }
@@ -286,8 +286,8 @@ class JSJGallerySlideshow{
 		$output .= "<div id='gallery-container-{$instance} gallery_container_jsjss-{$instance}' class='gallery-container gallery_container_jsjss'>";
 	  		// Start Navigation
 			$output .= "<div class='gallery-navigation'>";
-				$output .= "<a id='galleryPrev-{$instance}' class='gallery-prev gallery-button' href='#'>" . __( 'Previous', 'jsjGallerySlideshow' ) . "</a>";
-				$output .= " / <a id='galleryNext-{$instance}' class='gallery-next gallery-button' href='#'>" . __( 'Next Image', 'jsjGallerySlideshow' ) . "</a>";
+				$output .= "<a id='galleryPrev-{$instance}' class='gallery-prev gallery-button' href='#'>" . __( 'Previous', 'jsj-gallery-slideshow' ) . "</a>";
+				$output .= " / <a id='galleryNext-{$instance}' class='gallery-next gallery-button' href='#'>" . __( 'Next Image', 'jsj-gallery-slideshow' ) . "</a>";
 				$output .= " <span id='galleryNumbering-{$instance}' class='gallery-numbering'></span>";
 			$output .= "</div>"; // Finish Navigation
 	  		// Start Gallery
@@ -326,9 +326,9 @@ class JSJGallerySlideshow{
 		var galleryid;
 		var slideTransitionTime = 200;
 		var cycleGallery = [];
-		var createJSJGallerySlideshow;
+		var createjsj-gallery-slideshow;
 		jQuery(document).ready(function(){
-			createJSJGallerySlideshow = function(){
+			createjsj-gallery-slideshow = function(){
 				jQuery('.gallery').each(function(index){
 					var galleryId = jQuery(this).attr("id");
 					galleryId = galleryId.replace("galleryid-",""); 
@@ -369,7 +369,7 @@ class JSJGallerySlideshow{
 					setInitialHeight(cycleGallery[index]);
 				});
 			}
-			createJSJGallerySlideshow();
+			createjsj-gallery-slideshow();
 		});
 		</script>
 	<? }
