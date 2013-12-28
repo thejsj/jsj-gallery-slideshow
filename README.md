@@ -51,6 +51,12 @@ Fixed some HTML bugs.
 ### 1.1.1
 Embarrassing spelling mistakes... will I ever learn?
 
+### 1.1.2 
+Fixing plugin class name mistake. 
+
+### 1.1.3
+Fixing javascript function mistake.
+
 ## Upgrade notice 
 
 ### 1.0
@@ -58,7 +64,13 @@ First Version.
 
 ### 1.1 
 Check your html doesn't break. 
-If using ajax, try using the createjsj-gallery-slideshow() function to re-init your plugin. 
+If using ajax, try using the createJSJGallerySlideshow() function to re-init your plugin. 
+
+### 1.1.2
+Please update in order for plugin to work correctly. This upgrades fixes minor programming bugs.
+
+### 1.1.3
+Please update in order for plugin to work correctly. This upgrades fixes minor programming bugs.
 
 ## Online Examples
 
@@ -119,7 +131,7 @@ Requires at least: 3.3
 
 Tested up to: 3.5.1
 
-Stable tag: 1.1.1
+Stable tag: 1.1.3
 
 License: GPLv2 or later
 
