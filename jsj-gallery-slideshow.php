@@ -10,7 +10,7 @@ Author URI: http://thejsj.com
 License: GPL2
 */
 
-$jsj_gallery_slideshow_object = new jsj-gallery-slideshow();
+$jsj_gallery_slideshow_object = new JSJGallerySlideshow();
 
 // Hook on init
 add_action('plugins_loaded', array($jsj_gallery_slideshow_object, 'jsj_gallery_add_translations'));
@@ -30,7 +30,7 @@ add_action('wp_footer', array($jsj_gallery_slideshow_object, 'jsj_slide_add_init
 remove_shortcode('gallery');
 add_shortcode('gallery', array($jsj_gallery_slideshow_object, 'jsj_gallery_gallery_shortcode') );
 
-class jsj-gallery-slideshow{
+class JSJGallerySlideshow{
 
 	private $defined = true; 
 	private $title = 'JSJ Gallery Slideshow';
@@ -303,7 +303,7 @@ class jsj-gallery-slideshow{
 						'data-width'  => $image_src[1],
 						'data-height' => $image_src[2],
 						);
-					$output .= wp_get_attachment_image( $id, 'pageWidth', false, $attributes);
+					$output .= wp_get_attachment_image( $id, 'full', false, $attributes);
 				}
 			$output .= "</div>\n"; // Finish gallery div (has images)
 			// Start Gallery Pager
