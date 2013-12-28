@@ -23,7 +23,6 @@ function updatePaginationString(galleryId, slideNumber){
 
 function updateGalleryHeight(currSlideElement, nextSlideElement, options, forwardFlag){
 	if(nextSlideElement.height > 0){
-		console.log(nextSlideElement.height);
 		jQuery("#galleryid-" + options.id).clearQueue().animate({
 			height: nextSlideElement.height
 		}, slideTransitionTime);
@@ -45,7 +44,6 @@ function setInitialHeight(thisGallery){
 		myImage.src = thisGallery.context.images[0].src;
 		myImage.onload = function(){
 			imgHeight = this.height;
-			console.log(imgHeight);
 			if(imgHeight > 0){
 				thisGallery.clearQueue().animate({
 					height: imgHeight

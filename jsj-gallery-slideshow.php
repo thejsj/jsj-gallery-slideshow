@@ -2,9 +2,9 @@
 
 /*
 Plugin Name: JSJ Gallery Slideshow
-Plugin URI: http://thejsj.com
+Plugin URI: http://wordpress.org/plugins/jsj-gallery-slideshow/
 Description: A Plugin to change your slidehow. 
-Version: 1.1.1
+Version: 1.1.4
 Author: Jorge Silva Jetter
 Author URI: http://thejsj.com
 License: GPL2
@@ -18,7 +18,7 @@ add_action('plugins_loaded', array($jsj_gallery_slideshow_object, 'jsj_gallery_a
 // Hook for adding admin menus
 add_action('admin_menu',  array($jsj_gallery_slideshow_object, 'jsj_gallery_addMenu'));
 
-//call register settings function
+// Call register settings function
 add_action( 'admin_init', array($jsj_gallery_slideshow_object, 'jsj_gallery_register_mysettings') );
 
 // Add JS scripts
@@ -30,7 +30,7 @@ add_action('wp_footer', array($jsj_gallery_slideshow_object, 'jsj_slide_add_init
 remove_shortcode('gallery');
 add_shortcode('gallery', array($jsj_gallery_slideshow_object, 'jsj_gallery_gallery_shortcode') );
 
-class JSJGallerySlideshow{
+class JSJGallerySlideshow {
 
 	private $defined = true; 
 	private $title = 'JSJ Gallery Slideshow';
@@ -53,6 +53,8 @@ class JSJGallerySlideshow{
 		for($ii = 0; $ii < count($jsj_gallery_slideshow_options); $ii++){
 			register_setting( 'jsj_gallery-settings-group', $jsj_gallery_slideshow_options[$ii]->name );
 		}
+		// Change some of the default values
+		// update_option('containerResize' , $jsj_gallery_slideshow_options[$ii]->default)
 	}
 
 	public function jsj_gallery_add_translations(){
@@ -319,20 +321,21 @@ class JSJGallerySlideshow{
 		global $jsj_gallery_slideshow_options; 
 		?> 
 		<script type="text/javascript">
-		console.log("Start Ready (JSJ GALLERY SLIDESHOW)");
 		var isNext; 
 		var zeroBasedSlideIndex; 
 		var slideElement;
 		var galleryid;
 		var slideTransitionTime = 200;
 		var cycleGallery = [];
-		var createjsj-gallery-slideshow;
+		var createJSJGallerySlideshow;
 		jQuery(document).ready(function(){
-			createjsj-gallery-slideshow = function(){
+			createJSJGallerySlideshow = function(){
 				jQuery('.gallery').each(function(index){
 					var galleryId = jQuery(this).attr("id");
 					galleryId = galleryId.replace("galleryid-",""); 
 					updatePaginationString(galleryId);
+					// Remove Any Previous Pagination (if resize)
+					jQuery(this).parent().children('.gallery-pager').html('')
 					cycleGallery[index] = jQuery("#galleryid-" + galleryId).cycle({ 
 						id:               galleryId,
 						next:             '#galleryNext-' + galleryId, 
@@ -343,9 +346,11 @@ class JSJGallerySlideshow{
 							$option_value = get_option($jsj_gallery_slideshow_options[$i4]->name , $jsj_gallery_slideshow_options[$i4]->default);
 							if($option_value != $jsj_gallery_slideshow_options[$i4]->default){
 								if(is_numeric($option_value)){
+									// Don't add quotes
 									echo ($jsj_gallery_slideshow_options[$i4]->name . ": " . $option_value . ", //" . $jsj_gallery_slideshow_options[$i4]->descp . "\n");
 								}
 								else {
+									// Add Quotes
 									echo ($jsj_gallery_slideshow_options[$i4]->name . ": '" . $option_value . "', //" . $jsj_gallery_slideshow_options[$i4]->descp . "\n");
 								}
 							}
@@ -369,7 +374,10 @@ class JSJGallerySlideshow{
 					setInitialHeight(cycleGallery[index]);
 				});
 			}
-			createjsj-gallery-slideshow();
+			createJSJGallerySlideshow();
+		});
+		jQuery(window).resize(function(){
+			createJSJGallerySlideshow();
 		});
 		</script>
 	<? }
