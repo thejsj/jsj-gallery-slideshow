@@ -57,6 +57,9 @@ Fixing plugin class name mistake.
 ### 1.1.3
 Fixing javascript function mistake.
 
+### 1.1.4
+Fixing javascript function mistake.
+
 ## Upgrade notice 
 
 ### 1.0
@@ -70,6 +73,9 @@ If using ajax, try using the createJSJGallerySlideshow() function to re-init you
 Please update in order for plugin to work correctly. This upgrades fixes minor programming bugs.
 
 ### 1.1.3
+Please update in order
+
+### 1.1.4
 Please update in order for plugin to work correctly. This upgrades fixes minor programming bugs.
 
 ## Online Examples

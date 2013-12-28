@@ -48,17 +48,25 @@ class JSJGallerySlideshow {
 
 	// Register Settings
 	public function jsj_gallery_register_mysettings() {
-		global $jsj_gallery_slideshow_options; 
-		//register our settings
-		for($ii = 0; $ii < count($jsj_gallery_slideshow_options); $ii++){
-			register_setting( 'jsj_gallery-settings-group', $jsj_gallery_slideshow_options[$ii]->name );
-		}
+		global $jsj_gallery_slideshow_options_cycle; 
+		global $jsj_gallery_slideshow_options_other; 
+		
 		// Change some of the default values
-		// update_option('containerResize' , $jsj_gallery_slideshow_options[$ii]->default)
+		$this->register_settings($jsj_gallery_slideshow_options_cycle);
+		$this->register_settings($jsj_gallery_slideshow_options_other);
+		// update_option('containerResize' , $jsj_gallery_slideshow_options_cycle[$ii]->default)
+	}
+
+	private function register_settings($settings){
+		// Register our settings
+		for($ii = 0; $ii < count($settings); $ii++){
+			register_setting( 'jsj_gallery-settings-group', $settings[$ii]->name );
+		}
 	}
 
 	public function jsj_gallery_add_translations(){
-		global $jsj_gallery_slideshow_options;
+		global $jsj_gallery_slideshow_options_cycle;
+		global $jsj_gallery_slideshow_options_other;
 		load_plugin_textdomain('jsj-gallery-slideshow', FALSE, dirname(plugin_basename(__FILE__)).'/languages/');
 
 		$this->title = __( 'JSJ Gallery Slideshow', 'jsj-gallery-slideshow' );
@@ -72,7 +80,8 @@ class JSJGallerySlideshow {
 		$this->instructions .= '<br/><br/>';
 		$this->instructions .= sprintf( __('%sSettings with a Green Background%s denote settings that are probably more important.', 'jsj-gallery-slideshow' ), '<span style="background-color: #ccffcc;">', '</span>');
 
-		require( plugin_dir_path( __FILE__ ) . '/sssettings.php');
+		require( plugin_dir_path( __FILE__ ) . '/jsj-gallery-slideshow-settings-cycle.php');
+		require( plugin_dir_path( __FILE__ ) . '/jsj-gallery-slideshow-settings-other.php');
 	}
 
 	/**
@@ -80,10 +89,18 @@ class JSJGallerySlideshow {
 	 * @see http://codex.wordpress.org/Function_Reference/add_options_page
 	 */
 	public function jsj_gallery_optionPage(){
-		global $jsj_gallery_slideshow_options; 
-		if($_POST && isset($_POST['switch_default']) && $_POST['switch_default']) { 
-			for($ii = 0; $ii < count($jsj_gallery_slideshow_options); $ii++){
-				update_option($jsj_gallery_slideshow_options[$ii]->name , $jsj_gallery_slideshow_options[$ii]->default);
+		global $jsj_gallery_slideshow_options_cycle; 
+		global $jsj_gallery_slideshow_options_other; 
+
+		if($_POST && isset($_POST['switch_default_cycle']) && $_POST['switch_default_cycle']) { 
+			for($ii = 0; $ii < count($jsj_gallery_slideshow_options_cycle); $ii++){
+				update_option($jsj_gallery_slideshow_options_cycle[$ii]->name , $jsj_gallery_slideshow_options_cycle[$ii]->default);
+			}
+			echo('<div class="updated settings-error"><p>' . __( 'Your settings have been reverted back to their default.', 'jsj-gallery-slideshow' ) . '</p></div>');
+		}
+		if($_POST && isset($_POST['switch_default_other']) && $_POST['switch_default_other']) { 
+			for($ii = 0; $ii < count($jsj_gallery_slideshow_options_other); $ii++){
+				update_option($jsj_gallery_slideshow_options_other[$ii]->name , $jsj_gallery_slideshow_options_other[$ii]->default);
 			}
 			echo('<div class="updated settings-error"><p>' . __( 'Your settings have been reverted back to their default.', 'jsj-gallery-slideshow' ) . '</p></div>');
 		}
@@ -100,6 +117,14 @@ class JSJGallerySlideshow {
 
 			ul.jsj_gallery {
 				display: block; 
+				clear: both;
+				margin: 0px;
+			}
+
+			form.jsj_gallery h3 {
+				padding: 20px 10px;
+				margin: 0px;
+				clear: both;
 			}
 
 			ul.jsj_gallery li.jsj_gallery {
@@ -117,94 +142,119 @@ class JSJGallerySlideshow {
 			}
 			</style> 
 			<h2 class="jsj_gallery"><?php echo $this->title ?></h2>
-
 			<p class="jsj_gallery"><?php echo $this->instructions ?></p>
 			<form method="post" action="options.php" class="jsj_gallery">
 				<?php settings_fields( 'jsj_gallery-settings-group' ); ?>
-				<ul class="jsj_gallery">
-					<?php for($ii = 0; $ii < count($jsj_gallery_slideshow_options); $ii++){ ?>
-					<li class="jsj_gallery <?php echo $jsj_gallery_slideshow_options[$ii]->class ?>">
-						<h4 class="jsj_gallery"><?php echo $jsj_gallery_slideshow_options[$ii]->title ?></h4>
-						<p class="jsj_gallery"><?php echo $jsj_gallery_slideshow_options[$ii]->descp ?></p>
-						<?php 
-
-						// Check to see if we have a previous entry
-						if(get_option($jsj_gallery_slideshow_options[$ii]->name) === FALSE){ 
-							$input_value = $jsj_gallery_slideshow_options[$ii]->default;
-						} else { 
-							$input_value = get_option($jsj_gallery_slideshow_options[$ii]->name); 
-						}
-
-						if( $jsj_gallery_slideshow_options[$ii]->type != "select" ) { ?>
-							<input class="jsj_gallery" type="<?php echo $jsj_gallery_slideshow_options[$ii]->type ?>" name="<?php echo $jsj_gallery_slideshow_options[$ii]->name ?>" value="<?php echo $input_value ?>" />
-							<?php }
-							else { ?>
-							<select name="<?php echo $jsj_gallery_slideshow_options[$ii]->name ?>"> <?php
-							echo '<option class="jsj_gallery" value="' . $input_value . '">' . $input_value .'</option>';
-							for($iii = 0; $iii < count($jsj_gallery_slideshow_options[$ii]->parameters); $iii++){
-								if($jsj_gallery_slideshow_options[$ii]->parameters[$iii] != $input_value){
-									echo '<option class="jsj_gallery" value="' . $jsj_gallery_slideshow_options[$ii]->parameters[$iii] . '">' . $jsj_gallery_slideshow_options[$ii]->parameters[$iii] .'</option>';
-								}
-							}
-							?>
-							</select>
-							<?php 
-						} ?>
-					</li>
-					<?php } ?>
-				</ul>
+				<h3><?php _e( 'Gallery Options', 'jsj-gallery-slideshow' ); ?></h3>
+				<?php $this->displayOptionsForm($jsj_gallery_slideshow_options_cycle); ?>
+				<h3><?php _e( 'Loading Options', 'jsj-gallery-slideshow' ); ?></h3>
+				<?php $this->displayOptionsForm($jsj_gallery_slideshow_options_other); ?>				
 				<div style="clear:both"></div>
 				<p><?php _e( 'If pleased with your settings, go ahead and save them!', 'jsj-gallery-slideshow' ); ?></p>
 				<?php submit_button(); ?>
 			</form>
-			<p><?php _e( 'Switch To Default Settings', 'jsj-gallery-slideshow' ); ?></p>
+			<h3><?php _e( 'Switch To Default Settings', 'jsj-gallery-slideshow' ); ?></h3>
 			<p><?php _e( 'Clear all your settings and switch to the original plugin settings.', 'jsj-gallery-slideshow' ); ?></p>
+			<!-- Revert Cycle Options to their defults -->
 			<form name="jsj_gallery_default" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
-                <input type="hidden" name="switch_default" value="1">  
+                <input type="hidden" name="switch_default_cycle" value="1">  
                 <input type="submit" name="Submit" value="<?php _e( 'Revert back to default options', 'jsj-gallery-slideshow' ); ?>" />
+            </form>
+            <br/>
+            <!-- Revert Other/Loading options to their defaults -->
+            <form name="jsj_gallery_default" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+                <input type="hidden" name="switch_default_other" value="1">  
+                <input type="submit" name="Submit" value="<?php _e( 'Revert back to default options (Other)', 'jsj-gallery-slideshow' ); ?>" />
             </form>
 	</div>
 	<? }
 	
+	private function displayOptionsForm($options_group){ ?>
+		<ul class="jsj_gallery">
+		<?php for($ii = 0; $ii < count($options_group); $ii++){ ?>
+			<li class="jsj_gallery <?php echo $options_group[$ii]->class ?>">
+				<h4 class="jsj_gallery"><?php echo $options_group[$ii]->title ?></h4>
+				<p class="jsj_gallery"><?php echo $options_group[$ii]->descp ?></p>
+				<?php 
+
+				// Check to see if we have a previous entry
+				if(get_option($options_group[$ii]->name) === FALSE){ 
+					$input_value = $options_group[$ii]->default;
+				} else { 
+					$input_value = get_option($options_group[$ii]->name); 
+				}
+
+				if( $options_group[$ii]->type != "select" ) { ?>
+					<input class="jsj_gallery" type="<?php echo $options_group[$ii]->type ?>" name="<?php echo $options_group[$ii]->name ?>" value="<?php echo $input_value ?>" />
+					<?php }
+					else { ?>
+					<select name="<?php echo $options_group[$ii]->name ?>"> <?php
+					echo '<option class="jsj_gallery" value="' . $input_value . '">' . $input_value .'</option>';
+					for($iii = 0; $iii < count($options_group[$ii]->parameters); $iii++){
+						if($options_group[$ii]->parameters[$iii] != $input_value){
+							echo '<option class="jsj_gallery" value="' . $options_group[$ii]->parameters[$iii] . '">' . $options_group[$ii]->parameters[$iii] .'</option>';
+						}
+					}
+					?>
+					</select>
+					<?php 
+				} ?>
+			</li>
+		<?php } ?>
+		</ul> <?php
+	}
 
 	// Add Script to the Footer and Header
 	public function jsj_gallery_queryScripts(){
+		global $jsj_gallery_slideshow_options_other; 
+		global $post;
+
 		// Check if Jquery is here!!!
-		// <?php wp_enqueue_script( $handle, $src, $deps, $ver, $in_footer ); 
-		if(!wp_script_is('jquery')){
-			wp_enqueue_script( 'jquery' );
-		}
-		wp_enqueue_script(
-			'jqueryEasing',
-			plugins_url( 'js/jquery.easing.min.js' , __FILE__ ),
-			array( 'jquery' ), // Deps
-			"", // Version
-			true //
-		);
-		wp_enqueue_script(
-			'jqueryCycle',
-			plugins_url( 'js/jquery.cycle.js' , __FILE__ ),
-			array( 'jquery', 'jqueryEasing' ), // Deps
-			"", // Version
-			true //
-		);
-		wp_enqueue_script(
-			'JSJMiniFunctions',
-			plugins_url( 'js/jsjSlideShowMiniFuncitons.js' , __FILE__ ),
-			array( 'jquery', 'jqueryCycle'), // Deps
-			"", // Version
-			true //
-		);
-		wp_enqueue_style(
-			"jsj_gallery_css", 
-			plugins_url( 'css/jsj_gallery_css.css' , __FILE__ )
+		// The content has a [gallery] short code, so this check returned true.
+		$check_for_shortcode = get_option($jsj_gallery_slideshow_options_other[0]->name , $jsj_gallery_slideshow_options_other[0]->default);
+
+		if( $check_for_shortcode == 'false' || $check_for_shortcode == 'true' && has_shortcode( $post->post_content, 'gallery' ) ) {
+			// Determines if Javascript code will be inserted into the page
+			$this->scripts_enqueued = true; 
+
+			if(!wp_script_is('jquery')){
+				wp_enqueue_script( 'jquery' );
+			}
+			wp_enqueue_script(
+				'jqueryEasing',
+				plugins_url( 'js/jquery.easing.min.js' , __FILE__ ),
+				array( 'jquery' ), // Deps
+				"", // Version
+				true //
 			);
+			wp_enqueue_script(
+				'jqueryCycle',
+				plugins_url( 'js/jquery.cycle.js' , __FILE__ ),
+				array( 'jquery', 'jqueryEasing' ), // Deps
+				"", // Version
+				true //
+			);
+			wp_enqueue_script(
+				'JSJMiniFunctions',
+				plugins_url( 'js/jsjSlideShowMiniFuncitons.js' , __FILE__ ),
+				array( 'jquery', 'jqueryCycle'), // Deps
+				"", // Version
+				true //
+			);
+			wp_enqueue_style(
+				"jsj_gallery_css", 
+				plugins_url( 'css/jsj_gallery_css.css' , __FILE__ )
+			);
+		}
+		else {
+			$this->scripts_enqueued = false; 
+		}
 	}
 	
 	// Change Slidehow Function
 	public function jsj_gallery_gallery_shortcode($attr){
-
 		global $post, $wp_locale;
+
 		static $instance = 0;
 		$instance++;
 		if ( ! empty( $attr['ids'] ) ) {
@@ -224,7 +274,7 @@ class JSJGallerySlideshow {
 			$attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
 			if ( !$attr['orderby'] )
 				unset( $attr['orderby'] );
-		}
+		};
 
 		extract(shortcode_atts(array(
 			'order'      => 'ASC',
@@ -298,14 +348,14 @@ class JSJGallerySlideshow {
 				foreach ( $attachments as $id => $attachment ) {
 					$i++;
 					  // This comes from line 770 of wp-includes/media.php
-					$image_src = wp_get_attachment_image_src( $id, "full" );
+					$image_src = wp_get_attachment_image_src( $id, $size );
 					$attributes = array(
 						'data-galleryid'   => $instance,
 						'data-link'   => $image_src[0],
 						'data-width'  => $image_src[1],
 						'data-height' => $image_src[2],
 						);
-					$output .= wp_get_attachment_image( $id, 'full', false, $attributes);
+					$output .= wp_get_attachment_image( $id, $size, false, $attributes);
 				}
 			$output .= "</div>\n"; // Finish gallery div (has images)
 			// Start Gallery Pager
@@ -318,8 +368,8 @@ class JSJGallerySlideshow {
 	
 	// Add Code to initiate Galleryjsj-slide-showf
 	public function jsj_slide_add_init_function(){
-		global $jsj_gallery_slideshow_options; 
-		?> 
+		global $jsj_gallery_slideshow_options_cycle; ?> 
+		<?php if($this->scripts_enqueued) : ?>
 		<script type="text/javascript">
 		var isNext; 
 		var zeroBasedSlideIndex; 
@@ -342,16 +392,16 @@ class JSJGallerySlideshow {
 						prev:             '#galleryPrev-' + galleryId,
 						pager:            jQuery("#gallery-pager-" + galleryId), 
 						onPrevNextEvent:  UpdateNumbers, // callback fn for prev/next events: function(isNext, zeroBasedSlideIndex, slideElement),
-						<?php for($i4 = 0; $i4 < count($jsj_gallery_slideshow_options); $i4++){
-							$option_value = get_option($jsj_gallery_slideshow_options[$i4]->name , $jsj_gallery_slideshow_options[$i4]->default);
-							if($option_value != $jsj_gallery_slideshow_options[$i4]->default){
+						<?php for($i4 = 0; $i4 < count($jsj_gallery_slideshow_options_cycle); $i4++){
+							$option_value = get_option($jsj_gallery_slideshow_options_cycle[$i4]->name , $jsj_gallery_slideshow_options_cycle[$i4]->default);
+							if($option_value != $jsj_gallery_slideshow_options_cycle[$i4]->default){
 								if(is_numeric($option_value)){
 									// Don't add quotes
-									echo ($jsj_gallery_slideshow_options[$i4]->name . ": " . $option_value . ", //" . $jsj_gallery_slideshow_options[$i4]->descp . "\n");
+									echo ($jsj_gallery_slideshow_options_cycle[$i4]->name . ": " . $option_value . ", //" . $jsj_gallery_slideshow_options_cycle[$i4]->descp . "\n");
 								}
 								else {
 									// Add Quotes
-									echo ($jsj_gallery_slideshow_options[$i4]->name . ": '" . $option_value . "', //" . $jsj_gallery_slideshow_options[$i4]->descp . "\n");
+									echo ($jsj_gallery_slideshow_options_cycle[$i4]->name . ": '" . $option_value . "', //" . $jsj_gallery_slideshow_options_cycle[$i4]->descp . "\n");
 								}
 							}
 						}
@@ -359,10 +409,10 @@ class JSJGallerySlideshow {
 						before: function(){ 
 							var sh = jQuery(this).height();
 							<?php 
-							if(get_option($jsj_gallery_slideshow_options[21]->name) === FALSE || !is_numeric(get_option($jsj_gallery_slideshow_options[21]->name))){ 
-								$input_value = $jsj_gallery_slideshow_options[21]->default;//This number is the default for 
+							if(get_option($jsj_gallery_slideshow_options_cycle[21]->name) === FALSE || !is_numeric(get_option($jsj_gallery_slideshow_options_cycle[21]->name))){ 
+								$input_value = $jsj_gallery_slideshow_options_cycle[21]->default;//This number is the default for 
 							} else {
-								$input_value = get_option($jsj_gallery_slideshow_options[21]->name);
+								$input_value = get_option($jsj_gallery_slideshow_options_cycle[21]->name);
 							}
 							?>
 							if(sh > 1) jQuery(this).parent().clearQueue().animate({ height: sh }, <?php echo $input_value; ?> );
@@ -380,5 +430,6 @@ class JSJGallerySlideshow {
 			createJSJGallerySlideshow();
 		});
 		</script>
+		<?php endif; ?>
 	<? }
 } ?>
