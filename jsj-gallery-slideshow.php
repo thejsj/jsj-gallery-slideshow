@@ -12,62 +12,72 @@ License: GPL2
 
 $jsj_gallery_slideshow_object = new JSJGallerySlideshow();
 
-// Hook on init
-add_action('plugins_loaded', array($jsj_gallery_slideshow_object, 'jsj_gallery_add_translations'));
-
-// Hook for adding admin menus
-add_action('admin_menu',  array($jsj_gallery_slideshow_object, 'jsj_gallery_addMenu'));
+// Init Set All Plugin Variables
+add_action('init', array($jsj_gallery_slideshow_object, 'init') );
 
 // Call register settings function
-add_action( 'admin_init', array($jsj_gallery_slideshow_object, 'jsj_gallery_register_mysettings') );
+add_action( 'admin_init', array($jsj_gallery_slideshow_object, 'admin_init') );
+
+// Hook on init
+// add_action('plugins_loaded', array($jsj_gallery_slideshow_object, 'add_translations'));
 
 // Add JS scripts
-add_action( 'wp_enqueue_scripts', array($jsj_gallery_slideshow_object, 'jsj_gallery_queryScripts') );
+add_action( 'wp_enqueue_scripts', array($jsj_gallery_slideshow_object, 'enqueue_client_scripts') );
 
-// Add JS code to the Footer   
-add_action('wp_footer', array($jsj_gallery_slideshow_object, 'jsj_slide_add_init_function'), 30); //Enqueued scripts are executed at priority level 20.
+// Admin: Enqueue CSS
+add_action( 'admin_enqueue_scripts', array($jsj_gallery_slideshow_object, 'enqueue_admin_scripts') );
+
+// Hook for adding admin menus
+add_action('admin_menu',  array($jsj_gallery_slideshow_object, 'add_options_menu'));
 
 remove_shortcode('gallery');
-add_shortcode('gallery', array($jsj_gallery_slideshow_object, 'jsj_gallery_gallery_shortcode') );
+add_shortcode('gallery', array($jsj_gallery_slideshow_object, 'gallery_shortcode') );
 
 class JSJGallerySlideshow {
 
 	private $defined = true; 
 	private $title = 'JSJ Gallery Slideshow';
+	private $name_space = 'jsj-gallery-slideshow';
 	private $titleLowerCase = '';
 	private $instructions = '';
-	private $settings = Array();
-
+	
 	/**
-	* This will create a menu item under the option menu
-	* @see http://codex.wordpress.org/Function_Reference/add_options_page
-	*/
-	public function jsj_gallery_addMenu(){
-		add_options_page(__( 'JSJ Gallery Slideshow Options', 'jsj-gallery-slideshow' ), 'JSJ Gallery Slideshow', 'manage_options', 'jsj-gallery-slideshow', array($this, 'jsj_gallery_optionPage'));
-	}
-
-	// Register Settings
-	public function jsj_gallery_register_mysettings() {
+	 * Init Plugin and get all settings
+	 * 
+	 * @return void
+	 */
+	public function init(){
 		global $jsj_gallery_slideshow_options_cycle; 
 		global $jsj_gallery_slideshow_options_other; 
-		
-		// Change some of the default values
-		$this->register_settings($jsj_gallery_slideshow_options_cycle);
-		$this->register_settings($jsj_gallery_slideshow_options_other);
-		// update_option('containerResize' , $jsj_gallery_slideshow_options_cycle[$ii]->default)
-	}
 
-	private function register_settings($settings){
-		// Register our settings
-		for($ii = 0; $ii < count($settings); $ii++){
-			register_setting( 'jsj_gallery-settings-group', $settings[$ii]->name );
-		}
-	}
+		/* * * Get All Settings * * */
 
-	public function jsj_gallery_add_translations(){
-		global $jsj_gallery_slideshow_options_cycle;
-		global $jsj_gallery_slideshow_options_other;
 		load_plugin_textdomain('jsj-gallery-slideshow', FALSE, dirname(plugin_basename(__FILE__)).'/languages/');
+
+		require( plugin_dir_path( __FILE__ ) . '/jsj-gallery-slideshow-settings-cycle.php');
+		require( plugin_dir_path( __FILE__ ) . '/jsj-gallery-slideshow-settings-other.php');
+
+		$this->settings = (object) array(); 
+		$this->settings->cycle = $jsj_gallery_slideshow_options_cycle;
+		$this->settings->other = $jsj_gallery_slideshow_options_other;		
+
+		// Create Namespace
+		foreach($this->settings->cycle as $key => $setting){
+			$this->settings->cycle[$key]->name_space = $this->name_space . "-" . $setting->name;
+		}
+		foreach($this->settings->other as $key => $setting){
+			$this->settings->other[$key]->name_space = $this->name_space . "-" . $setting->name;		
+		}
+
+		// Get Settings
+		foreach($this->settings->cycle as $key => $setting){
+			$this->settings->cycle[$key]->value = get_option( $setting->name_space, $setting->default );
+		}
+		foreach($this->settings->other as $key => $setting){
+			$this->settings->other[$key]->value = get_option( $setting->name_space, $setting->default );
+		}
+
+		/* * * Get Translation Strings * * */
 
 		$this->title = __( 'JSJ Gallery Slideshow', 'jsj-gallery-slideshow' );
 		$this->instructions  = '';
@@ -79,141 +89,25 @@ class JSJGallerySlideshow {
 		$this->instructions .= sprintf( __(' You can see an example of this plugin in action in my website: %s.', 'jsj-gallery-slideshow' ), '<a href="http://thejsj.com">thejsj.com</a>'); 
 		$this->instructions .= '<br/><br/>';
 		$this->instructions .= sprintf( __('%sSettings with a Green Background%s denote settings that are probably more important.', 'jsj-gallery-slideshow' ), '<span style="background-color: #ccffcc;">', '</span>');
-
-		require( plugin_dir_path( __FILE__ ) . '/jsj-gallery-slideshow-settings-cycle.php');
-		require( plugin_dir_path( __FILE__ ) . '/jsj-gallery-slideshow-settings-other.php');
 	}
 
-	/**
-	 * This is where you add all the html and php for your option page
-	 * @see http://codex.wordpress.org/Function_Reference/add_options_page
+	public function admin_init(){
+		// Register our settings
+		foreach($this->settings->cycle as $key => $setting){
+			register_setting( 'jsj_gallery-settings-group', $setting->name_space );
+		}
+		foreach($this->settings->other as $key => $setting){
+			register_setting( 'jsj_gallery-settings-group', $setting->name_space );
+		}
+	}
+
+	/*
+	 * Add Script to the Footer and Header
 	 */
-	public function jsj_gallery_optionPage(){
-		global $jsj_gallery_slideshow_options_cycle; 
-		global $jsj_gallery_slideshow_options_other; 
-
-		if($_POST && isset($_POST['switch_default_cycle']) && $_POST['switch_default_cycle']) { 
-			for($ii = 0; $ii < count($jsj_gallery_slideshow_options_cycle); $ii++){
-				update_option($jsj_gallery_slideshow_options_cycle[$ii]->name , $jsj_gallery_slideshow_options_cycle[$ii]->default);
-			}
-			echo('<div class="updated settings-error"><p>' . __( 'Your settings have been reverted back to their default.', 'jsj-gallery-slideshow' ) . '</p></div>');
-		}
-		if($_POST && isset($_POST['switch_default_other']) && $_POST['switch_default_other']) { 
-			for($ii = 0; $ii < count($jsj_gallery_slideshow_options_other); $ii++){
-				update_option($jsj_gallery_slideshow_options_other[$ii]->name , $jsj_gallery_slideshow_options_other[$ii]->default);
-			}
-			echo('<div class="updated settings-error"><p>' . __( 'Your settings have been reverted back to their default.', 'jsj-gallery-slideshow' ) . '</p></div>');
-		}
-		?>  
-		<div id="<?php $this->titleLowerCase ?>" class="wrap jsj_gallery">
-			<style>
-			div.wrap.jsj_gallery {
-				max-width: 1100px;
-			}
-
-			p.jsj_gallery {
-				max-width: 600px;
-			}
-
-			ul.jsj_gallery {
-				display: block; 
-				clear: both;
-				margin: 0px;
-			}
-
-			form.jsj_gallery h3 {
-				padding: 20px 10px;
-				margin: 0px;
-				clear: both;
-			}
-
-			ul.jsj_gallery li.jsj_gallery {
-				display: inline-block;
-				width: 200px;
-				height: 200px;
-				border: solid 1px #ccc;
-				padding: 10px;
-				margin: 0px;
-				float: left;
-			}
-
-			ul.jsj_gallery li.jsj_gallery.important {
-				background-color: #ccffcc;
-			}
-			</style> 
-			<h2 class="jsj_gallery"><?php echo $this->title ?></h2>
-			<p class="jsj_gallery"><?php echo $this->instructions ?></p>
-			<form method="post" action="options.php" class="jsj_gallery">
-				<?php settings_fields( 'jsj_gallery-settings-group' ); ?>
-				<h3><?php _e( 'Gallery Options', 'jsj-gallery-slideshow' ); ?></h3>
-				<?php $this->displayOptionsForm($jsj_gallery_slideshow_options_cycle); ?>
-				<h3><?php _e( 'Loading Options', 'jsj-gallery-slideshow' ); ?></h3>
-				<?php $this->displayOptionsForm($jsj_gallery_slideshow_options_other); ?>				
-				<div style="clear:both"></div>
-				<p><?php _e( 'If pleased with your settings, go ahead and save them!', 'jsj-gallery-slideshow' ); ?></p>
-				<?php submit_button(); ?>
-			</form>
-			<h3><?php _e( 'Switch To Default Settings', 'jsj-gallery-slideshow' ); ?></h3>
-			<p><?php _e( 'Clear all your settings and switch to the original plugin settings.', 'jsj-gallery-slideshow' ); ?></p>
-			<!-- Revert Cycle Options to their defults -->
-			<form name="jsj_gallery_default" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
-                <input type="hidden" name="switch_default_cycle" value="1">  
-                <input type="submit" name="Submit" value="<?php _e( 'Revert back to default options', 'jsj-gallery-slideshow' ); ?>" />
-            </form>
-            <br/>
-            <!-- Revert Other/Loading options to their defaults -->
-            <form name="jsj_gallery_default" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
-                <input type="hidden" name="switch_default_other" value="1">  
-                <input type="submit" name="Submit" value="<?php _e( 'Revert back to default options (Other)', 'jsj-gallery-slideshow' ); ?>" />
-            </form>
-	</div>
-	<? }
-	
-	private function displayOptionsForm($options_group){ ?>
-		<ul class="jsj_gallery">
-		<?php for($ii = 0; $ii < count($options_group); $ii++){ ?>
-			<li class="jsj_gallery <?php echo $options_group[$ii]->class ?>">
-				<h4 class="jsj_gallery"><?php echo $options_group[$ii]->title ?></h4>
-				<p class="jsj_gallery"><?php echo $options_group[$ii]->descp ?></p>
-				<?php 
-
-				// Check to see if we have a previous entry
-				if(get_option($options_group[$ii]->name) === FALSE){ 
-					$input_value = $options_group[$ii]->default;
-				} else { 
-					$input_value = get_option($options_group[$ii]->name); 
-				}
-
-				if( $options_group[$ii]->type != "select" ) { ?>
-					<input class="jsj_gallery" type="<?php echo $options_group[$ii]->type ?>" name="<?php echo $options_group[$ii]->name ?>" value="<?php echo $input_value ?>" />
-					<?php }
-					else { ?>
-					<select name="<?php echo $options_group[$ii]->name ?>"> <?php
-					echo '<option class="jsj_gallery" value="' . $input_value . '">' . $input_value .'</option>';
-					for($iii = 0; $iii < count($options_group[$ii]->parameters); $iii++){
-						if($options_group[$ii]->parameters[$iii] != $input_value){
-							echo '<option class="jsj_gallery" value="' . $options_group[$ii]->parameters[$iii] . '">' . $options_group[$ii]->parameters[$iii] .'</option>';
-						}
-					}
-					?>
-					</select>
-					<?php 
-				} ?>
-			</li>
-		<?php } ?>
-		</ul> <?php
-	}
-
-	// Add Script to the Footer and Header
-	public function jsj_gallery_queryScripts(){
-		global $jsj_gallery_slideshow_options_other; 
+	public function enqueue_client_scripts(){
 		global $post;
 
-		// Check if Jquery is here!!!
-		// The content has a [gallery] short code, so this check returned true.
-		$check_for_shortcode = get_option($jsj_gallery_slideshow_options_other[0]->name , $jsj_gallery_slideshow_options_other[0]->default);
-
-		if( $check_for_shortcode == 'false' || $check_for_shortcode == 'true' && has_shortcode( $post->post_content, 'gallery' ) ) {
+		if( $this->settings->other['checkForShortCode']->value == 'false' || $this->settings->other['checkForShortCode']->value == 'true' && has_shortcode( $post->post_content, 'gallery' ) ) {
 			// Determines if Javascript code will be inserted into the page
 			$this->scripts_enqueued = true; 
 
@@ -221,38 +115,164 @@ class JSJGallerySlideshow {
 				wp_enqueue_script( 'jquery' );
 			}
 			wp_enqueue_script(
-				'jqueryEasing',
-				plugins_url( 'js/jquery.easing.min.js' , __FILE__ ),
+				'jsjGallerySlideshowScripts-jQueryCycle',
+				plugins_url( 'js/jsj-gallery-slideshow-ck.js' , __FILE__ ),
 				array( 'jquery' ), // Deps
 				"", // Version
-				true //
+				true // Footer
 			);
-			wp_enqueue_script(
-				'jqueryCycle',
-				plugins_url( 'js/jquery.cycle.js' , __FILE__ ),
-				array( 'jquery', 'jqueryEasing' ), // Deps
-				"", // Version
-				true //
+			wp_localize_script( 
+				'jsjGallerySlideshowScripts-jQueryCycle', 
+				'jsjGallerySlideshowOptions', 
+				array(
+					'settings' => $this->settings,
+					'scripts_enqueued' => $this->scripts_enqueued
+				) 
 			);
-			wp_enqueue_script(
-				'JSJMiniFunctions',
-				plugins_url( 'js/jsjSlideShowMiniFuncitons.js' , __FILE__ ),
-				array( 'jquery', 'jqueryCycle'), // Deps
-				"", // Version
-				true //
-			);
+
+			// Add CSS
 			wp_enqueue_style(
-				"jsj_gallery_css", 
-				plugins_url( 'css/jsj_gallery_css.css' , __FILE__ )
+				"jsj-gallery-slideshow-style", 
+				plugins_url( 'css/jsj-gallery-slideshow-style.css' , __FILE__ )
 			);
 		}
 		else {
 			$this->scripts_enqueued = false; 
 		}
 	}
+
+	public function enqueue_admin_scripts(){
+		// Add CSS
+		wp_enqueue_style(
+			"jsj-gallery-slideshow-admin-style", 
+			plugins_url( 'css/jsj-gallery-slideshow-admin-style.css' , __FILE__ )
+		);
+	}
+
+	/**
+	* This will create a menu item under the option menu
+	* @see http://codex.wordpress.org/Function_Reference/add_options_page
+	*/
+	public function add_options_menu(){
+		add_options_page(__( 'JSJ Gallery Slideshow Options', 'jsj-gallery-slideshow' ), 'JSJ Gallery Slideshow', 'manage_options', 'jsj-gallery-slideshow', array($this, 'options_page'));
+	}
+
+	/**
+	 * This is where you add all the html and php for your option page
+	 * @see http://codex.wordpress.org/Function_Reference/add_options_page
+	 */
+	public function options_page(){
+
+
+		if($_POST && isset($_POST[ $this->name_space . '-switch_default']) && $_POST[ $this->name_space . '-switch_default']) { 
+			foreach($this->settings->cycle as $setting){
+				update_option($setting->name_space , $setting->default);
+			}
+			foreach($this->settings->other as $setting){
+				update_option($setting->name_space , $setting->default);
+			}
+			echo('<div class="updated settings-error"><p>' . __( 'Your settings have been reverted back to their default.', 'jsj-gallery-slideshow' ) . '</p></div>');
+		}
+		?>
+		<div id="<?php echo $this->name_space; ?>-container" class="<?php echo $this->name_space; ?> <?php echo $this->name_space; ?>-container">
+
+			<!-- Title & Description -->
+			<h2 class="<?php echo $this->name_space; ?> <?php echo $this->name_space; ?>-header"><?php echo $this->title ?></h2>
+			<p class="<?php echo $this->name_space; ?>"><?php echo $this->instructions ?></p>
+
+			<form method="post" action="options.php" class="<?php echo $this->name_space; ?>">
+				<?php settings_fields( 'jsj_gallery-settings-group' ); ?>
+
+				<!-- Gallery Options -->
+				<h3><?php _e( 'Gallery Options', 'jsj-gallery-slideshow' ); ?></h3>
+				<?php $this->displayOptionsForm($this->settings->cycle); ?>
+
+				<!-- Loading Options -->
+				<h3><?php _e( 'Loading Options', 'jsj-gallery-slideshow' ); ?></h3>
+				<?php $this->displayOptionsForm($this->settings->other); ?>				
+				<div style="clear:both"></div>
+
+				<!-- Save -->
+				<p><?php _e( 'If pleased with your settings, go ahead and save them!', 'jsj-gallery-slideshow' ); ?></p>
+				<?php submit_button(); ?>
+
+			</form>
+
+			<!-- Revert Options to their defults -->
+			<h3><?php _e( 'Switch To Default Settings', 'jsj-gallery-slideshow' ); ?></h3>
+			<p><?php _e( 'Clear all your settings and switch to the original plugin settings.', 'jsj-gallery-slideshow' ); ?></p>
+			<form name="<?php echo $this->name_space; ?>-default" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+                <input type="hidden" name="<?php echo $this->name_space; ?>-switch_default" value="1">  
+                <input type="submit" name="Submit" value="<?php _e( 'Revert back to default options', 'jsj-gallery-slideshow' ); ?>" />
+            </form>
+     
+	</div>
+	<? }
+
+	/**
+	 * Turns an array of options into HTML
+	 */
+	private function displayOptionsForm($options_group){ ?>
+		<table class="<?php echo $this->name_space; ?>">
+		<?php $i = 0; ?>
+		<?php foreach($options_group as $key => $option): ?>
+			<tr class="<?php echo $this->name_space; ?> <?php echo $this->name_space; ?>-main <?php echo ( isset($option->class) ? $option->class : '' ); ?> <?php echo $i; ?> <?php echo ( $i % 2  == 0 ? 'odd' : 'even' ); ?>">
+				<td class="<?php echo $this->name_space; ?> <?php echo $this->name_space; ?>-name"><strong><?php echo $option->title ?></strong></td>
+				<td class="<?php echo $this->name_space; ?>-field">
+					<label for="<?php echo $option->name_space; ?>">
+						<?php if($option->type == 'boolean'): // Boolean ?>
+							<input type='checkbox' id="<?php echo $option->name_space; ?>" name="<?php echo $option->name_space; ?>" value='1' <?php if ( 1 == $option->value ) echo 'checked="checked"'; ?> />
+						<?php elseif( $option->type != "select" ): ?>
+							<input id="<?php echo $option->name_space; ?>" class="<?php echo $this->name_space; ?>" type="<?php echo $option->type ?>" name="<?php echo $option->name_space ?>" value="<?php echo $option->value ?>" />
+						<?php else: ?>
+							<select id="<?php echo $option->name_space; ?>" name="<?php echo $option->name_space ?>">
+								<option class="<?php echo $this->name_space; ?>" value="<?php echo $option->value; ?>"><?php echo $option->value; ?></option>';
+								<?php for($iii = 0; $iii < count($option->parameters); $iii++): ?>
+									<?php if($option->parameters[$iii] != $option->value): ?>
+										<option class="<?php echo $this->name_space; ?>" value="<?php echo $option->parameters[$iii]; ?>"><?php echo $option->parameters[$iii]; ?></option>
+									<?php endif; ?>
+								<?php endfor; ?>
+							</select>
+						<?php endif; ?>
+						<span class='description <?php echo $this->name_space; ?>-description'><?php echo $option->descp ?></span>
+					</label>
+				</td>
+			</tr>
+			<!-- <tr>
+				<td colspan="2">
+					
+				</td>
+			</tr> -->
+			<?php $i++; ?>
+		<?php endforeach; ?>
+		</table><?php
+	}
+
+	/*
+	 * Get a specific admin color user user preferences and the WP array of colors
+	 *
+	 * @return string
+	 */
+	private function get_admin_color($key = 3){
+		if(!isset($this->colors)){
+			global $_wp_admin_css_colors;
+			$current_color = get_user_option( 'admin_color' );
+			if($current_color && $_wp_admin_css_colors[$current_color]){
+				$this->colors = $_wp_admin_css_colors[$current_color];
+			}
+		}
+		if(isset($this->colors) && isset($this->colors->colors[$key])){
+			return $this->colors->colors[$key];
+		}
+		return '#000'; 
+	}
 	
-	// Change Slidehow Function
-	public function jsj_gallery_gallery_shortcode($attr){
+	/**
+	 * Change Slidehow Function
+	 * 
+	 * Overwrite of WP Core
+	 */
+	public function gallery_shortcode($attr){
 		global $post, $wp_locale;
 
 		static $instance = 0;
@@ -335,7 +355,7 @@ class JSJGallerySlideshow {
 	  	// Start Gallery HTML Code
 		$output  = "";
 	  	// Start Container 
-		$output .= "<div id='gallery-container-{$instance} gallery_container_jsjss-{$instance}' class='gallery-container gallery_container_jsjss'>";
+		$output .= "<div id='gallery-container-{$instance} gallery_container_<?php echo  $this->name_space; ?>-{$instance}' class='gallery-container gallery_container_<?php echo  $this->name_space; ?>'>";
 	  		// Start Navigation
 			$output .= "<div class='gallery-navigation'>";
 				$output .= "<a id='galleryPrev-{$instance}' class='gallery-prev gallery-button' href='#'>" . __( 'Previous', 'jsj-gallery-slideshow' ) . "</a>";
@@ -365,71 +385,5 @@ class JSJGallerySlideshow {
 		$output .= "</div>"; // Finish Gallery Container
 		return $output;
 	}
-	
-	// Add Code to initiate Galleryjsj-slide-showf
-	public function jsj_slide_add_init_function(){
-		global $jsj_gallery_slideshow_options_cycle; ?> 
-		<?php if($this->scripts_enqueued) : ?>
-		<script type="text/javascript">
-		var isNext; 
-		var zeroBasedSlideIndex; 
-		var slideElement;
-		var galleryid;
-		var slideTransitionTime = 200;
-		var cycleGallery = [];
-		var createJSJGallerySlideshow;
-		jQuery(document).ready(function(){
-			createJSJGallerySlideshow = function(){
-				jQuery('.gallery').each(function(index){
-					var galleryId = jQuery(this).attr("id");
-					galleryId = galleryId.replace("galleryid-",""); 
-					updatePaginationString(galleryId);
-					// Remove Any Previous Pagination (if resize)
-					jQuery(this).parent().children('.gallery-pager').html('')
-					cycleGallery[index] = jQuery("#galleryid-" + galleryId).cycle({ 
-						id:               galleryId,
-						next:             '#galleryNext-' + galleryId, 
-						prev:             '#galleryPrev-' + galleryId,
-						pager:            jQuery("#gallery-pager-" + galleryId), 
-						onPrevNextEvent:  UpdateNumbers, // callback fn for prev/next events: function(isNext, zeroBasedSlideIndex, slideElement),
-						<?php for($i4 = 0; $i4 < count($jsj_gallery_slideshow_options_cycle); $i4++){
-							$option_value = get_option($jsj_gallery_slideshow_options_cycle[$i4]->name , $jsj_gallery_slideshow_options_cycle[$i4]->default);
-							if($option_value != $jsj_gallery_slideshow_options_cycle[$i4]->default){
-								if(is_numeric($option_value)){
-									// Don't add quotes
-									echo ($jsj_gallery_slideshow_options_cycle[$i4]->name . ": " . $option_value . ", //" . $jsj_gallery_slideshow_options_cycle[$i4]->descp . "\n");
-								}
-								else {
-									// Add Quotes
-									echo ($jsj_gallery_slideshow_options_cycle[$i4]->name . ": '" . $option_value . "', //" . $jsj_gallery_slideshow_options_cycle[$i4]->descp . "\n");
-								}
-							}
-						}
-						?>
-						before: function(){ 
-							var sh = jQuery(this).height();
-							<?php 
-							if(get_option($jsj_gallery_slideshow_options_cycle[21]->name) === FALSE || !is_numeric(get_option($jsj_gallery_slideshow_options_cycle[21]->name))){ 
-								$input_value = $jsj_gallery_slideshow_options_cycle[21]->default;//This number is the default for 
-							} else {
-								$input_value = get_option($jsj_gallery_slideshow_options_cycle[21]->name);
-							}
-							?>
-							if(sh > 1) jQuery(this).parent().clearQueue().animate({ height: sh }, <?php echo $input_value; ?> );
-						},
-						pagerAnchorBuilder: function(idx, slide) { // callback fn that creates a thumbnail to use as pager anchor 
-							return '<li class="slideshow_thumb" style="background-image: url(' + slide.src + ');"></li>'; //<a href="#"><img src="" /></a>
-						}
-					});
-					setInitialHeight(cycleGallery[index]);
-				});
-			}
-			createJSJGallerySlideshow();
-		});
-		jQuery(window).resize(function(){
-			createJSJGallerySlideshow();
-		});
-		</script>
-		<?php endif; ?>
-	<? }
+
 } ?>
