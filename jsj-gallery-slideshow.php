@@ -12,27 +12,6 @@ License: GPL2
 
 $jsj_gallery_slideshow_object = new JSJGallerySlideshow();
 
-// Init Set All Plugin Variables
-add_action('init', array($jsj_gallery_slideshow_object, 'init') );
-
-// Call register settings function
-add_action( 'admin_init', array($jsj_gallery_slideshow_object, 'admin_init') );
-
-// Hook on init
-// add_action('plugins_loaded', array($jsj_gallery_slideshow_object, 'add_translations'));
-
-// Add JS scripts
-add_action( 'wp_enqueue_scripts', array($jsj_gallery_slideshow_object, 'enqueue_client_scripts') );
-
-// Admin: Enqueue CSS
-add_action( 'admin_enqueue_scripts', array($jsj_gallery_slideshow_object, 'enqueue_admin_scripts') );
-
-// Hook for adding admin menus
-add_action('admin_menu',  array($jsj_gallery_slideshow_object, 'add_options_menu'));
-
-remove_shortcode('gallery');
-add_shortcode('gallery', array($jsj_gallery_slideshow_object, 'gallery_shortcode') );
-
 class JSJGallerySlideshow {
 
 	private $defined = true; 
@@ -49,6 +28,29 @@ class JSJGallerySlideshow {
 	public function init(){
 		global $jsj_gallery_slideshow_options_cycle; 
 		global $jsj_gallery_slideshow_options_other; 
+
+		/* * * Bind Plugin to Wordpress Hooks * * */
+
+		// Init Set All Plugin Variables
+		add_action('init', array($this, 'init') );
+
+		// Call register settings function
+		add_action( 'admin_init', array($this, 'admin_init') );
+
+		// Hook on init
+		// add_action('plugins_loaded', array($jsj_gallery_slideshow_object, 'add_translations'));
+
+		// Add JS scripts
+		add_action( 'wp_enqueue_scripts', array($this, 'enqueue_client_scripts') );
+
+		// Admin: Enqueue CSS
+		add_action( 'admin_enqueue_scripts', array($this, 'enqueue_admin_scripts') );
+
+		// Hook for adding admin menus
+		add_action('admin_menu',  array($this, 'add_options_menu'));
+
+		remove_shortcode('gallery');
+		add_shortcode('gallery', array($this, 'gallery_shortcode') );
 
 		/* * * Get All Settings * * */
 
@@ -91,6 +93,11 @@ class JSJGallerySlideshow {
 		$this->instructions .= sprintf( __('%sSettings with a Green Background%s denote settings that are probably more important.', 'jsj-gallery-slideshow' ), '<span style="background-color: #ccffcc;">', '</span>');
 	}
 
+	/**
+	 * Register all plugin settings
+	 *
+	 * @return void
+	 */
 	public function admin_init(){
 		// Register our settings
 		foreach($this->settings->cycle as $key => $setting){
@@ -101,8 +108,10 @@ class JSJGallerySlideshow {
 		}
 	}
 
-	/*
+	/**
 	 * Add Script to the Footer and Header
+	 *
+	 * @return void
 	 */
 	public function enqueue_client_scripts(){
 		global $post;
@@ -141,6 +150,11 @@ class JSJGallerySlideshow {
 		}
 	}
 
+	/**
+	 * Enqueue CSS stylesheet to admin
+	 *
+	 * @return void
+	 */
 	public function enqueue_admin_scripts(){
 		// Add CSS
 		wp_enqueue_style(
@@ -150,9 +164,11 @@ class JSJGallerySlideshow {
 	}
 
 	/**
-	* This will create a menu item under the option menu
-	* @see http://codex.wordpress.org/Function_Reference/add_options_page
-	*/
+	 * This will create a menu item under the option menu
+	 * @see http://codex.wordpress.org/Function_Reference/add_options_page
+	 *
+	 * @return void
+	 */
 	public function add_options_menu(){
 		add_options_page(__( 'JSJ Gallery Slideshow Options', 'jsj-gallery-slideshow' ), 'JSJ Gallery Slideshow', 'manage_options', 'jsj-gallery-slideshow', array($this, 'options_page'));
 	}
@@ -160,6 +176,8 @@ class JSJGallerySlideshow {
 	/**
 	 * This is where you add all the html and php for your option page
 	 * @see http://codex.wordpress.org/Function_Reference/add_options_page
+	 *
+	 * @return void
 	 */
 	public function options_page(){
 
@@ -199,11 +217,10 @@ class JSJGallerySlideshow {
 			</form>
 
 			<!-- Revert Options to their defults -->
-			<h3><?php _e( 'Switch To Default Settings', 'jsj-gallery-slideshow' ); ?></h3>
 			<p><?php _e( 'Clear all your settings and switch to the original plugin settings.', 'jsj-gallery-slideshow' ); ?></p>
 			<form name="<?php echo $this->name_space; ?>-default" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
                 <input type="hidden" name="<?php echo $this->name_space; ?>-switch_default" value="1">  
-                <input type="submit" name="Submit" value="<?php _e( 'Revert back to default options', 'jsj-gallery-slideshow' ); ?>" />
+                <input type="submit" name="Submit" value="<?php _e( 'Revert back to default options', 'jsj-gallery-slideshow' ); ?>" class="button"/>
             </form>
      
 	</div>
@@ -211,6 +228,8 @@ class JSJGallerySlideshow {
 
 	/**
 	 * Turns an array of options into HTML
+	 *
+	 * @return void
 	 */
 	private function displayOptionsForm($options_group){ ?>
 		<table class="<?php echo $this->name_space; ?>">
@@ -248,7 +267,7 @@ class JSJGallerySlideshow {
 		</table><?php
 	}
 
-	/*
+	/**
 	 * Get a specific admin color user user preferences and the WP array of colors
 	 *
 	 * @return string
@@ -271,6 +290,8 @@ class JSJGallerySlideshow {
 	 * Change Slidehow Function
 	 * 
 	 * Overwrite of WP Core
+	 * 
+	 * @return string
 	 */
 	public function gallery_shortcode($attr){
 		global $post, $wp_locale;
