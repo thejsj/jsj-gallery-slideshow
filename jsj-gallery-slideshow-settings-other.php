@@ -7,7 +7,8 @@ $jsj_gallery_slideshow_options_other = array(
 		'title' => __( 'Check For Shortcode', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'Only load plugin if [gallery] shortcode is being used in content. Recommened for most cases. Deactivate if using Ajax.', 'jsj-gallery-slideshow' ),
 		'type' => 'boolean',
-		'default' => 1
+		'tab' => 'advanced',
+		'default' => 0
 	)
 );
 

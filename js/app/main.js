@@ -1,24 +1,31 @@
 var createJSJGallerySlideshow = (function($){
+
 	var isNext, zeroBasedSlideIndex, slideElement, galleryid;
-	var cycleGallery = [];
-	var utilities = new JSJ_Gallery_SlideShow_Utilities(); 
+	
+	var cycleGallery = []; // All Galleries
+	
+	var utilities = new JSJ_Gallery_SlideShow_Utilities(); // Create an instance of our utilities class
+	// Parse Options from WordPress
 	var cycle_options = (function(){
 		var options = {}; 
-		var settings = jsjGallerySlideshowOptions.settings.cycle;
+		var settings = jsjGallerySlideshowOptions.settings;
 		for(i in settings){
-			var value = settings[i].value;
+			var value = settings[i];
 			if(!isNaN(parseInt(value))) {
 				value = parseInt(value);
 			}
-			if(value === 'false' || value === "true"){
+			if(value === 'false' || value === 'true'){
 				value = (value === 'false') ? false : true; 
 			}
-			options[settings[i].name] = value; 
+			options[i] = value; 
 		}
 		return options; 
 	})();
+
 	var slideTransitionTime = cycle_options['speed'];
-	console.log(cycle_options);
+	console.log("cycle_options");
+	console.log(jsjGallerySlideshowOptions.settings);
+
 	return function(){
 		jQuery('.gallery').each(function(index){
 			var galleryId = jQuery(this).attr("id");
@@ -34,7 +41,7 @@ var createJSJGallerySlideshow = (function($){
 				onPrevNextEvent:  utilities.update_numbers, // callback fn for prev/next events: function(isNext, zeroBasedSlideIndex, slideElement),
 				before: function(){ 
 					var sh = jQuery(this).height();
-					if(sh > 1) jQuery(this).parent().clearQueue().animate({ height: sh }, jsjGallerySlideshowOptions.settings.cycle['speed'].value );
+					if(sh > 1) jQuery(this).parent().clearQueue().animate({ height: sh }, slideTransitionTime );
 				},
 				pagerAnchorBuilder: function(idx, slide) { // callback fn that creates a thumbnail to use as pager anchor 
 					return '<li class="slideshow_thumb" style="background-image: url(' + slide.src + ');"></li>'; //<a href="#"><img src="" /></a>
@@ -46,13 +53,10 @@ var createJSJGallerySlideshow = (function($){
 })(jQuery);
 
 if(jsjGallerySlideshowOptions.scripts_enqueued){
-	console.log('scritps enqueued');
 	jQuery(window).resize(function(){
 		createJSJGallerySlideshow();
 	});
-
 	jQuery(document).ready(function(){
 		createJSJGallerySlideshow();
 	});
 }
-

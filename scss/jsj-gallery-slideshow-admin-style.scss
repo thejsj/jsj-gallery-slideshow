@@ -12,6 +12,17 @@
 		max-width: 600px;
 	}
 
+	.tab-nav {
+
+		h2 {
+			border-bottom: 1px #ccc solid; 
+		}
+		
+		.nav-tab {
+			background: none; 
+		}
+	}
+
 	table.jsj-gallery-slideshow {
 
 		border: 1px #ddd solid; 
