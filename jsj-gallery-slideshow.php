@@ -3,12 +3,27 @@
 /*
 Plugin Name: JSJ Gallery Slideshow
 Plugin URI: http://wordpress.org/plugins/jsj-gallery-slideshow/
-Description: A Plugin to change your slidehow. 
+Description: A plugin to immediately improve all your WordPress galleries, with a simple, easy-to-use slideshow. 
 Version: 1.2
 Author: Jorge Silva Jetter
 Author URI: http://thejsj.com
 License: GPL2
 */
+
+/*
+
+TODO : Add Correct urls to resources and credit
+TODO : Add new screenshots for plugin admin
+TODO : Add changes to readme.txt
+TODO : Update readme.txt
+
+LATER: 
+
+TODO : Update Banners in Wordpress.org
+TODO : Add new screenshots for plugin front-end
+
+*/
+
 
 $jsj_gallery_slideshow_object = new JSJGallerySlideshow();
 
@@ -26,7 +41,7 @@ class JSJGallerySlideshow {
 	 * @return void
 	 */
 	public function __construct(){
-		/* * * Bind Plugin to Wordpress Hooks * * */
+		/* * * Bind Plugin to WordPress Hooks * * */
 
 		// Init Set All Plugin Variables
 		add_action('init', array($this, 'init') );
@@ -191,7 +206,7 @@ class JSJGallerySlideshow {
 			$options_tab = $_GET['tab'];
 		}
 		else{
-			$options_tab = 'easy';
+			$options_tab = 'simple';
 		}
 
 		// Rest Settings
@@ -213,7 +228,7 @@ class JSJGallerySlideshow {
 
 			<div id="nav" class="tab-nav">
 				<h2 class="themes-php">
-					<a class="nav-tab" href="?page=<?php echo $this->name_space; ?>&amp;tab=easy"><?php _e('Easy', 'jsj-gallery-slideshow' ); ?></a>
+					<a class="nav-tab" href="?page=<?php echo $this->name_space; ?>&amp;tab=simple"><?php _e('Simple', 'jsj-gallery-slideshow' ); ?></a>
 					<a class="nav-tab" href="?page=<?php echo $this->name_space; ?>&amp;tab=advanced"><?php _e('Advanced', 'jsj-gallery-slideshow' ); ?></a>
 				</h2>
 			</div>
@@ -221,13 +236,14 @@ class JSJGallerySlideshow {
 			<form method="post" action="options.php" class="<?php echo $this->name_space; ?>">
 				<?php settings_fields( 'jsj_gallery_slideshow-settings-group' ); ?>
 
-				<?php if($options_tab == 'easy'): ?>
-
+				
+				<div class="<?php echo $this->name_space; ?>-tab-content <?php echo (($options_tab == 'simple') ? 'active' : 'disabled' );?>">
 					<!-- Gallery Options -->
 					<h3><?php _e( 'Gallery Options', 'jsj-gallery-slideshow' ); ?></h3>
-					<?php $this->displayOptionsForm($this->settings->cycle, 'easy'); ?>
+					<?php $this->displayOptionsForm($this->settings->cycle, 'simple'); ?>
+				</div>
 
-				<?php elseif($options_tab == 'advanced'): ?>
+				<div class="<?php echo $this->name_space; ?>-tab-content <?php echo (($options_tab == 'advanced') ? 'active' : 'disabled' );?>">		
 
 					<!-- Gallery Options -->
 					<h3><?php _e( 'Advanced Gallery Options', 'jsj-gallery-slideshow' ); ?></h3>
@@ -237,38 +253,40 @@ class JSJGallerySlideshow {
 					<h3><?php _e( 'Loading Options', 'jsj-gallery-slideshow' ); ?></h3>
 					<?php $this->displayOptionsForm($this->settings->other, 'advanced'); ?>		
 
-				<?php endif; ?>
+				</div>
 				<div style="clear:both"></div>
 
 				<!-- Save -->
-				<p><?php _e( 'If pleased with your settings, go ahead and save them!', 'jsj-gallery-slideshow' ); ?></p>
+				<!-- <p><?php _e( 'If pleased with your settings, go ahead and save them!', 'jsj-gallery-slideshow' ); ?></p> -->
 				<?php submit_button(); ?>
 
 			</form>
 
 			<!-- Revert Options to their defults -->
-			<p><?php _e( 'Clear all your settings and switch to the original plugin settings.', 'jsj-gallery-slideshow' ); ?></p>
+			<p><?php _e( 'Reset all plugin settings to their defaults. This will delete all your current settings.', 'jsj-gallery-slideshow' ); ?></p>
 			<form name="<?php echo $this->name_space; ?>-default" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
                 <input type="hidden" name="<?php echo $this->name_space; ?>-switch_default" value="1">  
-                <input type="submit" name="Submit" value="<?php _e( 'Revert back to default options', 'jsj-gallery-slideshow' ); ?>" class="button"/>
+                <input type="submit" name="Submit" value="<?php _e( 'Reset Plugin Settings', 'jsj-gallery-slideshow' ); ?>" class="button"/>
             </form>
 
             <h4><?php _e('Resources', 'jsj-gallery-slideshow' ); ?></h4>
             <ul>
             	<?php // TODO : Add How To link ?>
             	<li><?php echo sprintf( __('%sHow To Use This Plugin%s', 'jsj-gallery-slideshow' ), '<a href="#" target="_blank">' , '</a>'); ?></li>
+            	<?php // TODO : Add Survey link ?>
+            	<li><?php echo sprintf( __('%sProvide Feedback%s', 'jsj-gallery-slideshow' ), '<a href="#" target="_blank">','</a>'); ?></li>
+            	<li><?php echo sprintf( __('%sReview This Plugin%s', 'jsj-gallery-slideshow' ), '<a href="http://wordpress.org/support/view/plugin-reviews/jsj-gallery-slideshow" target="_blank">','</a>'); ?></li>
             	<?php // TODO : Add Plugin Website ?>
-            	<li><?php echo sprintf( __('%sPlugin Webiste%s', 'jsj-gallery-slideshow' ), '<a href="#" target="_blank">', '</a>'); ?></li>
-            	<?php // TODO : Add Survery link ?>
-            	<li><?php echo sprintf( __('%sTake The Survey%s', 'jsj-gallery-slideshow' ), '<a href="#" target="_blank">','</a>'); ?></li>
-            	<li><?php echo sprintf( __('%sReview the Plugin%s', 'jsj-gallery-slideshow' ), '<a href="http://wordpress.org/support/view/plugin-reviews/jsj-gallery-slideshow" target="_blank">','</a>'); ?></li>
+            	<li><?php echo sprintf( __('%sVisit Plugin Website%s', 'jsj-gallery-slideshow' ), '<a href="#" target="_blank">', '</a>'); ?></li>
+            	<?php // TODO : Add JSJ Plugins url ?>
+            	<li><?php echo sprintf( __('%sSee All JSJ Plugins%s', 'jsj-gallery-slideshow' ), '<a href="#" target="_blank">','</a>'); ?></li>
 			</ul>
 
             <h4><?php _e('Credit', 'jsj-gallery-slideshow' ); ?></h4>
             <ul>
-            	<li><?php echo sprintf( __('Built with %sJquery Cycle%s.', 'jsj-gallery-slideshow' ), '<a href="http://jquery.malsup.com/cycle/" target="_blank">' , '</a>'); ?></li>
-            	<li><?php echo sprintf( __('Inspired by %sCargo%s.', 'jsj-gallery-slideshow' ), '<a href="http://cargocollective.com/slideshow" target="_blank">', '</a>'); ?></li>
-            	<li><?php echo sprintf( __('Plugin by  %s.', 'jsj-gallery-slideshow' ), '<a href="http://thejsj.com" target="_blank">Jorge Silva-Jetter</a>'); ?></li>
+            	<li><?php echo sprintf( __('Plugin by  %s', 'jsj-gallery-slideshow' ), '<a href="http://thejsj.com" target="_blank">Jorge Silva-Jetter</a>'); ?></li>
+            	<li><?php echo sprintf( __('Built with %sJquery Cycle%s', 'jsj-gallery-slideshow' ), '<a href="http://jquery.malsup.com/cycle/" target="_blank">' , '</a>'); ?></li>
+            	<li><?php echo sprintf( __('Inspired by %sCargo%s', 'jsj-gallery-slideshow' ), '<a href="http://cargocollective.com/slideshow" target="_blank">', '</a>'); ?></li>
 			</ul>
 	</div>
 	<? }
@@ -278,7 +296,7 @@ class JSJGallerySlideshow {
 	 *
 	 * @return void
 	 */
-	private function displayOptionsForm($options_group, $tab = 'easy'){ ?>
+	private function displayOptionsForm($options_group, $tab = 'simple'){ ?>
 		<table class="<?php echo $this->name_space; ?>">
 		<?php $i = 0; // used for odd/even value?>
 		<?php foreach($options_group as $key => $option): ?>

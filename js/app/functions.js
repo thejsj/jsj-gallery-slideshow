@@ -58,5 +58,3 @@ var JSJ_Gallery_SlideShow_Utilities = function(){
 		}
 	}
 }
-
-console.log("Begin Slideshow");

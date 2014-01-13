@@ -23,9 +23,7 @@ var createJSJGallerySlideshow = (function($){
 	})();
 
 	var slideTransitionTime = cycle_options['speed'];
-	console.log("cycle_options");
-	console.log(jsjGallerySlideshowOptions.settings);
-
+	
 	return function(){
 		jQuery('.gallery').each(function(index){
 			var galleryId = jQuery(this).attr("id");
