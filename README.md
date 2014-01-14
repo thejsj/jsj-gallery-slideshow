@@ -30,7 +30,7 @@ Inspired by [Cargo](http://cargocollective.com/)
 
 1. Upload the entire jsj-gallery-slideshow folder to the /wp-content/plugins/ directory or simply use the Plugin upload interface in the admin.
 2. Activate the plugin through the ‘Plugins’ menu in WordPress. At that moment, all your slideshows will be automatically converted into JSJ Gallery Slideshows.
-**3. Optional:** If you want to change any of the options for the plugin, go to Settings -> JSJ Gallery Slideshow.  
+3. Optional. If you want to change any of the options for the plugin, go to Settings -> JSJ Gallery Slideshow.
 
 ## Frequently asked questions ##
 
@@ -40,19 +40,24 @@ If you have any feedback or suggestions, email me at jorge dot silva at thejsj d
 
 ## Screenshots ##
 
-### 1. Example  ###
-![Example ](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-1.png)
-#1. See it online: <http://thejsj.com/#/uncategorized/jsj-gallery-slideshow-example/>
+### 1. Example <http://thejsj.com/uncategorized/jsj-gallery-slideshow-example/> ###
+![Example <http://thejsj.com/uncategorized/jsj-gallery-slideshow-example/>](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-1.png)
 
-2. Example #2. See it online: <http://thejsj.com/#/pieces/anything-worth-saying-exhibition/>
+### 2. Example <http://thejsj.com/pieces/anything-worth-saying-exhibition/> ###
+![Example <http://thejsj.com/pieces/anything-worth-saying-exhibition/>](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-2.png)
 
-3. Example #3. See it online: <http://thejsj.com/#/pieces/n-possible-routes/>
+### 3. Example <http://thejsj.com/pieces/n-possible-routes/> ###
+![Example <http://thejsj.com/pieces/n-possible-routes/>](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-3.png)
 
-4. Example #4. See it online: <http://thejsj.com/#/pieces/anything-worth-saying-interactive/>
+### 4. Example <http://thejsj.com/pieces/anything-worth-saying-interactive/> ###
+![Example <http://thejsj.com/pieces/anything-worth-saying-interactive/>](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-4.png)
 
-5. Options Page 
+### 5. Options Page  ###
+![Options Page ](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-5.png)
 
-6. Options Page (Advanced Options)
+### 6. Options Page (Advanced Options) ###
+![Options Page (Advanced Options)](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-6.png)
+
 
 ## Changelog ##
 
