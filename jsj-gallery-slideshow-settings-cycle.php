@@ -79,7 +79,7 @@ $jsj_gallery_slideshow_options_cycle = Array(
 		'descp' => __( 'Force slide width/height to a fixed width/height before every transition', 'jsj-gallery-slideshow' ),
 		'type' => 'boolean',
 		'tab' => 'advanced',
-		'default' => 1,
+		'default' => 0,
 	),
 	'containerResize' => (object) array(
 		'name' => 'containerResize', 
