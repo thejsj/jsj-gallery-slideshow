@@ -8,11 +8,11 @@
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
-JSJ Gallery Slideshow is a  WordPress plugin that substitutes the default gallery an turns into a much nicer slideshow. 
+JSJ Gallery Slideshow immediately improves all your WordPress galleries, with a simple, elegant and easy-to-use slideshow. 
 
 ## Description ##
 
-JSJ Gallery Slideshow is a WordPress plugin that substitutes the default gallery an turns into a much nicer slideshow. It does this completely automatically (really, it’s that easy!). You only have to install the plugin and all your slideshows will be automatically converted to something like [this](http://thejsj.com/#/uncategorized/jsj-%C2%B7-gallery-slideshow-example/).
+JSJ Gallery Slideshow immediately improves all your WordPress galleries, with a simple, elegant and easy-to-use slideshow. It does this completely automatically (really, it’s that simple!). You only have to install the plugin and all your slideshows will be automatically converted to something like [this](http://thejsj.com/#/uncategorized/jsj-%C2%B7-gallery-slideshow-example/).
 
 You can change the way the slideshow is displayed through changing settings such as speed, transition effect and timeout between transition. 
 

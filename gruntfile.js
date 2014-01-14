@@ -52,7 +52,7 @@ module.exports = function(grunt) {
 	            options: {
 	                plugin_slug: 'jsj-gallery-slideshow',
 	                svn_user: 'jorge.silva',    
-	                build_dir: 'trunk' //relative path to your build directory
+	                build_dir: './' //relative path to your build directory
 	            },
 	        }
 	    },
@@ -87,11 +87,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-checkwpversion');
 	grunt.loadNpmTasks('grunt-wp-readme-to-markdown');
+	grunt.loadNpmTasks('grunt-wp-deploy');
 	grunt.loadNpmTasks('grunt-shell');
 
 	// Default task(s).
 	grunt.registerTask('default', ['checkwpversion','uglify', 'compass','wp_readme_to_markdown']);
 	grunt.registerTask('generatePot', ['shell:generatePot']);
-	grunt.registerTask('deploy', ['shell:deploy']);
+	grunt.registerTask('deploy', ['wp_deploy']);
 
 };
