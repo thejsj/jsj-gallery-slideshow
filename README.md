@@ -1,32 +1,48 @@
-# jsj-gallery-slideshow
+# JSJ Gallery Slideshow #
+**Contributors:** jorge.silva  
+**Donate link:** http://thejsj.com  
+**Tags:** slideshow, gallery, simple, jquery, easing, animation, cargo, cycle, jsj  
+**Requires at least:** 3.3  
+**Tested up to:** 3.8  
+**Stable tag:** 1.2  
+**License:** GPLv2 or later  
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
-JSJ Gallery Slideshow is a  Wordpress plugin that substitutes the default gallery an turns into a much nicer slideshow. 
+JSJ Gallery Slideshow is a  WordPress plugin that substitutes the default gallery an turns into a much nicer slideshow. 
 
-## Description
+## Description ##
 
-JSJ Gallery Slideshow is a Wordpress plugin that substitutes the default gallery an turns into a much nicer slideshow. It does this completely automatically (really, it’s that easy!). You only have to install the plugin and all your slideshows will be automatically converted to something like [this](http://thejsj.com/#/uncategorized/jsj-%C2%B7-gallery-slideshow-example/).
+JSJ Gallery Slideshow is a WordPress plugin that substitutes the default gallery an turns into a much nicer slideshow. It does this completely automatically (really, it’s that easy!). You only have to install the plugin and all your slideshows will be automatically converted to something like [this](http://thejsj.com/#/uncategorized/jsj-%C2%B7-gallery-slideshow-example/).
 
-You can change almost all the options allowed by [Jquery Cycle](http://jquery.malsup.com/cycle/options.html) (it’s based on this Jquery plugin) such as: transition time, transition effect, timeout between transition (or no timeout), slide class, …etc.
+You can change the way the slideshow is displayed through changing settings such as speed, transition effect and timeout between transition. 
 
-This plugin is inspired by [Cargo Collective’s slideshow feature](http://cargocollective.com/slideshow) and uses [Jquery Cycle](http://jquery.malsup.com/cycle/) and [Jquery Easing](http://gsgd.co.uk/sandbox/jquery/easing/) as the basis for the plugin.
+The plugin is based on the excellent [Jquery Cycle](http://jquery.malsup.com/cycle/options.html), one of the best jQuery slideshow plugins out there. The plugin options are also based in the [Jquery Cycle Options](http://jquery.malsup.com/cycle/options.html).
 
-Available translations:
+Plugin by [Jorge Silva-Jetter](http://thejsj.com)
 
-- Spanish (es_ES)
+Build with [Jquery Cycle](http://jquery.malsup.com/cycle/)
 
-## Installation
+Inspired by [Cargo](http://cargocollective.com/) 
 
-1. Upload the entire jsj-gallery-slideshow folder to the /wp-content/plugins/ directory.
+**Available translations:** Spanish (es_ES)  
+
+## Installation ##
+
+1. Upload the entire jsj-gallery-slideshow folder to the /wp-content/plugins/ directory or simply use the Plugin upload interface in the admin.
 2. Activate the plugin through the ‘Plugins’ menu in WordPress. At that moment, all your slideshows will be automatically converted into JSJ Gallery Slideshows.
-3. Optional: If you want to change any of the options for the plugin, go to Settings -> JSJ Gallery Slideshow.
+**3. Optional:** If you want to change any of the options for the plugin, go to Settings -> JSJ Gallery Slideshow.  
 
-## Frequently asked questions
+## Frequently asked questions ##
 
-If you have any questions, please try to add a ticket in the WordPress support forum for this plugin (http://wordpress.org/support/plugin/jsj-gallery-slideshow). Also, if you wish, email me at jorge dot silva at thejsj dot com.
+If you have any questions, please try to add a ticket in the WordPress support forum for this plugin (http://wordpress.org/support/plugin/jsj-gallery-slideshow). 
 
-## Screenshots
+If you have any feedback or suggestions, email me at jorge dot silva at thejsj dot com.
 
-1. Example #1. See it online: <http://thejsj.com/#/uncategorized/jsj-gallery-slideshow-example/>
+## Screenshots ##
+
+### 1. Example  ###
+![Example ](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-1.png)
+#1. See it online: <http://thejsj.com/#/uncategorized/jsj-gallery-slideshow-example/>
 
 2. Example #2. See it online: <http://thejsj.com/#/pieces/anything-worth-saying-exhibition/>
 
@@ -34,59 +50,68 @@ If you have any questions, please try to add a ticket in the WordPress support f
 
 4. Example #4. See it online: <http://thejsj.com/#/pieces/anything-worth-saying-interactive/>
 
-5. Options Page
+5. Options Page 
 
-## Changelog
+6. Options Page (Advanced Options)
 
-### 1.0 
+## Changelog ##
+
+### 1.0 ###
 First Version. 
 
-### 1.1 
+### 1.1 ###
 Added translation capabilities.
 Added Spanish(es_ES) translation to plugin.
 Created javascript function to ensure easier use with AJAX.
 Changed default image size to 'Full'.
 Fixed some HTML bugs.
 
-### 1.1.1
+### 1.1.1 ###
 Embarrassing spelling mistakes... will I ever learn?
 
-### 1.1.2 
+### 1.1.2 ###
 Fixing plugin class name mistake. 
 
-### 1.1.3
+### 1.1.3 ###
 Fixing javascript function mistake.
 
-### 1.1.4
+### 1.1.4 ###
 Fixing javascript function mistake.
 
-## Upgrade notice 
+### 1.2 ###
+Completely revamped the admin for a much more intuitive experience
+Optimized CSS and Javascript code through minification
+Deleted some unnecessary and unintuitive settings
+Added 'check for shortcode' setting
 
-### 1.0
+## Upgrade notice ##
+
+### 1.0 ###
 First Version. 
 
-### 1.1 
+### 1.1 ###
 Check your html doesn't break. 
-If using ajax, try using the createJSJGallerySlideshow() function to re-init your plugin. 
+If using ajax, try using the createjsj-gallery-slideshow() function to re-init your plugin. 
 
-### 1.1.2
+### 1.1.2 ###
 Please update in order for plugin to work correctly. This upgrades fixes minor programming bugs.
 
-### 1.1.3
-Please update in order
-
-### 1.1.4
+### 1.1.3 ###
 Please update in order for plugin to work correctly. This upgrades fixes minor programming bugs.
 
-## Online Examples
+### 1.1.4 ###
+Please update in order for plugin to work correctly. This upgrades fixes minor programming bugs.
+
+### 1.2 ###
+Due to the way the plugin settings have been revamped, some settings might be deleted. Resetting your settings is recommended.  
+
+## Online Examples ##
 
 You can see some online examples here:
 
 1. <http://thejsj.com/#/uncategorized/jsj-gallery-slideshow-example/>
 
 1. <http://thejsj.com/#/pieces/anything-worth-saying-exhibition/>
-
-1. <http://jajaja.thejsj.com/?page_id=118#>
 
 1. <http://thejsj.com/#/uncategorized/jsj-gallery-slideshow-example/>
 
@@ -96,49 +121,35 @@ You can see some online examples here:
 
 1. <http://thejsj.com/#/pieces/anything-worth-saying-interactive/>
 
-## Available Options (From JqueryCycle)
+## Available Options ##
 
-* Active Pager Class – Class name used for the active pager element. No Spaces.
-* Auto Stop – True to end slideshow after X transitions (where X == slide count.
-* Auto Stop Count – number of transitions (optionally used with autostop to define X.
-* Start Backwards – true to start slideshow at last slide and move backwards through the stac.
-* Clear Type No Background – Set to true to disable extra cleartype fixing (leave false to force background color setting on slides.
-* Container Resize – Resize container to fit largest slide. 0:False / 1: Tru.
-* Delay – Additional delay (in ms) for first transition (hint: can be negative).
-* FastOn Event – Force fast transitions when triggered manually (via pager or prev/next); value == time in ms.
-* Fit Slides – Force slides to fit container.
-* Transition Effect – Name of transition effect.
-* Slide Height – Container height (if the ‘fit’ option is true, the slides will be set to this height as well).
-* Manual Trump – Causes manual transition to stop an active transition instead of being ignored.
-* Data Attribute – data-attribute that holds the option data for the slideshow.
-* No Wrapping – True(1) to prevent slideshow from wrapping.
-* Pause Slidehow – True(1) to enable “pause on hover”.
-* Pause On Pager Hover – True(1) to pause when hovering over pager link.
-* Random Slides – True(1) for random, false for sequence (not applicable to shuffle fx).
-* Requeue OnImageNotLoaded – Requeue the slideshow if any image slides are not yet loaded .
-* Requeue Timeout – Ms delay for requeue.
-* Reverse Animation – Causes animations to transition in reverse (for effects that support it such as scrollHorz/scrollVert/shuffle).
-* Slide Resize – Force slide width/height to fixed size before every transition).
-* Speed – speed of the transition (any valid fx speed value).
-* Starting Slide # – Zero-based index of the first slide to be displayed.
-* Synchronize Slides – True if in/out transitions should occur simultaneously.
-* Transition Time – Milliseconds between slide transitions (0 to disable auto advance).
-* Width – Container width (if the ‘fit’ option is true, the slides will be set to this width as well).
+Simple
 
-## Info
+* Transition Effect : Select transition effect for slideshow
+* Speed : Speed of slide transition (in milliseconds)
+* Timeout : Milliseconds between slide transitions (0 to disable auto advance)
+* Pause On Hover : Pause slideshow when hovering over slide
+* Pause On Pager Hover : Pause slideshow when hovering over pager thumbnails
 
-Contributors: jorge.silva
+Advanced
 
-Donate link: 
-
-Tags: slideshow, gallery, simple, jquery, easing, animation, cargo, cycle, jsj
-
-Requires at least: 3.3
-
-Tested up to: 3.5.1
-
-Stable tag: 1.1.3
-
-License: GPLv2 or later
-
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+* Fit Slides : Force slides to fit container
+* Slide Height : Container height (if the "Fit Slides" is enabled, slides will also be resized).
+* Slide Width Container width (if the "Fit Slides" is enabled, slides will also be resized)
+* Slide Resize : Force slide width/height to a fixed width/height before every transition
+* Container Resize : Resize container to fit largest slide
+* No Wrapping Prevent slideshow from wrapping
+* Auto Stop : End slideshow after X transitions (X == Auto Stop Count)
+* Auto Stop Count Number of transitions (See Auto Stop)
+* Starting Slide # : Zero-based index of the first slide to be displayed
+* Start Backwards Start slideshow at last slide and move backwards through the stack
+* Random Slides : Transition slides randomly (not applicable to shuffle fx)
+* Delay : Additional delay (in ms) for first transition (hint: can be negative)
+* Re-queue Timeout : Delay for re-queue (in milliseconds)
+* Re-queue OnImageNotLoaded : Re-queue the slideshow if any images have not been loaded
+* Manual Trump : Causes manual transition to stop an active transition, instead of being ignored
+* Reverse Animation : Causes animations to transition in reverse (for effects that support it such as scrollHorz/scrollVert/shuffle)
+* Synchronize Slides : In/out transitions should occur simultaneously
+* Active Pager Class : Class name used for the active pager element
+* Clear Type No Background : Disable extra cleartype fixing (leave false to force background color setting on slides)
+* Check For Shortcode Only load plugin if [gallery] shortcode is being used in content. Deactivate if using Ajax.

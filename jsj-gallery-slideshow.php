@@ -268,7 +268,7 @@ class JSJGallerySlideshow {
                 <input type="hidden" name="<?php echo $this->name_space; ?>-switch_default" value="1">  
                 <input type="submit" name="Submit" value="<?php _e( 'Reset Plugin Settings', 'jsj-gallery-slideshow' ); ?>" class="button"/>
             </form>
-
+            <?php /* NOTE : This will be renenabled in the next version
             <h4><?php _e('Resources', 'jsj-gallery-slideshow' ); ?></h4>
             <ul>
             	<?php // TODO : Add How To link ?>
@@ -280,7 +280,7 @@ class JSJGallerySlideshow {
             	<li><?php echo sprintf( __('%sVisit Plugin Website%s', 'jsj-gallery-slideshow' ), '<a href="#" target="_blank">', '</a>'); ?></li>
             	<?php // TODO : Add JSJ Plugins url ?>
             	<li><?php echo sprintf( __('%sSee All JSJ Plugins%s', 'jsj-gallery-slideshow' ), '<a href="#" target="_blank">','</a>'); ?></li>
-			</ul>
+			</ul> */ ?>
 
             <h4><?php _e('Credit', 'jsj-gallery-slideshow' ); ?></h4>
             <ul>
@@ -288,6 +288,7 @@ class JSJGallerySlideshow {
             	<li><?php echo sprintf( __('Built with %sJquery Cycle%s', 'jsj-gallery-slideshow' ), '<a href="http://jquery.malsup.com/cycle/" target="_blank">' , '</a>'); ?></li>
             	<li><?php echo sprintf( __('Inspired by %sCargo%s', 'jsj-gallery-slideshow' ), '<a href="http://cargocollective.com/slideshow" target="_blank">', '</a>'); ?></li>
 			</ul>
+			
 	</div>
 	<? }
 

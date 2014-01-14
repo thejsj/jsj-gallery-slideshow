@@ -1,6 +1,7 @@
 === JSJ Gallery Slideshow ===
 Contributors: jorge.silva
-Donate link: Tags: slideshow, gallery, simple, jquery, easing, animation, cargo, cycle, jsj
+Donate link: http://thejsj.com
+Tags: slideshow, gallery, simple, jquery, easing, animation, cargo, cycle, jsj
 Requires at least: 3.3
 Tested up to: 3.8
 Stable tag: 1.2
@@ -27,7 +28,7 @@ Available translations: Spanish (es_ES)
 
 == Installation ==
 
-1. Upload the entire jsj-gallery-slideshow folder to the /wp-content/plugins/ directory.
+1. Upload the entire jsj-gallery-slideshow folder to the /wp-content/plugins/ directory or simply use the Plugin upload interface in the admin.
 2. Activate the plugin through the ‘Plugins’ menu in WordPress. At that moment, all your slideshows will be automatically converted into JSJ Gallery Slideshows.
 3. Optional: If you want to change any of the options for the plugin, go to Settings -> JSJ Gallery Slideshow.
 
@@ -47,7 +48,9 @@ If you have any feedback or suggestions, email me at jorge dot silva at thejsj d
 
 4. Example #4. See it online: <http://thejsj.com/#/pieces/anything-worth-saying-interactive/>
 
-5. Options Page
+5. Options Page 
+
+6. Options Page (Advanced Options)
 
 == Changelog ==
 
