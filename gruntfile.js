@@ -40,22 +40,7 @@ module.exports = function(grunt) {
 				    'mv jsj-gallery-slideshow.pot ./languages/jsj-gallery-slideshow.pot'
 				].join('&&')
 			},
-			deploy: {
-				options: {
-				        stdout: true
-				},
-				command: 'source ~/Sites/scripts/deployPlugin.sh',
-			}
         },
-        wp_deploy: {
-	        deploy: { 
-	            options: {
-	                plugin_slug: 'jsj-gallery-slideshow',
-	                svn_user: 'jorge.silva',    
-	                build_dir: './' //relative path to your build directory
-	            },
-	        }
-	    },
 	    wp_readme_to_markdown: {
 			your_target: {
 				files: {
@@ -79,20 +64,53 @@ module.exports = function(grunt) {
 	            compare: '==',
 	        },
 	    },
+	    copy: {
+            // Copy the plugin to a versioned release directory
+            main: {
+                src:  [
+                    '**',
+                    '!node_modules/**',
+                    '!build/**',
+                    '!.git/**',
+                    '!gruntfile.js',
+                    '!package.json',
+                    '!.gitignore',
+                    '!.gitmodules',
+                    '!*~',
+                    '!README.md',
+                    '!config.rb',
+                ],
+                dest: 'build/jsj-code-highlight/',
+            }                
+        },
+        wp_deploy: {
+	        deploy: { 
+	            options: {
+	                plugin_slug: 'jsj-gallery-slideshow',
+	                svn_user: 'jorge.silva',    
+	                build_dir: 'build/jsj-gallery-slideshow/' //relative path to your build directory
+	            },
+	        }
+	    },
 	});
 
 	// Load the plugin that provides the "uglify" task.
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+
 	grunt.loadNpmTasks('grunt-checkwpversion');
 	grunt.loadNpmTasks('grunt-wp-readme-to-markdown');
 	grunt.loadNpmTasks('grunt-wp-deploy');
 	grunt.loadNpmTasks('grunt-shell');
 
 	// Default task(s).
-	grunt.registerTask('default', ['checkwpversion','uglify', 'compass','wp_readme_to_markdown']);
-	grunt.registerTask('generatePot', ['shell:generatePot']);
-	grunt.registerTask('deploy', ['wp_deploy']);
+	grunt.registerTask('default', ['uglify', 'compass']);
+	grunt.registerTask('build', ['compass' ,'uglify', 'checkwpversion', 'shell:generatePot','wp_readme_to_markdown', 'clean', 'copy']);
+	grunt.registerTask( 'deploy', [ 'wp_readme_to_markdown', 'clean', 'copy', 'wp_deploy' ] );
+
 
 };

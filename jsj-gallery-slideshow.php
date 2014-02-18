@@ -290,7 +290,7 @@ class JSJGallerySlideshow {
 			</ul>
 			
 	</div>
-	<? }
+	<?php }
 
 	/**
 	 * Turns an array of options into HTML

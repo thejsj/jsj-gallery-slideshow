@@ -27,7 +27,7 @@ $jsj_gallery_slideshow_options_cycle = Array(
 		'descp' => __( 'Milliseconds between slide transitions (0 to disable auto advance)', 'jsj-gallery-slideshow' ),
 		'type' => 'number',
 		'tab' => 'simple',
-		'default' => 4000
+		'default' => 0
 	),
 	'pause' => (object) array(
 		'name' => 'pause', 
