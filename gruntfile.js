@@ -64,6 +64,10 @@ module.exports = function(grunt) {
 	            compare: '==',
 	        },
 	    },
+	    clean: {
+            //Clean up build folder
+            main: ['build/jsj-gallery-slideshow']
+        },
 	    copy: {
             // Copy the plugin to a versioned release directory
             main: {
@@ -80,7 +84,7 @@ module.exports = function(grunt) {
                     '!README.md',
                     '!config.rb',
                 ],
-                dest: 'build/jsj-code-highlight/',
+                dest: 'build/jsj-gallery-slideshow/',
             }                
         },
         wp_deploy: {

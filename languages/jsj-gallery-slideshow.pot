@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the JSJ Gallery Slideshow package.
 msgid ""
 msgstr ""
-"Project-Id-Version: JSJ Gallery Slideshow 1.2\n"
+"Project-Id-Version: JSJ Gallery Slideshow 1.2.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/jsj-gallery-slideshow\n"
-"POT-Creation-Date: 2014-01-12 23:56:21+00:00\n"
+"POT-Creation-Date: 2014-02-18 04:46:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -225,7 +225,7 @@ msgid ""
 "if using Ajax."
 msgstr ""
 
-#. #-#-#-#-#  jsj-gallery-slideshow.pot (JSJ Gallery Slideshow 1.2)  #-#-#-#-#
+#. #-#-#-#-#  jsj-gallery-slideshow.pot (JSJ Gallery Slideshow 1.2.2)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: jsj-gallery-slideshow.php:105
 msgid "JSJ Gallery Slideshow"
@@ -273,51 +273,27 @@ msgstr ""
 msgid "Reset Plugin Settings"
 msgstr ""
 
-#: jsj-gallery-slideshow.php:272
-msgid "Resources"
-msgstr ""
-
-#: jsj-gallery-slideshow.php:275
-msgid "%sHow To Use This Plugin%s"
-msgstr ""
-
-#: jsj-gallery-slideshow.php:277
-msgid "%sProvide Feedback%s"
-msgstr ""
-
-#: jsj-gallery-slideshow.php:278
-msgid "%sReview This Plugin%s"
-msgstr ""
-
-#: jsj-gallery-slideshow.php:280
-msgid "%sVisit Plugin Website%s"
-msgstr ""
-
-#: jsj-gallery-slideshow.php:282
-msgid "%sSee All JSJ Plugins%s"
-msgstr ""
-
 #: jsj-gallery-slideshow.php:285
 msgid "Credit"
 msgstr ""
 
 #: jsj-gallery-slideshow.php:287
-msgid "Built with %sJquery Cycle%s"
-msgstr ""
-
-#: jsj-gallery-slideshow.php:288
-msgid "Inspired by %sCargo%s"
-msgstr ""
-
-#: jsj-gallery-slideshow.php:289
 msgid "Plugin by  %s"
 msgstr ""
 
-#: jsj-gallery-slideshow.php:444
-msgid "Previous"
+#: jsj-gallery-slideshow.php:288
+msgid "Built with %sJquery Cycle%s"
+msgstr ""
+
+#: jsj-gallery-slideshow.php:289
+msgid "Inspired by %sCargo%s"
 msgstr ""
 
 #: jsj-gallery-slideshow.php:445
+msgid "Previous"
+msgstr ""
+
+#: jsj-gallery-slideshow.php:446
 msgid "Next Image"
 msgstr ""
 
