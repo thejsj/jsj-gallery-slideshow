@@ -1,16 +1,16 @@
-=== JSJ Gallery Slideshow ===
-Contributors: jorge.silva
-Donate link: http://thejsj.com
-Tags: slideshow, gallery, simple, jquery, easing, animation, cargo, cycle, jsj
-Requires at least: 3.3
-Tested up to: 3.8
-Stable tag: 1.2.4
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+# JSJ Gallery Slideshow #
+**Contributors:** jorge.silva  
+**Donate link:** http://thejsj.com  
+**Tags:** slideshow, gallery, simple, jquery, easing, animation, cargo, cycle, jsj  
+**Requires at least:** 3.3  
+**Tested up to:** 3.8  
+**Stable tag:** 1.2.4  
+**License:** GPLv2 or later  
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
 JSJ Gallery Slideshow immediately improves all your WordPress galleries, with a simple, elegant and easy-to-use slideshow. 
 
-== Description ==
+## Description ##
 
 JSJ Gallery Slideshow immediately improves all your WordPress galleries, with a simple, elegant and easy-to-use slideshow. It does this completely automatically (really, it’s that simple!). You only have to install the plugin and all your slideshows will be automatically converted to something like [this](http://thejsj.com/#/uncategorized/jsj-%C2%B7-gallery-slideshow-example/).
 
@@ -24,87 +24,99 @@ Build with [Jquery Cycle](http://jquery.malsup.com/cycle/)
 
 Inspired by [Cargo](http://cargocollective.com/) 
 
-Available translations: Spanish (es_ES)
+**Available translations:** Spanish (es_ES)  
 
-== Installation ==
+## Installation ##
 
 1. Upload the entire jsj-gallery-slideshow folder to the /wp-content/plugins/ directory or simply use the Plugin upload interface in the admin.
 2. Activate the plugin through the ‘Plugins’ menu in WordPress. At that moment, all your slideshows will be automatically converted into JSJ Gallery Slideshows.
 3. Optional. If you want to change any of the options for the plugin, go to Settings -> JSJ Gallery Slideshow.
 
-== Frequently asked questions ==
+## Frequently asked questions ##
 
 If you have any questions, please try to add a ticket in the WordPress support forum for this plugin (http://wordpress.org/support/plugin/jsj-gallery-slideshow). 
 
 If you have any feedback or suggestions, email me at jorge dot silva at thejsj dot com.
 
-== Screenshots ==
+## Screenshots ##
 
-1. Example <http://thejsj.com/uncategorized/jsj-gallery-slideshow-example/>
-2. Example <http://thejsj.com/pieces/anything-worth-saying-exhibition/>
-3. Example <http://thejsj.com/pieces/n-possible-routes/>
-4. Example <http://thejsj.com/pieces/anything-worth-saying-interactive/>
-5. Options Page 
-6. Options Page (Advanced Options)
+### 1. Example <http://thejsj.com/uncategorized/jsj-gallery-slideshow-example/> ###
+![Example <http://thejsj.com/uncategorized/jsj-gallery-slideshow-example/>](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-1.png)
 
-== Changelog ==
+### 2. Example <http://thejsj.com/pieces/anything-worth-saying-exhibition/> ###
+![Example <http://thejsj.com/pieces/anything-worth-saying-exhibition/>](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-2.png)
 
-= 1.0 =
+### 3. Example <http://thejsj.com/pieces/n-possible-routes/> ###
+![Example <http://thejsj.com/pieces/n-possible-routes/>](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-3.png)
+
+### 4. Example <http://thejsj.com/pieces/anything-worth-saying-interactive/> ###
+![Example <http://thejsj.com/pieces/anything-worth-saying-interactive/>](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-4.png)
+
+### 5. Options Page  ###
+![Options Page ](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-5.png)
+
+### 6. Options Page (Advanced Options) ###
+![Options Page (Advanced Options)](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-6.png)
+
+
+## Changelog ##
+
+### 1.0 ###
 First Version. 
 
-= 1.1 =
+### 1.1 ###
 Added translation capabilities.
 Added Spanish(es_ES) translation to plugin.
 Created javascript function to ensure easier use with AJAX.
 Changed default image size to 'Full'.
 Fixed some HTML bugs.
 
-= 1.1.1 =
+### 1.1.1 ###
 Embarrassing spelling mistakes... will I ever learn?
 
-= 1.1.2 =
+### 1.1.2 ###
 Fixing plugin class name mistake. 
 
-= 1.1.3 =
+### 1.1.3 ###
 Fixing javascript function mistake.
 
-= 1.1.4 =
+### 1.1.4 ###
 Fixing javascript function mistake.
 
-= 1.2 =
+### 1.2 ###
 Completely revamped the admin for a much more intuitive experience
 Optimized CSS and Javascript code through minification
 Deleted some unnecessary and unintuitive settings
 Added 'check for shortcode' setting
 
-= 1.2.4 =
+### 1.2.4 ###
 Added check that prevents slideshow from being initialized multiple times
 
-== Upgrade notice ==
+## Upgrade notice ##
 
-= 1.0 =
+### 1.0 ###
 First Version. 
 
-= 1.1 =
+### 1.1 ###
 Check your html doesn't break. 
 If using ajax, try using the createjsj-gallery-slideshow() function to re-init your plugin. 
 
-= 1.1.2 =
+### 1.1.2 ###
 Please update in order for plugin to work correctly. This upgrades fixes minor programming bugs.
 
-= 1.1.3 =
+### 1.1.3 ###
 Please update in order for plugin to work correctly. This upgrades fixes minor programming bugs.
 
-= 1.1.4 =
+### 1.1.4 ###
 Please update in order for plugin to work correctly. This upgrades fixes minor programming bugs.
 
-= 1.2 =
+### 1.2 ###
 Due to the way the plugin settings have been revamped, some settings might be deleted. Resetting your settings is recommended.  
 
-= 1.2.4 = 
+### 1.2.4 ###
 Adds small fix to prevent slideshow being initalized multiple times.
 
-== Online Examples ==
+## Online Examples ##
 
 You can see some online examples here:
 
@@ -120,7 +132,7 @@ You can see some online examples here:
 
 1. <http://thejsj.com/#/pieces/anything-worth-saying-interactive/>
 
-== Available Options ==
+## Available Options ##
 
 Simple
 
