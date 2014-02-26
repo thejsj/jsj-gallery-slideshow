@@ -1,6 +1,6 @@
 {
   "name": "jsj-gallery-slideshow",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-uglify": "~0.2.2",

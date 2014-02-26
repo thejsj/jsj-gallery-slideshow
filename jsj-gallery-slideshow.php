@@ -4,7 +4,7 @@
 Plugin Name: JSJ Gallery Slideshow
 Plugin URI: http://wordpress.org/plugins/jsj-gallery-slideshow/
 Description: A plugin to immediately improve all your WordPress galleries, with a simple, easy-to-use slideshow. 
-Version: 1.2.4
+Version: 1.2.5
 Author: Jorge Silva Jetter
 Author URI: http://thejsj.com
 License: GPL2
@@ -268,20 +268,17 @@ class JSJGallerySlideshow {
                 <input type="hidden" name="<?php echo $this->name_space; ?>-switch_default" value="1">  
                 <input type="submit" name="Submit" value="<?php _e( 'Reset Plugin Settings', 'jsj-gallery-slideshow' ); ?>" class="button"/>
             </form>
-            <?php /* NOTE : This will be renenabled in the next version
+     
             <h4><?php _e('Resources', 'jsj-gallery-slideshow' ); ?></h4>
             <ul>
-            	<?php // TODO : Add How To link ?>
-            	<li><?php echo sprintf( __('%sHow To Use This Plugin%s', 'jsj-gallery-slideshow' ), '<a href="#" target="_blank">' , '</a>'); ?></li>
-            	<?php // TODO : Add Survey link ?>
-            	<li><?php echo sprintf( __('%sProvide Feedback%s', 'jsj-gallery-slideshow' ), '<a href="#" target="_blank">','</a>'); ?></li>
+            	<li><?php echo sprintf( __('%sRequest A Feature%s', 'jsj-gallery-slideshow' ), '<a href="http://thejsj.com/jsj-gallery-slideshow-feature-request/" target="_blank">' , '</a>'); ?></li>
+            	<?php /* <li><?php echo sprintf( __('%sHow To Use This Plugin%s', 'jsj-gallery-slideshow' ), '<a href="#" target="_blank">' , '</a>'); ?></li>
+            	<?php // TODO : Add Survey link ?> */ ?>
+            	<?php /* <li><?php echo sprintf( __('%sProvide Feedback%s', 'jsj-gallery-slideshow' ), '<a href="#" target="_blank">','</a>'); ?></li> */ ?>
             	<li><?php echo sprintf( __('%sReview This Plugin%s', 'jsj-gallery-slideshow' ), '<a href="http://wordpress.org/support/view/plugin-reviews/jsj-gallery-slideshow" target="_blank">','</a>'); ?></li>
-            	<?php // TODO : Add Plugin Website ?>
-            	<li><?php echo sprintf( __('%sVisit Plugin Website%s', 'jsj-gallery-slideshow' ), '<a href="#" target="_blank">', '</a>'); ?></li>
-            	<?php // TODO : Add JSJ Plugins url ?>
-            	<li><?php echo sprintf( __('%sSee All JSJ Plugins%s', 'jsj-gallery-slideshow' ), '<a href="#" target="_blank">','</a>'); ?></li>
-			</ul> */ ?>
-
+            	<li><?php echo sprintf( __('%sVisit Plugin Website%s', 'jsj-gallery-slideshow' ), '<a href="http://wordpress.org/plugins/jsj-gallery-slideshow/" target="_blank">', '</a>'); ?></li>
+            	<li><?php echo sprintf( __('%sSee All JSJ Plugins%s', 'jsj-gallery-slideshow' ), '<a href="http://profiles.wordpress.org/jorgesilva-1/" target="_blank">','</a>'); ?></li>
+			</ul>
             <h4><?php _e('Credit', 'jsj-gallery-slideshow' ); ?></h4>
             <ul>
             	<li><?php echo sprintf( __('Plugin by  %s', 'jsj-gallery-slideshow' ), '<a href="http://thejsj.com" target="_blank">Jorge Silva-Jetter</a>'); ?></li>
