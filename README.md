@@ -4,7 +4,7 @@
 **Tags:** slideshow, gallery, simple, jquery, easing, animation, cargo, cycle, jsj  
 **Requires at least:** 3.3  
 **Tested up to:** 3.8  
-**Stable tag:** 1.2.4  
+**Stable tag:** 1.2.5  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -92,6 +92,9 @@ Added 'check for shortcode' setting
 ### 1.2.4 ###
 Added check that prevents slideshow from being initialized multiple times
 
+### 1.2.5 ###
+Adding 'Resources' links and Feature Request form.
+
 ## Upgrade notice ##
 
 ### 1.0 ###
@@ -115,6 +118,9 @@ Due to the way the plugin settings have been revamped, some settings might be de
 
 ### 1.2.4 ###
 Adds small fix to prevent slideshow being initalized multiple times.
+
+### 1.2.5 ###
+Adding 'Resources' links and Feature Request form.
 
 ## Online Examples ##
 
