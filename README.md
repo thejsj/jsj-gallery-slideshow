@@ -4,7 +4,7 @@
 **Tags:** slideshow, gallery, simple, jquery, easing, animation, cargo, cycle, jsj  
 **Requires at least:** 3.3  
 **Tested up to:** 3.8  
-**Stable tag:** 1.2.5  
+**Stable tag:** 1.2.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -95,6 +95,10 @@ Added check that prevents slideshow from being initialized multiple times
 ### 1.2.5 ###
 Adding 'Resources' links and Feature Request form.
 
+### 1.2.6 ###
+Minor Javascript Changes
+Adding 'of' as translation string
+
 ## Upgrade notice ##
 
 ### 1.0 ###
@@ -121,6 +125,9 @@ Adds small fix to prevent slideshow being initalized multiple times.
 
 ### 1.2.5 ###
 Adding 'Resources' links and Feature Request form.
+
+### 1.2.6 ###
+Minor changes. Update and enjoy!
 
 ## Online Examples ##
 

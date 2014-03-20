@@ -1,11 +1,11 @@
 var JSJ_Gallery_SlideShow_Utilities = function(){
 
-	var that = this;
+	var self = {}, __self ={}; 
 
-	this.update_numbers = function(isNext, zeroBasedSlideIndex, slideElement){
+	self.update_numbers = function(isNext, zeroBasedSlideIndex, slideElement){
 		if(slideElement.src != undefined){
 			galleryId = jQuery("img[src$='" + slideElement.src + "']").data("galleryid");
-			that.update_pagination_string(galleryId, zeroBasedSlideIndex);
+			self.update_pagination_string(galleryId, zeroBasedSlideIndex);
 		}
 		else {
 			var string = "";
@@ -13,19 +13,20 @@ var JSJ_Gallery_SlideShow_Utilities = function(){
 		jQuery("#galleryNumbering-" + galleryId).html(string);
 	}
 
-	this.update_pagination_string = function(galleryId, slideNumber){
+	self.update_pagination_string = function(galleryId, slideNumber){
+		__self.of_string = jQuery("#galleryNumbering-" + galleryId).data("numbering-translation-of");
 		if(slideNumber != undefined && slideNumber > 0){
 			var total = parseInt(jQuery("#galleryid-" + galleryId).data("total"));
-			var string = "(" + (slideNumber + 1) + " of " + total + ")"; // (1 of 6)
+			var string = "(" + (slideNumber + 1) + " " + __self.of_string + " " + total + ")"; // (1 of 6)
 		}
 		else {
 			var total = parseInt(jQuery("#galleryid-" + galleryId).data("total"));
-			var string = "(" + 1 + " of " + total + ")"; // (1 of 6)
+			var string = "(" + 1 + " " + __self.of_string + " " + total + ")"; // (1 of 6)
 		}
 		jQuery("#galleryNumbering-" + galleryId).html(string);
 	}
 
-	this.update_gallery_height = function(currSlideElement, nextSlideElement, options, forwardFlag){
+	self.update_gallery_height = function(currSlideElement, nextSlideElement, options, forwardFlag){
 		if(nextSlideElement.height > 0){
 			jQuery("#galleryid-" + options.id).clearQueue().animate({
 				height: nextSlideElement.height
@@ -33,7 +34,7 @@ var JSJ_Gallery_SlideShow_Utilities = function(){
 		}
 	}
 
-	this.set_intial_height = function(thisGallery){
+	self.set_intial_height = function(thisGallery){
 		// Set Height
 		// Plan A: Get it directly...
 		var hght = thisGallery[0].children[0].height;
@@ -57,4 +58,5 @@ var JSJ_Gallery_SlideShow_Utilities = function(){
 			};
 		}
 	}
+	return self; 
 }

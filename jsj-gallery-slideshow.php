@@ -4,7 +4,7 @@
 Plugin Name: JSJ Gallery Slideshow
 Plugin URI: http://wordpress.org/plugins/jsj-gallery-slideshow/
 Description: A plugin to immediately improve all your WordPress galleries, with a simple, easy-to-use slideshow. 
-Version: 1.2.5
+Version: 1.2.6
 Author: Jorge Silva Jetter
 Author URI: http://thejsj.com
 License: GPL2
@@ -441,7 +441,7 @@ class JSJGallerySlideshow {
 			$output .= "<div class='gallery-navigation'>";
 				$output .= "<a id='galleryPrev-{$instance}' class='gallery-prev gallery-button' href='#'>" . __( 'Previous', 'jsj-gallery-slideshow' ) . "</a>";
 				$output .= " / <a id='galleryNext-{$instance}' class='gallery-next gallery-button' href='#'>" . __( 'Next Image', 'jsj-gallery-slideshow' ) . "</a>";
-				$output .= " <span id='galleryNumbering-{$instance}' class='gallery-numbering'></span>";
+				$output .= " <span id='galleryNumbering-{$instance}' class='gallery-numbering' data-numbering-translation-of='" . _x( 'of', '1 of 10','jsj-gallery-slideshow' ) . "'></span>";
 			$output .= "</div>"; // Finish Navigation
 	  		// Start Gallery
 			$output .= apply_filters( 'gallery_style', $gallery_style . "\n\t\t" . $gallery_div );
