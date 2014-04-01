@@ -4,7 +4,7 @@ Donate link: http://thejsj.com
 Tags: slideshow, gallery, simple, jquery, easing, animation, cargo, cycle, jsj
 Requires at least: 3.3
 Tested up to: 3.8
-Stable tag: 1.2.7
+Stable tag: 1.2.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,7 @@ Build with [Jquery Cycle](http://jquery.malsup.com/cycle/)
 
 Inspired by [Cargo](http://cargocollective.com/) 
 
-Available translations: Spanish, Dutch (Translated by Wouter Bouger) 
+Available translations: Spanish, Dutch (Translated by [datiswous](http://profiles.wordpress.org/datiswous/)) 
 
 == Installation ==
 
@@ -88,7 +88,7 @@ Minor Javascript Changes
 Adding 'of' as translation string
 
 = 1.2.7 =
-Adding Dutch translation. Translated by Wouter Bouger
+Adding Dutch translation. Translated by [datiswous](http://profiles.wordpress.org/datiswous/)
 
 == Upgrade notice ==
 
@@ -121,7 +121,7 @@ Adding 'Resources' links and Feature Request form.
 Minor changes. Update and enjoy!
 
 = 1.2.7 =
-Adding Dutch translation. Translated by Wouter Bouger
+Adding Dutch translation. Translated by [datiswous](http://profiles.wordpress.org/datiswous/)
 
 == Online Examples ==
 
