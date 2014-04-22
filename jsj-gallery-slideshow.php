@@ -4,7 +4,7 @@
 Plugin Name: JSJ Gallery Slideshow
 Plugin URI: http://wordpress.org/plugins/jsj-gallery-slideshow/
 Description: A plugin to immediately improve all your WordPress galleries, with a simple, easy-to-use slideshow. 
-Version: 1.2.7.1
+Version: 1.2.8
 Author: Jorge Silva Jetter
 Author URI: http://thejsj.com
 License: GPL2
@@ -23,7 +23,6 @@ TODO : Update Banners in Wordpress.org
 TODO : Add new screenshots for plugin front-end
 
 */
-
 
 $jsj_gallery_slideshow_object = new JSJGallerySlideshow();
 
@@ -385,10 +384,12 @@ class JSJGallerySlideshow {
 			'icontag'    => 'dt',
 			'captiontag' => 'dd',
 			'columns'    => 3,
-			'size'       => 'full',
+			'size'       => $this->settings->other['defaultImageSize']->value,
 			'include'    => '',
 			'exclude'    => ''
 			), $attr));
+
+		echo $size;
 
 		$id = intval($id);
 		if ( 'RAND' == $order )
