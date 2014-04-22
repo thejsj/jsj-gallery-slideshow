@@ -389,8 +389,6 @@ class JSJGallerySlideshow {
 			'exclude'    => ''
 			), $attr));
 
-		echo $size;
-
 		$id = intval($id);
 		if ( 'RAND' == $order )
 			$orderby = 'none';
