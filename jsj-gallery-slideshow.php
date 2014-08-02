@@ -62,7 +62,7 @@ class JSJGallerySlideshow {
 	}
 
 
-	 /**
+	/**
 	 * Init Plugin and get all settings
 	 * 
 	 * @return void
@@ -75,8 +75,8 @@ class JSJGallerySlideshow {
 
 		load_plugin_textdomain('jsj-gallery-slideshow', FALSE, dirname(plugin_basename(__FILE__)).'/languages/');
 
-		require( plugin_dir_path( __FILE__ ) . '/jsj-gallery-slideshow-settings-cycle.php');
-		require( plugin_dir_path( __FILE__ ) . '/jsj-gallery-slideshow-settings-other.php');
+		require( plugin_dir_path( __FILE__ ) . '/lib/jsj-gallery-slideshow-settings-cycle.php');
+		require( plugin_dir_path( __FILE__ ) . '/lib/jsj-gallery-slideshow-settings-other.php');
 
 		$this->settings = (object) array(); 
 		$this->settings->cycle = $jsj_gallery_slideshow_options_cycle;
@@ -133,7 +133,7 @@ class JSJGallerySlideshow {
 			// Add CSS
 			wp_enqueue_style(
 				"jsj-gallery-slideshow-style", 
-				plugins_url( 'css/jsj-gallery-slideshow-style.css' , __FILE__ )
+				plugins_url( 'static/css/jsj-gallery-slideshow-style.css' , __FILE__ )
 			);
 
 			if(!wp_script_is('jquery')){
@@ -141,7 +141,7 @@ class JSJGallerySlideshow {
 			}
 			wp_enqueue_script(
 				'jsjGallerySlideshowScripts-jQueryCycle',
-				plugins_url( 'js/jsj-gallery-slideshow.js' , __FILE__ ),
+				plugins_url( 'static/js/jsj-gallery-slideshow.js' , __FILE__ ),
 				array( 'jquery' ), // Deps
 				"", // Version
 				true // Footer
@@ -179,7 +179,7 @@ class JSJGallerySlideshow {
 		// Add CSS
 		wp_enqueue_style(
 			"jsj-gallery-slideshow-admin-style", 
-			plugins_url( 'css/jsj-gallery-slideshow-admin-style.css' , __FILE__ )
+			plugins_url( 'static/css/jsj-gallery-slideshow-admin-style.css' , __FILE__ )
 		);
 	}
 
@@ -205,10 +205,10 @@ class JSJGallerySlideshow {
 			$options_tab = $_GET['tab'];
 		}
 		else{
-			$options_tab = 'simple';
+			$options_tab = 'themes';
 		}
 
-		// Rest Settings
+		// Reset Settings
 		if($_POST && isset($_POST[ $this->name_space . '-switch_default']) && $_POST[ $this->name_space . '-switch_default']) { 
 			foreach($this->settings->cycle as $setting){
 				update_option( $setting->name_space , $setting->default);
@@ -227,6 +227,7 @@ class JSJGallerySlideshow {
 
 			<div id="nav" class="tab-nav">
 				<h2 class="themes-php">
+					<a class="nav-tab" href="?page=<?php echo $this->name_space; ?>&amp;tab=themes"><?php _e('Themes', 'jsj-gallery-slideshow' ); ?></a>
 					<a class="nav-tab" href="?page=<?php echo $this->name_space; ?>&amp;tab=simple"><?php _e('Simple', 'jsj-gallery-slideshow' ); ?></a>
 					<a class="nav-tab" href="?page=<?php echo $this->name_space; ?>&amp;tab=advanced"><?php _e('Advanced', 'jsj-gallery-slideshow' ); ?></a>
 				</h2>
@@ -234,8 +235,31 @@ class JSJGallerySlideshow {
 
 			<form method="post" action="options.php" class="<?php echo $this->name_space; ?>">
 				<?php settings_fields( 'jsj_gallery_slideshow-settings-group' ); ?>
+				<?php $this->current_theme = 2; ?>
+				<div class="<?php echo $this->name_space; ?>-tab-content <?php echo (($options_tab == 'themes') ? 'active' : 'disabled' );?>">
+					<!-- Gallery Options -->
+					<h3><?php _e( 'Theme Options', 'jsj-gallery-slideshow' ); ?></h3>
+					<?php foreach(array(1,2,3) as $theme): ?>
+						<label 
+							class="<?php echo $this->name_space;?>_style_image_container <?php echo $this->name_space;?>_theme_label" 
+							for="<?php echo $theme; ?>"
+						>
+							<input 
+								id="<?php echo $theme; ?>" 
+								type="radio" 
+								name="<?php echo $this->name_space; ?>" 
+								value="<?php echo $theme; ?>" 
+								<?php if ( $theme == $this->current_theme) echo 'checked="checked"'; ?>
+							/>
+							<img 
+								src="<?php echo plugins_url( 'images/' . $theme . '.png' , __FILE__ ); ?>" 
+								alt="<?php echo $theme; ?>" 
+							/>
+							<p><?php echo $theme; ?></p>
+						</label>
+					<?php endforeach; ?>
+				</div>
 
-				
 				<div class="<?php echo $this->name_space; ?>-tab-content <?php echo (($options_tab == 'simple') ? 'active' : 'disabled' );?>">
 					<!-- Gallery Options -->
 					<h3><?php _e( 'Gallery Options', 'jsj-gallery-slideshow' ); ?></h3>
