@@ -24,6 +24,9 @@ TODO : Add new screenshots for plugin front-end
 
 */
 
+require( plugin_dir_path( __FILE__ ) . '/lib/jsj-gallery-slideshow-settings-class.php');
+require( plugin_dir_path( __FILE__ ) . '/lib/jsj-gallery-slideshow-static-enqueue.php');
+
 $jsj_gallery_slideshow_object = new JSJGallerySlideshow();
 
 class JSJGallerySlideshow {
@@ -42,17 +45,11 @@ class JSJGallerySlideshow {
 	public function __construct(){
 		/* * * Bind Plugin to WordPress Hooks * * */
 
+		$this->settings       = new JSJGallerySlideshowSettings($this->name_space);
+		$this->static_enqueue = new JSJGallerySlideshowStaticEnqueue($this->name_space, $this->settings);
+
 		// Init Set All Plugin Variables
 		add_action('init', array($this, 'init') );
-
-		// Call register settings function
-		add_action( 'admin_init', array($this, 'admin_init') );
-
-		// Add JS scripts
-		add_action( 'wp_enqueue_scripts', array($this, 'enqueue_client_scripts') );
-
-		// Admin: Enqueue CSS
-		add_action( 'admin_enqueue_scripts', array($this, 'enqueue_admin_scripts') );
 
 		// Hook for adding admin menus
 		add_action('admin_menu',  array($this, 'add_options_menu'));
@@ -68,119 +65,12 @@ class JSJGallerySlideshow {
 	 * @return void
 	 */
 	public function init(){
-		global $jsj_gallery_slideshow_options_cycle; 
-		global $jsj_gallery_slideshow_options_other; 
-
-		/* * * Get All Settings * * */
-
+		// Load Translation
 		load_plugin_textdomain('jsj-gallery-slideshow', FALSE, dirname(plugin_basename(__FILE__)).'/languages/');
-
-		require( plugin_dir_path( __FILE__ ) . '/lib/jsj-gallery-slideshow-settings-cycle.php');
-		require( plugin_dir_path( __FILE__ ) . '/lib/jsj-gallery-slideshow-settings-other.php');
-
-		$this->settings = (object) array(); 
-		$this->settings->cycle = $jsj_gallery_slideshow_options_cycle;
-		$this->settings->other = $jsj_gallery_slideshow_options_other;		
-
-		// Get Settings
-		foreach($this->settings as $group_key => $setttings_group){
-			foreach($this->settings->{$group_key} as $key => $setting){
-				$this->settings->{$group_key}[$key]->name_space = $this->name_space . "-" . $setting->name;
-				$this->settings->{$group_key}[$key]->value = get_option( $setting->name_space, $setting->default );
-				// Perform Data checks
-				// If Boolean, conver to boolean
-				if($this->settings->{$group_key}[$key]->value == false && $setting->type == 'boolean'){
-					$this->settings->{$group_key}[$key]->value = 0; // Convert boolean to int
-				}	
-				// If numberic value, convert to int
-				if(is_numeric($this->settings->{$group_key}[$key]->value) && ($setting->type == 'boolean' || $setting->type == 'number')){
-					$this->settings->{$group_key}[$key]->value = intval($this->settings->{$group_key}[$key]->value); // Convert boolean to int
-				}		
-			}
-		}	
-
-		/* * * Get Translation Strings * * */
-
 		$this->title = __( 'JSJ Gallery Slideshow', 'jsj-gallery-slideshow' );
-	}
 
-	/**
-	 * Register all plugin settings
-	 *
-	 * @return void
-	 */
-	public function admin_init(){
-		// Register our settings
-		foreach($this->settings as $group_key => $setttings_group){
-			foreach($this->settings->{$group_key} as $key => $setting){
-				register_setting( 'jsj_gallery_slideshow-settings-group', $setting->name_space );
-			}
-		}
-	}
-
-	/**
-	 * Add Script to the Footer and Header
-	 *
-	 * @return void
-	 */
-	public function enqueue_client_scripts(){
-		global $post;
-	
-		if( $this->settings->other['checkForShortCode']->value == 'false' || $this->settings->other['checkForShortCode']->value == 'true' && has_shortcode( $post->post_content, 'gallery' ) ) {
-			// Determines if Javascript code will be inserted into the page
-			$this->scripts_enqueued = true; 
-
-			// Add CSS
-			wp_enqueue_style(
-				"jsj-gallery-slideshow-style", 
-				plugins_url( 'static/css/jsj-gallery-slideshow-style.css' , __FILE__ )
-			);
-
-			if(!wp_script_is('jquery')){
-				wp_enqueue_script( 'jquery' );
-			}
-			wp_enqueue_script(
-				'jsjGallerySlideshowScripts-jQueryCycle',
-				plugins_url( 'static/js/jsj-gallery-slideshow.js' , __FILE__ ),
-				array( 'jquery' ), // Deps
-				"", // Version
-				true // Footer
-			);
-
-			//	Parse Settings so that they come out in their most simple form
-			$jsj_gallery__slideshow_options_for_javascript = array(); 
-			foreach($this->settings->cycle as $key => $setting){
-				if($setting->value != $setting->default || $key == "speed"){
-					$jsj_gallery__slideshow_options_for_javascript[$key] = $setting->value;
-				}
-			}
-
-			// Localize Settings
-			wp_localize_script( 
-				'jsjGallerySlideshowScripts-jQueryCycle', 
-				'jsjGallerySlideshowOptions', 
-				array(
-					'settings' => $jsj_gallery__slideshow_options_for_javascript,
-					'scripts_enqueued' => $this->scripts_enqueued
-				) 
-			);
-		}
-		else {
-			$this->scripts_enqueued = false; 
-		}
-	}
-
-	/**
-	 * Enqueue CSS stylesheet to admin
-	 *
-	 * @return void
-	 */
-	public function enqueue_admin_scripts(){
-		// Add CSS
-		wp_enqueue_style(
-			"jsj-gallery-slideshow-admin-style", 
-			plugins_url( 'static/css/jsj-gallery-slideshow-admin-style.css' , __FILE__ )
-		);
+		// Load Settings
+		$this->settings->initSettings();
 	}
 
 	/**
@@ -210,12 +100,7 @@ class JSJGallerySlideshow {
 
 		// Reset Settings
 		if($_POST && isset($_POST[ $this->name_space . '-switch_default']) && $_POST[ $this->name_space . '-switch_default']) { 
-			foreach($this->settings->cycle as $setting){
-				update_option( $setting->name_space , $setting->default);
-			}
-			foreach($this->settings->other as $setting){
-				update_option( $setting->name_space , $setting->default);
-			}
+			$this->settings->resetSettings();
 			echo('<div class="updated settings-error"><p>' . __( 'Your settings have been reverted back to their default.', 'jsj-gallery-slideshow' ) . '</p></div>');
 		}
 		?>
