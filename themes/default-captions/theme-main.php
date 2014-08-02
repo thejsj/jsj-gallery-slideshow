@@ -14,19 +14,19 @@
 	}
 
 	// Extend the default Theme Class
-	class JSJGallerySlideshowDefaultTheme extends JSJGallerySlideshowTheme {
+	class JSJGallerySlideshowDefaultCaptionTheme extends JSJGallerySlideshowTheme {
 
-		public $name = 'Default'; // Change the name of your theme that will appear in the admin
-		public $slug = 'jsj-gallery-slideshow-default';
+		public $name = 'Default With Caption'; // Change the name of your theme that will appear in the admin
+		public $slug = 'jsj-gallery-slideshow-default-caption';
 
 		public function __construct(){
 			 // Get this file's directory
-			$this->directory = plugin_dir_path( __FILE__ ); // Used for files used by PHP
+			$this->directory = plugin_dir_path( __FILE__ );
 			$this->url       = trailingslashit(plugins_url('', __FILE__ )); // Used for static files
 			parent::__construct();
 		}
 	}
 
 	// Init Our Slideshow
-	$jsj_gallery_slideshow_default_Theme = new JSJGallerySlideshowDefaultTheme();
+	$jsj_gallery_slideshow_default_caption_theme = new JSJGallerySlideshowDefaultCaptionTheme();
 

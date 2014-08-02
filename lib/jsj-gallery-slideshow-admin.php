@@ -2,10 +2,11 @@
 	
 	class JSJGallerySlideshowAdmin {
 
-		public function __construct($name_space, &$settings, &$title) {
+		public function __construct($name_space, &$settings, &$title, &$all_themes) {
 			$this->name_space = $name_space;
 			$this->settings   = $settings;
-			$this->title   = $title;
+			$this->title      = $title;
+			$this->all_themes = $all_themes;
 
 			// Hook for adding admin menus
 			add_action('admin_menu',  array($this, 'add_options_menu'));
@@ -22,8 +23,16 @@
 		}
 
 		/**
+		 * Update our themes variable
+		 *
+		 * I'm only adding this because passing by reference wasn't working for me
+		 */
+		public function updateThemes($themes) {
+			$this->all_themes = $themes;
+		}
+
+		/**
 		 * This is where you add all the html and php for your option page
-		 * @see http://codex.wordpress.org/Function_Reference/add_options_page
 		 *
 		 * @return void
 		 */
@@ -48,6 +57,7 @@
 				<!-- Title & Description -->
 				<h2 class="<?php echo $this->name_space; ?> <?php echo $this->name_space; ?>-header"><?php echo $this->title ?></h2>
 
+				<!-- Display All Tabs -->
 				<div id="nav" class="tab-nav">
 					<h2 class="themes-php">
 						<a class="nav-tab" href="?page=<?php echo $this->name_space; ?>&amp;tab=themes"><?php _e('Themes', 'jsj-gallery-slideshow' ); ?></a>
@@ -56,29 +66,29 @@
 					</h2>
 				</div>
 
+				<!-- Display Form -->
 				<form method="post" action="options.php" class="<?php echo $this->name_space; ?>">
 					<?php settings_fields( 'jsj_gallery_slideshow-settings-group' ); ?>
-					<?php $this->current_theme = 2; ?>
 					<div class="<?php echo $this->name_space; ?>-tab-content <?php echo (($options_tab == 'themes') ? 'active' : 'disabled' );?>">
 						<!-- Gallery Options -->
 						<h3><?php _e( 'Theme Options', 'jsj-gallery-slideshow' ); ?></h3>
-						<?php foreach(array(1,2,3) as $theme): ?>
+						<?php foreach($this->all_themes as $theme): ?>
 							<label 
 								class="<?php echo $this->name_space;?>_style_image_container <?php echo $this->name_space;?>_theme_label" 
-								for="<?php echo $theme; ?>"
+								for="<?php echo $theme['slug']; ?>"
 							>
 								<input 
-									id="<?php echo $theme; ?>" 
+									id="<?php echo $theme['slug']; ?>" 
 									type="radio" 
-									name="<?php echo $this->name_space; ?>" 
-									value="<?php echo $theme; ?>" 
-									<?php if ( $theme == $this->current_theme) echo 'checked="checked"'; ?>
+									name="<?php echo $this->settings->themes['current_theme']->name_space; ?>" 
+									value="<?php echo $theme['slug']; ?>" 
+									<?php if ( $theme['active']) echo 'checked="checked"'; ?>
 								/>
 								<img 
-									src="<?php echo plugins_url( 'images/' . $theme . '.png' , __FILE__ ); ?>" 
-									alt="<?php echo $theme; ?>" 
+									src="<?php echo $theme['screenshot_url']; ?>" 
+									alt="<?php echo $theme['name']; ?>" 
 								/>
-								<p><?php echo $theme; ?></p>
+								<p><?php echo $theme['name']; ?></p>
 							</label>
 						<?php endforeach; ?>
 					</div>
