@@ -59,8 +59,8 @@
                             $(this).parent().clearQueue().animate({ height: sh }, slideTransitionTime);
                         }
                     },
-                    pagerAnchorBuilder: function (idx, slide) { // callback fn that creates a thumbnail to use as pager anchor 
-                        return '<li class="slideshow_thumb" style="background-image: url(' + slide.src + ');"></li>'; //<a href="#"><img src="" /></a>
+                    pagerAnchorBuilder: function (i, slide) { // callback fn that creates a thumbnail to use as pager anchor 
+                        return '<li class="slideshow-thumb index-' + i + '" style="background-image: url(' + slide.src + ');"></li>'; //<a href="#"><img src="" /></a>
                     }
                 })); // Append Settings to Cycle Object
                 utilities.set_intial_height(cycleGallery[index]);

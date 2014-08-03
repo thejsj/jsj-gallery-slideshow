@@ -1,6 +1,6 @@
 <div id='gallery-container-<?php echo $id; ?> gallery_container_<?php echo $name_space; ?>-<?php echo $id; ?>' class='gallery-container gallery_container_<?php echo $name_space; ?>'>
 	<!-- Navigation -->
-	
+	<div class='gallery-navigation'>
 		<a id='galleryPrev-<?php echo $id; ?>' class='gallery-prev gallery-button' href='#'><?php echo $previous; ?></a>
 		 / <a id='galleryNext-<?php echo $id; ?>' class='gallery-next gallery-button' href='#'><?php echo $next; ?></a>
 		<span id='galleryNumbering-<?php $id; ?>' class='gallery-numbering' data-numbering-translation-of='<?php echo $number_translation; ?>'></span>

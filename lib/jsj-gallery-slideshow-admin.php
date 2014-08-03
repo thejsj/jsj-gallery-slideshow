@@ -74,7 +74,7 @@
 						<h3><?php _e( 'Theme Options', 'jsj-gallery-slideshow' ); ?></h3>
 						<?php foreach($this->all_themes as $theme): ?>
 							<label 
-								class="<?php echo $this->name_space;?>_style_image_container <?php echo $this->name_space;?>_theme_label" 
+								class="<?php echo $this->name_space;?>_themes <?php echo $this->name_space;?>_theme_label" 
 								for="<?php echo $theme['slug']; ?>"
 							>
 								<input 

@@ -22,3 +22,9 @@ node_modules/*
 ehthumbs.db
 Thumbs.db
 !README.md
+
+# Ignore all CSS, since it's taken care of by Grunt
+**.css
+
+# Ignore all minified JS
+**.min.js

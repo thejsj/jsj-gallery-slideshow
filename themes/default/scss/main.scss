@@ -68,8 +68,10 @@
 			background-clip: content-box;
 			background-size: cover;
 			background-repeat: no-repeat; 
-			background-position: center center; 
+			background-position: center center;
+			cursor: pointer; 
 			border: solid 1px #ccc;
+			
 			&.activeSlide_gallery_cycle {
 				border: solid 1px #000;
 			}

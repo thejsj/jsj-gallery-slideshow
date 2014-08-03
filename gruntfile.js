@@ -35,14 +35,26 @@ module.exports = function (grunt) {
         compass: {
             dist: {
                 options: {
-                    sassDir: 'scss',
-                    cssDir: 'css',
+                    sassDir: './static/scss',
+                    cssDir: './static/css',
+                },
+            },
+            default_theme: {
+                options: {
+                    sassDir: './themes/default/scss',
+                    cssDir: './themes/default/css',
+                }
+            },
+            default_captions_theme: {
+                options: {
+                    sassDir: './themes/default-captions/scss',
+                    cssDir: './themes/default-captions/css',
                 }
             }
         },
         watch: {
             css: {
-                files: ['./static/scss/*.scss', './static/js/*.js'],
+                files: ['./static/scss/*.scss', './static/js/*.js', './themes/**/*.scss', './themes/**/*.js'],
                 tasks: ['uglify', 'compass'],
             }
         },

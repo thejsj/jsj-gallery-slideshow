@@ -70,6 +70,8 @@
 			background-repeat: no-repeat; 
 			background-position: center center; 
 			border: solid 1px #ccc;
+			cursor: pointer;
+			
 			&.activeSlide_gallery_cycle {
 				border: solid 1px #000;
 			}
