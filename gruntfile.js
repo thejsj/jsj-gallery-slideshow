@@ -9,9 +9,23 @@ module.exports = function (grunt) {
             main: {
                 files: {
                     'static/js/jsj-gallery-slideshow.min.js': [
+                        // jQuery Easing
                         'static/js/libs/easing.min.js',
-                        'static/js/libs/jquery.cycle.js',
-                        'static/js/libs/browser.min.js',
+                        // Cycle 2
+                        'static/js/libs/jquery.cycle2.js',
+                        // Cycle 2 Transitions
+                        'static/js/libs/transition/jquery.cycle2.carousel.js',
+                        'static/js/libs/transition/jquery.cycle2.flip.js',
+                        'static/js/libs/transition/jquery.cycle2.ie-fade.js',
+                        'static/js/libs/transition/jquery.cycle2.scrollVert.js',
+                        'static/js/libs/transition/jquery.cycle2.shuffle.js',
+                        'static/js/libs/transition/jquery.cycle2.tile.js',
+                        // Functional
+                        'static/js/libs/functional/jquery.cycle2.caption2.js',
+                        'static/js/libs/functional/jquery.cycle2.center.js',
+                        'static/js/libs/functional/jquery.cycle2.swiper.js',
+                        'static/js/libs/functional/jquery.cycle2.video.js',
+                        // JSJ Gallery Slideshow Files
                         'static/js/app/functions.js',
                         'static/js/app/main.js',
                     ],
