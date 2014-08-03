@@ -29,7 +29,7 @@
 						$k = $setting->name;
 
 						$this->{$group_key}[$k]->name_space = $this->name_space . "-" . $setting->name;
-						$this->{$group_key}[$k]->value      = get_option( $setting->name_space, $setting->default );
+						$this->{$group_key}[$k]->value      = get_option( $this->{$group_key}[$k]->name_space, $setting->default );
 
 						// Perform Data checks
 						// If Boolean, conver to boolean

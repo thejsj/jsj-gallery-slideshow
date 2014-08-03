@@ -1,225 +1,349 @@
 <?php 
- // Start Setting Options
+
+$all_transition_effects = array("fade","fadeout","scrollHorz","none");
+
+// Start Setting Options
 $jsj_gallery_slideshow_options_cycle = Array(
 
-	// Easy
 
+	'allow-wrap' => (object) array(
+		'name' => 'allow-wrap', 
+		'title' => __( 'Allow Wrap', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'This option determines whether or not a slideshow can advance from the last slide to the first (or vice versa)', 'jsj-gallery-slideshow' ),
+		'type' => 'boolean',
+		'tab' => 'advanced',
+		'convert_to_boolean' => true,
+		'default' => 1
+	),
+	'auto-height' => (object) array(
+		'name' => 'auto-height', 
+		'title' => __( 'Auto Height', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'This option determines whether or not Cycle2 will provide height management for the slideshow which can be very useful in fluid or responsive designs', 'jsj-gallery-slideshow' ),
+		'type' => 'text',
+		'tab' => 'advanced',
+		'default' => 0
+	),
+	/**
+	 * NOT INCLUDED: autoSelector ++DETERMINED IN PHP CLASS
+	 *
+	 * A jQuery selector which identifies elements that should be initialized automatically by Cycle2. 
+	 * The default value is .cycle-slideshow. 
+	 * Add the cycle-slideshow class to your slideshow container and Cycle2 will automatically find and initialize it when the DOM ready event fires.
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: caption ++DETERMINED IN PHP CLASS
+	 *
+	 * A selector which identifies the element that should be used for the slideshow caption. 
+	 * By default, Cycle2 looks for an element with the class .cycle-caption that exists within the slideshow container.
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: caption-template ++DETERMINED IN PHP CLASS
+	 *
+	 * A template string which defines how the slideshow caption should be formatted. 
+	 * The template can reference real-time state information from the slideshow, such as the current slide index, etc.
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: continueAuto
+	 *
+	 * Option which can be set dynamically to instruct C2 to stop transitioning on a timeout. 
+	 * This is useful when you want to start with an automatic slideshow but later switch to a manual slideshow. This option can also be a function which returns a boolean value.
+	 *
+	 */
+	'delay' => (object) array(
+		'name' => 'delay', 
+		'title' => __( 'Delay', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'The number of milliseconds to add onto, or substract from, the time before the first slide transition occurs', 'jsj-gallery-slideshow' ),
+		'type' => 'number',
+		'tab' => 'advanced',
+		'default' => 0,
+	),
+	/**
+	 * NOT INCLUDED: disabled-class ++DETERMINED IN PHP CLASS
+	 *
+	 * The classname to assign to prev/next links when they cannot be activated (due to data-cycle-allow-wrap="false".
+	 *
+	 */
+	'easing' => (object) array(
+		'name' => 'easing', 
+		'title' => __( 'Easing', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'Name of the easing function to use for animations', 'jsj-gallery-slideshow' ),
+		'type' => 'select',
+		'tab' => 'simple',
+		'parameters' => array('jswing', 'def', 'easeInQuad', 'easeOutQuad', 'easeInOutQuad', 'easeInCubic', 'easeOutCubic', 'easeInOutCubic', 'easeInQuart', 'easeOutQuart', 'easeInOutQuart', 'easeInQuint', 'easeOutQuint', 'easeInOutQuint', 'easeInSine', 'easeOutSine', 'easeInOutSine', 'easeInExpo', 'easeOutExpo', 'easeInOutExpo', 'easeInCirc', 'easeOutCirc', 'easeInOutCirc', 'easeInElastic', 'easeOutElastic', 'easeInOutElastic', 'easeInBack', 'easeOutBack', 'easeInOutBack', 'easeInBounce', 'easeOutBounce', 'easeInOutBounce'),
+		'default' => 'easeInQuad'
+	),
 	'fx' => (object) array(
 		'name' => 'fx', 
 		'title' => __( 'Transition Effect', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Select transition effect for slideshow', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'The name of the slideshow transition to use', 'jsj-gallery-slideshow' ),
 		'type' => 'select',
 		'tab' => 'simple',
-		'parameters' => array("blindX","blindY","blindZ","cover","curtainX","curtainY","fade","fadeZoom","growX","growY","scrollUp","scrollDown","scrollLeft","scrollRight","scrollHorz","scrollVert","shuffle","slideX","slideY","toss","turnUp","turnDown","turnLeft","turnRight","uncover","wipe","zoom"),
-		'default' => 'fade'
+		'parameters' => $all_transition_effects,
+		'default' => 'scrollHorz'
 	),
+	'hide-non-active' => (object) array(
+		'name' => 'hide-non-active', 
+		'title' => __( 'Hide Non-Active', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'Determines whether or not Cycle2 hides the inactive slides', 'jsj-gallery-slideshow' ),
+		'type' => 'boolean',
+		'tab' => 'advanced',
+		'convert_to_boolean' => true,
+		'default' => 1
+	),
+	/**
+	 * NOT INCLUDED: loader
+	 *
+	 * The loader option sets the image loader behavior for the slideshow.
+	 * false disabled loader functionality
+	 * true load slides as images arrive
+	 * "wait" wait for all images to arrive before staring slideshow
+	 *
+	 */
+	'log' => (object) array(
+		'name' => 'log', 
+		'title' => __( 'Log', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'Enable console logging', 'jsj-gallery-slideshow' ),
+		'type' => 'boolean',
+		'tab' => 'advanced',
+		'convert_to_boolean' => true,
+		'default' => false
+	),
+	'loop' => (object) array(
+		'name' => 'loop', 
+		'title' => __( 'Loop', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'The number of times an auto-advancing slideshow should loop before terminating', 'jsj-gallery-slideshow' ),
+		'type' => 'text',
+		'tab' => 'advanced',
+		'default' => 0
+	),
+	'manual-fx' => (object) array(
+		'name' => 'manual-fx', 
+		'title' => __( 'Manual Transition Effect', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'The transition effect to use for manually triggered transitions (not timer-based transitions)', 'jsj-gallery-slideshow' ),
+		'type' => 'select',
+		'tab' => 'advanced',
+		'parameters' => array_merge(array('false'), $all_transition_effects),
+		'default' => 'false'
+	),
+	'manual-speed' => (object) array(
+		'name' => 'manual-speed', 
+		'title' => __( 'Manual Transition Effect', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'The speed (in milliseconds) for transitions that are manually initiated, such as those caused by clicking a "next" button or a pager link', 'jsj-gallery-slideshow' ),
+		'type' => 'text',
+		'tab' => 'advanced',
+		'default' => false
+	),
+	'manualTrump' => (object) array(
+		'name' => 'manualTrump', 
+		'title' => __( 'Manual Trump', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'Determines whether or not transitions are interrupted to begin new ones if the new ones are the result of a user action (not timer)', 'jsj-gallery-slideshow' ),
+		'type' => 'boolean',
+		'convert_to_boolean' => true,
+		'tab' => 'advanced',
+		'default' => 1,
+	),
+	/**
+	 * NOT INCLUDED: next ++DETERMINED IN PHP CLASS
+	 *
+	 * A selector string which identifies the element (or elements) to use as a trigger to advance the slideshow forward. 
+	 * By default, Cycle2 looks for an element with the class .cycle-next that exists within the slideshow container.
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: next-event
+	 *
+	 * The event to bind to elements identified with the next option. By default, Cycle2 binds click events.
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: overlay
+	 *
+	 * A selector string which identifies the element to use as the overlay element. 
+	 * A slideshow overlay typically provides information about the current slide. 
+	 * By default, Cycle2 looks for an element with the class .cycle-overlay that exists within the slideshow container.
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: overlay-template
+	 *
+	 * A template string which defines how the overlay should be formatted. 
+	 * The template can reference real-time state information from the slideshow, such as the current slide index, etc.
+	 * Cycle2 uses simple Mustache-style templates by default.
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: pager ++DETERMINED IN PHP CLASS
+	 *
+	 * A selector string which identifies the element to use as the container for pager links. 
+	 * By default, Cycle2 looks for an element with the class .cycle-pager that exists within the slideshow container.
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: pager-active-class ++DETERMINED IN PHP CLASS
+	 *
+	 * The classname to assign to pager links when a particular link references the currently visible slide.
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: pager-event
+	 *
+	 * The type of event that is bound on the pager links. By default, Cycle2 binds click events.
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: pager-event-bubble
+	 *
+	 * Set to true to allow pager events to bubble up the DOM. This is useful if you have an anchor inside your pager element and want the anchor to be followed when it is clicked.
+	 *
+	 */
+	'pause-on-hover' => (object) array(
+		'name' => 'pause-on-hover', 
+		'title' => __( 'Pause on Hover', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'Determines whether or not transitions are interrupted to begin new ones if the new ones are the result of a user action (not timer)', 'jsj-gallery-slideshow' ),
+		'type' => 'boolean',
+		'convert_to_boolean' => true,
+		'tab' => 'simple',
+		'default' => 0,
+	),
+	'paused' => (object) array(
+		'name' => 'paused', 
+		'title' => __( 'Paused on Start', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'If true the slideshow will begin in a paused state.', 'jsj-gallery-slideshow' ),
+		'type' => 'boolean',
+		'convert_to_boolean' => true,
+		'tab' => 'simple',
+		'default' => 0,
+	),
+	/**
+	 * NOT INCLUDED: prev ++DETERMINED IN PHP CLASS
+	 *
+	 * A selector string which identifies the element (or elements) to use as a trigger to advance the slideshow backward. 
+	 * By default, Cycle2 looks for an element with the class .cycle-prev that exists within the slideshow container.
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: prev-event
+	 *
+	 * The type of event that is bound on the prev and next links. 
+	 * By default, Cycle2 binds click events.
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: progressive
+	 *
+	 * Identifies an element in the DOM which holds a JSON array representing the slides to be progressively loaded into the slideshow. Example.
+	 *
+	 */
+	'random' => (object) array(
+		'name' => 'random', 
+		'title' => __( 'Random', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'If true the order of the slides will be randomized', 'jsj-gallery-slideshow' ),
+		'type' => 'boolean',
+		'convert_to_boolean' => true,
+		'tab' => 'simple',
+		'default' => 0,
+	),
+	'reverse' => (object) array(
+		'name' => 'reverse', 
+		'title' => __( 'Reverse', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'If true the slideshow will proceed in reverse order and transitions that support this option will run a reverse animation', 'jsj-gallery-slideshow' ),
+		'type' => 'boolean',
+		'convert_to_boolean' => true,
+		'tab' => 'simple',
+		'default' => 0,
+	),
+	/**
+	 * NOT INCLUDED: slide-active-class ++DETERMINED IN PHP CLASS
+	 *
+	 * The classname to assign to the active slide.
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: slide-css
+	 *
+	 * An object which defines css properties that should be applied to each slide as it is initialized (once).
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: slide-class ++DETERMINED IN PHP CLASS
+	 *
+	 * Name of the class to add to each slide.
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: slides
+	 *
+	 * A selector string which identifies the elements within the slideshow container that should become slides.
+	 * By default, Cycle2 finds all image elements that are immediate children of the slideshow container.
+	 *
+	 */
 	'speed' => (object) array(
 		'name' => 'speed', 
 		'title' => __( 'Speed', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Speed of slide transition (in milliseconds)', 'jsj-gallery-slideshow' ),
-		'type' => 'number',
+		'descp' => __( 'The speed of the transition effect in milliseconds', 'jsj-gallery-slideshow' ),
+		'type' => 'text',
 		'tab' => 'simple',
-		'default' => 700
+		'default' => '350'
+	),
+	/**
+	 * NOT INCLUDED: starting-slide
+	 *
+	 * The zero-based index of the slide that should be initially displayed
+	 *
+	 */
+	'swipe' => (object) array(
+		'name' => 'swipe', 
+		'title' => __( 'Swipe', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'Enable gesture support for advancing the slideshow forward or back', 'jsj-gallery-slideshow' ),
+		'type' => 'boolean',
+		'convert_to_boolean' => true,
+		'tab' => 'simple',
+		'default' => 1,
+	),
+	'swipe-fx' => (object) array(
+		'name' => 'swipe-fx', 
+		'title' => __( 'Swipe Transition Effect', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'The transition effect to use for swipe-triggered transitions', 'jsj-gallery-slideshow' ),
+		'type' => 'select',
+		'tab' => 'advanced',
+		'parameters' => array_merge(array('false'), $all_transition_effects),
+		'default' => false
+	),
+	'sync' => (object) array(
+		'name' => 'sync', 
+		'title' => __( 'Sync', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'If true then animation of the incoming and outgoing slides will be synchronized', 'jsj-gallery-slideshow' ),
+		'type' => 'boolean',
+		'convert_to_boolean' => true,
+		'tab' => 'advanced',
+		'default' => 1,
 	),
 	'timeout' => (object) array(
 		'name' => 'timeout', 
 		'title' => __( 'Timeout', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Milliseconds between slide transitions (0 to disable auto advance)', 'jsj-gallery-slideshow' ),
-		'type' => 'number',
-		'tab' => 'simple',
-		'default' => 0
-	),
-	'pause' => (object) array(
-		'name' => 'pause', 
-		'title' => __( 'Pause On Hover', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Pause slideshow when hovering over slide', 'jsj-gallery-slideshow' ),
-		'type' => 'boolean',
-		'tab' => 'simple',
-		'default' => 0
-	),
-	'pauseOnPagerHover' => (object) array(
-		'name' => 'pauseOnPagerHover', 
-		'title' => __( 'Pause On Pager Hover', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Pause slideshow when hovering over pager thumbnails', 'jsj-gallery-slideshow' ),
-		'type' => 'boolean',
-		'tab' => 'simple',
-		'default' => 0
-	),
-
-	// Advanced
-
-	'fit' => (object) array(
-		'name' => 'fit', 
-		'title' => __( 'Fit Slides', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Force slides to fit container', 'jsj-gallery-slideshow' ),
-		'type' => 'boolean',
-		'convert_to_boolean' => true,
-		'tab' => 'advanced',
-		'default' => 0,
-	),
-	'height' => (object) array(
-		'name' => 'height', 
-		'title' => __( 'Slide Height', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Container height (if the "Fit Slides" is enabled, slides will also be resized).', 'jsj-gallery-slideshow' ),
+		'descp' => __( 'The time between slide transitions in milliseconds', 'jsj-gallery-slideshow' ),
 		'type' => 'text',
-		'tab' => 'advanced',
-		'default' => 'auto'
+		'tab' => 'simple',
+		'default' => '0'
 	),
-	'width' => (object) array(
-		'name' => 'width', 
-		'title' => __( 'Slide Width', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Container width (if the "Fit Slides" is enabled, slides will also be resized)', 'jsj-gallery-slideshow' ),
-		'type' => 'text',
-		'tab' => 'advanced',
-		'default' => null
-	),
-	'slideResize' => (object) array(
-		'name' => 'slideResize', 
-		'title' => __( 'Slide Resize', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Force slide width/height to a fixed width/height before every transition', 'jsj-gallery-slideshow' ),
-		'type' => 'boolean',
-		'tab' => 'advanced',
-		'default' => 0,
-	),
-	'containerResize' => (object) array(
-		'name' => 'containerResize', 
-		'title' => __( 'Container Resize', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Resize container to fit largest slide', 'jsj-gallery-slideshow' ),
-		'type' => 'boolean',
-		'tab' => 'advanced',
-		'default' => 1,
-	),
-	'nowrap' => (object) array(
-		'name' => 'nowrap', 
-		'title' => __( 'No Wrapping', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Prevent slideshow from wrapping', 'jsj-gallery-slideshow' ),
-		'type' => 'boolean',
-		'tab' => 'advanced',
-		'default' => 0
-	),
-	'autostop' => (object) array(
-		'name' => 'autostop', 
-		'title' => __( 'Auto Stop', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'End slideshow after X transitions (X == Auto Stop Count)', 'jsj-gallery-slideshow' ),
-		'type' => 'boolean',
-		'convert_to_boolean' => true,
-		'tab' => 'advanced',
-		'default' => 0,
-	),
-	'autostopCount' => (object) array(
-		'name' => 'autostopCount', 
-		'title' => __( 'Auto Stop Count', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Number of transitions (See Auto Stop)', 'jsj-gallery-slideshow' ),
-		'type' => 'number',
-		'tab' => 'advanced',
-		'default' => 0,
-	),
-	'startingSlide' => (object) array(
-		'name' => 'startingSlide', 
-		'title' => __( 'Starting Slide #', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Zero-based index of the first slide to be displayed', 'jsj-gallery-slideshow' ),
-		'type' => 'number',
-		'tab' => 'advanced',
-		'default' => 0
-	),
-	'backwards' => (object) array(
-		'name' => 'backwards', 
-		'title' => __( 'Start Backwards', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Start slideshow at last slide and move backwards through the stack', 'jsj-gallery-slideshow' ),
-		'type' => 'boolean',
-		'convert_to_boolean' => true,
-		'tab' => 'advanced',
-		'default' => 0,
-	),
-	'random' => (object) array(
-		'name' => 'random', 
-		'title' => __( 'Random Slides', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Transition slides randomly (not applicable to shuffle fx)', 'jsj-gallery-slideshow' ),
-		'type' => 'boolean',
-		'tab' => 'advanced',
-		'default' => 0
-	),
-	'delay' => (object) array(
-		'name' => 'delay', 
-		'title' => __( 'Delay', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Additional delay (in ms) for first transition (hint: can be negative)', 'jsj-gallery-slideshow' ),
-		'type' => 'number',
-		'tab' => 'advanced',
-		'default' => 0,
-	),
-	'requeueTimeout' => (object) array(
-		'name' => 'requeueTimeout', 
-		'title' => __( 'Re-queue Timeout', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Delay for re-queue (in milliseconds)', 'jsj-gallery-slideshow' ),
-		'type' => 'number',
-		'tab' => 'advanced',
-		'default' => 250
-	),
-	'requeueOnImageNotLoaded' => (object) array(
-		'name' => 'requeueOnImageNotLoaded', 
-		'title' => __( 'Re-queue OnImageNotLoaded', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Re-queue the slideshow if any images have not been loaded', 'jsj-gallery-slideshow' ),
-		'type' => 'boolean',
-		'convert_to_boolean' => true,
-		'tab' => 'advanced',
-		'default' => 1,
-	),
-	// 'fastOnEvent' => (object) array(
-	// 	'name' => 'fastOnEvent', 
-	// 	'title' => __( 'FastOn Event', 'jsj-gallery-slideshow' ),
-	// 	'descp' => __( 'Force fast transitions when triggered manually (via pager or prev/next), value == time in ms', 'jsj-gallery-slideshow' ),
-	// 	'type' => 'boolean',
-	// 	'default' => 0,
-	// ),	
-	'manualTrump' => (object) array(
-		'name' => 'manualTrump', 
-		'title' => __( 'Manual Trump', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Causes manual transition to stop an active transition, instead of being ignored', 'jsj-gallery-slideshow' ),
-		'type' => 'boolean',
-		'convert_to_boolean' => true,
-		'tab' => 'advanced',
-		'default' => 1,
-	),
-	// 'metaAttr' => (object) array(
-	// 	'name' => 'metaAttr', 
-	// 	'title' => __( 'Data Attribute', 'jsj-gallery-slideshow' ),
-	// 	'descp' => __( 'data- attribute that holds the option data for the slideshow.', 'jsj-gallery-slideshow' ),
-	// 	'type' => 'text',
-	// 	'default' => 'cycle'
-	// ),
-	'rev' => (object) array(
-		'name' => 'rev', 
-		'title' => __( 'Reverse Animation', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Causes animations to transition in reverse (for effects that support it such as scrollHorz/scrollVert/shuffle)', 'jsj-gallery-slideshow' ),
-		'type' => 'boolean',
-		'tab' => 'advanced',
-		'default' => 0,
-	),
-	'sync' => (object) array(
-		'name' => 'sync', 
-		'title' => __( 'Synchronize Slides', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'In/out transitions should occur simultaneously', 'jsj-gallery-slideshow' ),
-		'type' => 'boolean',
-		'tab' => 'advanced',
-		'default' => 1,
-	),
-	'activePagerClass'=> (object) array(
-		'name' => 'activePagerClass', 
-		'title' => __( 'Active Pager Class', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Class name used for the active pager element', 'jsj-gallery-slideshow' ),
-		'type' => 'text',
-		'tab' => 'advanced',
-		'default' => 'activeSlide'
-	),
-	'cleartypeNoBg' => (object) array(
-		'name' => 'cleartypeNoBg', 
-		'title' => __( 'Clear Type No Background', 'jsj-gallery-slideshow' ),
-		'descp' => __( 'Disable extra cleartype fixing (leave false to force background color setting on slides)', 'jsj-gallery-slideshow' ),
-		'type' => 'boolean',
-		'convert_to_boolean' => true,
-		'tab' => 'advanced',
-		'default' => 0,
-	),
+	/**
+	 * NOT INCLUDED: tmpl-regex
+	 *
+	 * The default regular expression used for template tokenization.
+	 *
+	 */
+	/**
+	 * NOT INCLUDED: update-view
+	 *
+	 * Determines when the updateView method is invoked (and event is triggered).
+	 * If the value is -1 then updateView is only invoked immediately after the slide transition.
+	 * If the value is 0 then updateView is invoked during the slide transition.
+	 * If the value is 1 then updateView is invoked immediately upon the beginning of a slide transition and again immediately after the transition.
+	 *
+	 */
 );
 
 ?>
