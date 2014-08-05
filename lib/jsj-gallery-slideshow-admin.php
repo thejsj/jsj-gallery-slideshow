@@ -80,7 +80,7 @@
 								<input 
 									id="<?php echo $theme['slug']; ?>" 
 									type="radio" 
-									name="<?php echo $this->settings->themes['current_theme']->name_space; ?>" 
+									name="<?php echo $this->settings->themes['current_theme']['name_space']; ?>" 
 									value="<?php echo $theme['slug']; ?>" 
 									<?php if ( $theme['active']) echo 'checked="checked"'; ?>
 								/>
@@ -154,26 +154,26 @@
 			<table class="<?php echo $this->name_space; ?>">
 			<?php $i = 0; // used for odd/even value?>
 			<?php foreach($options_group as $key => $option): ?>
-				<?php if($option->tab == $tab): ?>
-					<tr class="<?php echo $this->name_space; ?> <?php echo $this->name_space; ?>-main <?php echo ( isset($option->class) ? $option->class : '' ); ?> <?php echo $i; ?> <?php echo ( $i % 2  == 0 ? 'odd' : 'even' ); ?>">
-						<td class="<?php echo $this->name_space; ?> <?php echo $this->name_space; ?>-name"><strong><?php echo $option->title ?></strong></td>
+				<?php if(isset($option['tab']) && $option['tab'] == $tab): ?>
+					<tr class="<?php echo $this->name_space; ?> <?php echo $this->name_space; ?>-main <?php echo ( isset($option['class']) ? $option['class'] : '' ); ?> <?php echo $i; ?> <?php echo ( $i % 2  == 0 ? 'odd' : 'even' ); ?>">
+						<td class="<?php echo $this->name_space; ?> <?php echo $this->name_space; ?>-name"><strong><?php echo $option['title'] ?></strong></td>
 						<td class="<?php echo $this->name_space; ?>-field">
-							<label for="<?php echo $option->name_space; ?>">
-								<?php if($option->type == 'boolean'): // Boolean ?>
-									<input type='checkbox' id="<?php echo $option->name_space; ?>" name="<?php echo $option->name_space; ?>" value='1' <?php if ( 1 == $option->value ) echo 'checked="checked"'; ?> />
-								<?php elseif( $option->type != "select" ): ?>
-									<input id="<?php echo $option->name_space; ?>" class="<?php echo $this->name_space; ?>" type="<?php echo $option->type ?>" name="<?php echo $option->name_space ?>" value="<?php echo $option->value ?>" />
+							<label for="<?php echo $option['name_space']; ?>">
+								<?php if($option['type'] == 'boolean'): // Boolean ?>
+									<input type='checkbox' id="<?php echo $option['name_space']; ?>" name="<?php echo $option['name_space']; ?>" value='1' <?php if ( 1 == $option['value'] ) echo 'checked="checked"'; ?> />
+								<?php elseif( $option['type'] != "select" ): ?>
+									<input id="<?php echo $option['name_space']; ?>" class="<?php echo $this->name_space; ?>" type="<?php echo $option['type'] ?>" name="<?php echo $option['name_space'] ?>" value="<?php echo $option['value'] ?>" />
 								<?php else: ?>
-									<select id="<?php echo $option->name_space; ?>" name="<?php echo $option->name_space ?>">
-										<option class="<?php echo $this->name_space; ?>" value="<?php echo $option->value; ?>"><?php echo $option->value; ?></option>';
-										<?php for($iii = 0; $iii < count($option->parameters); $iii++): ?>
-											<?php if($option->parameters[$iii] != $option->value): ?>
-												<option class="<?php echo $this->name_space; ?>" value="<?php echo $option->parameters[$iii]; ?>"><?php echo $option->parameters[$iii]; ?></option>
+									<select id="<?php echo $option['name_space']; ?>" name="<?php echo $option['name_space'] ?>">
+										<option class="<?php echo $this->name_space; ?>" value="<?php echo $option['value']; ?>"><?php echo $option['value']; ?></option>';
+										<?php for($iii = 0; $iii < count($option['parameters']); $iii++): ?>
+											<?php if($option['parameters'][$iii] != $option['value']): ?>
+												<option class="<?php echo $this->name_space; ?>" value="<?php echo $option['parameters'][$iii]; ?>"><?php echo $option['parameters'][$iii]; ?></option>
 											<?php endif; ?>
 										<?php endfor; ?>
 									</select>
 								<?php endif; ?>
-								<span class='description <?php echo $this->name_space; ?>-description'><?php echo $option->descp ?></span>
+								<span class='description <?php echo $this->name_space; ?>-description'><?php echo $option['descp'] ?></span>
 							</label>
 						</td>
 					</tr>

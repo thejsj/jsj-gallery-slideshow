@@ -5,64 +5,47 @@
 
     window.createJSJGallerySlideshow = (function () {
 
-        var slideTransitionTime,
-            cycle_options,
+        var settings = window.jsjGallerySlideshowOptions.settings,
             cycleGallery = [], // All Galleries
             utilities = new window.JSJ_Gallery_SlideShow_Utilities(); // Create an instance of our utilities class
 
-        // Parse Options from WordPress
-        cycle_options = (function () {
+        console.log(utilities);
 
-            var options = {},
-                settings = window.jsjGallerySlideshowOptions.settings,
-                i,
-                value;
+        $.fn.cycle.defaults = $.extend($.fn.cycle.defaults, settings);
 
-            for (i in settings) {
-                if (settings.hasOwnProperty(i)) {
-                    value = settings[i];
-                    if (!isNaN(Number(value))) {
-                        value = Number(value);
-                    }
-                    if (value === 'false' || value === 'true') {
-                        value = (value === 'false') ? false : true;
-                    }
-                    options[i] = value;
-                }
-            }
-            return options;
-        }());
+        console.log($.fn.cycle.defaults);
 
-        slideTransitionTime = cycle_options.speed;
+        // $.extend(cycle_options, {
+        //             id:               galleryId,
+        //             next:             '#galleryNext-' + galleryId,
+        //             prev:             '#galleryPrev-' + galleryId,
+        //             pager:            $("#gallery-pager-" + galleryId),
+        //             onPrevNextEvent:  utilities.update_numbers, // callback fn for prev/next events: function(isNext, zeroBasedSlideIndex, slideElement),
+        //             before: function () {
+        //                 var sh = $(this).height();
+        //                 if (sh > 1) {
+        //                     $(this).parent().clearQueue().animate({ height: sh }, slideTransitionTime);
+        //                 }
+        //             },
+        //             pagerAnchorBuilder: function (i, slide) { // callback fn that creates a thumbnail to use as pager anchor 
+        //                 return '<li class="slideshow-thumb index-' + i + '" style="background-image: url(' + slide.src + ');"></li>'; //<a href="#"><img src="" /></a>
+        //             }
+        //         })
 
         return function () {
-            $('.gallery').each(function (index) {
+            $($.fn.cycle.defaults.autoSelector).each(function (index) {
                 var $this = $(this),
-                    galleryId = $this.attr("id").replace("galleryid-", "");
+                    gallery_id = $this.attr("id").replace("galleryid-", "");
 
                 // Update Pagination
-                utilities.update_pagination_string(galleryId);
+                utilities.update_pagination_string(gallery_id);
 
                 // Remove Any Previous Pagination (if resize)
                 $this.parent().children('.gallery-pager')
                     .html('');
 
-                cycleGallery[index] = $this.cycle('destroy').cycle($.extend(cycle_options, {
-                    id:               galleryId,
-                    next:             '#galleryNext-' + galleryId,
-                    prev:             '#galleryPrev-' + galleryId,
-                    pager:            $("#gallery-pager-" + galleryId),
-                    onPrevNextEvent:  utilities.update_numbers, // callback fn for prev/next events: function(isNext, zeroBasedSlideIndex, slideElement),
-                    before: function () {
-                        var sh = $(this).height();
-                        if (sh > 1) {
-                            $(this).parent().clearQueue().animate({ height: sh }, slideTransitionTime);
-                        }
-                    },
-                    pagerAnchorBuilder: function (i, slide) { // callback fn that creates a thumbnail to use as pager anchor 
-                        return '<li class="slideshow-thumb index-' + i + '" style="background-image: url(' + slide.src + ');"></li>'; //<a href="#"><img src="" /></a>
-                    }
-                })); // Append Settings to Cycle Object
+                cycleGallery[index] = $this.cycle('destroy').cycle(settings); // Append Settings to Cycle Object
+                console.log('End Init');
                 utilities.set_intial_height(cycleGallery[index]);
             });
         };

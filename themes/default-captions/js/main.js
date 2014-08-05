@@ -1,1 +1,5 @@
-!function(a){"use strict";console.log("Loading Theme"),console.log(a)}(window.jQuery);
+(function($) {
+    "use strict";
+    console.log("Loading Theme");
+    console.log($);
+})(window.jQuery);

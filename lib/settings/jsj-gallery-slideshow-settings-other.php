@@ -2,7 +2,7 @@
 
 // Start Setting Options
 $jsj_gallery_slideshow_options_other = array(
-	'checkForShortCode' => (object) array(
+	'checkForShortCode' => array(
 		'name' => 'checkForShortCode', 
 		'title' => __( 'Check For Shortcode', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'Only load plugin if [gallery] shortcode is being used in content. Deactivate if using Ajax.', 'jsj-gallery-slideshow' ),
@@ -10,7 +10,7 @@ $jsj_gallery_slideshow_options_other = array(
 		'tab' => 'advanced',
 		'default' => 0
 	),
-	'defaultImageSize' => (object) array(
+	'defaultImageSize' => array(
 		'name' => 'defaultImageSize', 
 		'title' => __( 'Default Image Size', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'Set the default WordPress thumbnail image size, in which all thumbnails should be output (Can be overwritten individually).', 'jsj-gallery-slideshow' ),

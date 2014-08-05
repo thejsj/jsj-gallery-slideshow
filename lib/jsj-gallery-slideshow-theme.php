@@ -20,17 +20,73 @@
 		 *
 		 * These will be passed on to our template and to our Cycle2 slideshow
 		 */
-		public $js_selectors = array(
-			'autoSelector'       => 'jsj-gs-gallery',
-			'caption'            => 'jsj-gs-caption',
-			'caption-template'   => '{{slideNum}} / {{slideCount}}',
-			'disabled-class'     => 'jsj-gs-disabled',
-			'next'               => 'jsj-gs-next',
-			'pager'              => 'jsj-gs-pager',
-			'pager-active-class' => 'jsj-gs-active',
-			'prev'               => 'jsj-gs-prev',
-			'slide-active-class' => 'jsj-gs-active',
-			'slide-class'        => 'jsj-gs-slide',
+
+		public $cycle_options = array(
+			'autoSelector' => array(
+				'name'          => 'autoSelector', 
+				'value'         => '.jsj-gs-gallery',
+				'css_class'     => 'jsj-gs-gallery',
+				'cycle_default' => '.cycle-slideshow[data-cycle-auto-init!=false]',
+				'data_type'     => 'jquery-selector',
+			),
+			'caption' => array(
+				'name'          => 'caption', 
+				'value'         => '.jsj-gs-caption',
+				'css_class'     => 'jsj-gs-caption',
+				'cycle_default' => '> .cycle-caption',
+				'data_type'     => 'jquery-selector',
+			),
+			'caption-template' => array(
+				'name'          => 'caption-template', 
+				'value'         => '{{slideNum}} / {{slideCount}}',
+				'cycle_default' => '{{slideNum}} / {{slideCount}}',
+				'data_type'     => 'string',
+			),
+			'disabled-class' => array(
+				'name'          => 'disabled-class', 
+				'value'         => 'jsj-gs-disabled',
+				'cycle_default' => 'disabled',
+				'data_type'     => 'string',
+			),
+			'next' => array(
+				'name'          => 'next', 
+				'value'         => '.jsj-gs-next',
+				'css_class'     => 'jsj-gs-next',
+				'cycle_default' => '> .cycle-next',
+				'data_type'     => 'jquery-selector',
+			),
+			'pager' => array(
+				'name'          => 'pager', 
+				'value'         => '.jsj-gs-pager',
+				'css_class'     => 'jsj-gs-pager',
+				'cycle_default' => '> .cycle-pager',
+				'data_type'     => 'jquery-selector',
+			),
+			'pager-active-class' => array(
+				'name'          => 'pager-active-class', 
+				'value'         => 'jsj-gs-active',
+				'cycle_default' => 'cycle-pager-active',
+				'data_type'     => 'string',
+			),
+			'prev' => array(
+				'name'          => 'prev', 
+				'value'         => '.jsj-gs-prev',
+				'css_class'     => 'jsj-gs-prev',
+				'cycle_default' => '> .cycle-prev',
+				'data_type'     => 'jquery-selector',
+			),
+			'slide-active-class' => array(
+				'name'          => 'slide-active-class', 
+				'value'         => 'jsj-gs-active',
+				'cycle_default' => 'cycle-slide-active',
+				'data_type'     => 'string',
+			),
+			'slide-class' => array(
+				'name'          => 'slide-class', 
+				'value'         => 'jsj-gs-slide',
+				'cycle_default' => 'cycle-slide',
+				'data_type'     => 'string',
+			),
 		);
 
 		public function __construct() {
@@ -51,7 +107,8 @@
 				'css_url'                 => $this->css_url,
 				'js_url'                  => $this->js_url,
 				'template_file_location'  => $this->template_file_location,
-				'screenshot_url'          => $this->screenshot_url
+				'screenshot_url'          => $this->screenshot_url,
+				'cycle_options'           => $this->cycle_options
 			);
 
 			// Append our class to 

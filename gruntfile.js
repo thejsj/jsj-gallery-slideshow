@@ -6,6 +6,11 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         uglify: {
+            options: {
+                mangle: false,
+                compress: false,
+                beautify: true,
+            },
             main: {
                 files: {
                     'static/js/jsj-gallery-slideshow.min.js': [
@@ -68,8 +73,12 @@ module.exports = function (grunt) {
         },
         watch: {
             css: {
-                files: ['./static/scss/*.scss', './static/js/*.js', './themes/**/*.scss', './themes/**/*.js'],
-                tasks: ['uglify', 'compass'],
+                files: ['./static/scss/*.scss', './themes/**/*.scss'],
+                tasks: ['compass'],
+            },
+            js: {
+                files: ['./static/js/app/*.js', './themes/**/jsj-*.js'],
+                tasks: ['uglify'],
             }
         },
         shell: { // Doesn't Run in Watch

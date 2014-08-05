@@ -10,20 +10,6 @@ Author URI: http://thejsj.com
 License: GPL2
 */
 
-/*
-
-TODO : Add Correct urls to resources and credit
-TODO : Add new screenshots for plugin admin
-TODO : Add changes to readme.txt
-TODO : Update readme.txt
-
-LATER: 
-
-TODO : Update Banners in Wordpress.org
-TODO : Add new screenshots for plugin front-end
-
-*/
-
 // Require Default Themes
 require( plugin_dir_path( __FILE__ ) . '/themes/default/theme-main.php');
 require( plugin_dir_path( __FILE__ ) . '/themes/default-captions/theme-main.php');
@@ -104,7 +90,7 @@ class JSJGallerySlideshow {
 
 		// Determine which is our active theme, if no theme is selected, use the default one
 		foreach($this->all_themes as $k => $theme){
-			if($this->settings->themes['current_theme']->value === $theme['slug']) {
+			if($this->settings->themes['current_theme']['value'] === $theme['slug']) {
 				$this->theme                    = $this->all_themes[$k];
 				$this->all_themes[$k]['active'] = true;
 			} else {
@@ -123,6 +109,7 @@ class JSJGallerySlideshow {
 		}
 
 		// Update our $all_themes in Admin
+		$this->settings->appendThemeSettings($this->theme);
 		$this->admin->updateThemes($this->all_themes);
 		$this->static_enqueue->updateTheme($this->theme);
 		$this->shortcode_handler->updateTheme($this->theme);

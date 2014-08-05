@@ -3,25 +3,27 @@
 $all_transition_effects = array("fade","fadeout","scrollHorz","none");
 
 // Start Setting Options
-$jsj_gallery_slideshow_options_cycle = Array(
+$jsj_gallery_slideshow_options_cycle = array(
 
 
-	'allow-wrap' => (object) array(
+	'allow-wrap' => array(
 		'name' => 'allow-wrap', 
 		'title' => __( 'Allow Wrap', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'This option determines whether or not a slideshow can advance from the last slide to the first (or vice versa)', 'jsj-gallery-slideshow' ),
 		'type' => 'boolean',
 		'tab' => 'advanced',
 		'convert_to_boolean' => true,
-		'default' => 1
+		'default' => true,
+		'data_type' => 'boolean',
 	),
-	'auto-height' => (object) array(
+	'auto-height' => array(
 		'name' => 'auto-height', 
 		'title' => __( 'Auto Height', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'This option determines whether or not Cycle2 will provide height management for the slideshow which can be very useful in fluid or responsive designs', 'jsj-gallery-slideshow' ),
 		'type' => 'text',
 		'tab' => 'advanced',
-		'default' => 0
+		'default' => 0,
+		'data_type' => 'integer',
 	),
 	/**
 	 * NOT INCLUDED: autoSelector ++DETERMINED IN PHP CLASS
@@ -52,13 +54,14 @@ $jsj_gallery_slideshow_options_cycle = Array(
 	 * This is useful when you want to start with an automatic slideshow but later switch to a manual slideshow. This option can also be a function which returns a boolean value.
 	 *
 	 */
-	'delay' => (object) array(
+	'delay' => array(
 		'name' => 'delay', 
 		'title' => __( 'Delay', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'The number of milliseconds to add onto, or substract from, the time before the first slide transition occurs', 'jsj-gallery-slideshow' ),
 		'type' => 'number',
 		'tab' => 'advanced',
 		'default' => 0,
+		'data_type' => 'integer',
 	),
 	/**
 	 * NOT INCLUDED: disabled-class ++DETERMINED IN PHP CLASS
@@ -66,32 +69,36 @@ $jsj_gallery_slideshow_options_cycle = Array(
 	 * The classname to assign to prev/next links when they cannot be activated (due to data-cycle-allow-wrap="false".
 	 *
 	 */
-	'easing' => (object) array(
+	'easing' => array(
 		'name' => 'easing', 
 		'title' => __( 'Easing', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'Name of the easing function to use for animations', 'jsj-gallery-slideshow' ),
 		'type' => 'select',
 		'tab' => 'simple',
 		'parameters' => array('jswing', 'def', 'easeInQuad', 'easeOutQuad', 'easeInOutQuad', 'easeInCubic', 'easeOutCubic', 'easeInOutCubic', 'easeInQuart', 'easeOutQuart', 'easeInOutQuart', 'easeInQuint', 'easeOutQuint', 'easeInOutQuint', 'easeInSine', 'easeOutSine', 'easeInOutSine', 'easeInExpo', 'easeOutExpo', 'easeInOutExpo', 'easeInCirc', 'easeOutCirc', 'easeInOutCirc', 'easeInElastic', 'easeOutElastic', 'easeInOutElastic', 'easeInBack', 'easeOutBack', 'easeInOutBack', 'easeInBounce', 'easeOutBounce', 'easeInOutBounce'),
-		'default' => 'easeInQuad'
+		'default' => 'easeInQuad',
+		'data_type' => 'string',
 	),
-	'fx' => (object) array(
+	'fx' => array(
 		'name' => 'fx', 
 		'title' => __( 'Transition Effect', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'The name of the slideshow transition to use', 'jsj-gallery-slideshow' ),
 		'type' => 'select',
 		'tab' => 'simple',
 		'parameters' => $all_transition_effects,
-		'default' => 'scrollHorz'
+		'default' => 'scrollHorz',
+		'cycle_default' => 'fade',
+		'data_type' => 'string',
 	),
-	'hide-non-active' => (object) array(
+	'hide-non-active' => array(
 		'name' => 'hide-non-active', 
 		'title' => __( 'Hide Non-Active', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'Determines whether or not Cycle2 hides the inactive slides', 'jsj-gallery-slideshow' ),
 		'type' => 'boolean',
 		'tab' => 'advanced',
 		'convert_to_boolean' => true,
-		'default' => 1
+		'default' => true,
+		'data_type' => 'boolean',
 	),
 	/**
 	 * NOT INCLUDED: loader
@@ -102,48 +109,54 @@ $jsj_gallery_slideshow_options_cycle = Array(
 	 * "wait" wait for all images to arrive before staring slideshow
 	 *
 	 */
-	'log' => (object) array(
+	'log' => array(
 		'name' => 'log', 
 		'title' => __( 'Log', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'Enable console logging', 'jsj-gallery-slideshow' ),
 		'type' => 'boolean',
 		'tab' => 'advanced',
 		'convert_to_boolean' => true,
-		'default' => false
+		'default' => false,
+		'cycle_default' => true,
+		'data_type' => 'boolean',
 	),
-	'loop' => (object) array(
+	'loop' => array(
 		'name' => 'loop', 
 		'title' => __( 'Loop', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'The number of times an auto-advancing slideshow should loop before terminating', 'jsj-gallery-slideshow' ),
 		'type' => 'text',
 		'tab' => 'advanced',
-		'default' => 0
+		'default' => 0,
+		'data_type' => 'integer',
 	),
-	'manual-fx' => (object) array(
+	'manual-fx' => array(
 		'name' => 'manual-fx', 
 		'title' => __( 'Manual Transition Effect', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'The transition effect to use for manually triggered transitions (not timer-based transitions)', 'jsj-gallery-slideshow' ),
 		'type' => 'select',
 		'tab' => 'advanced',
-		'parameters' => array_merge(array('false'), $all_transition_effects),
-		'default' => 'false'
+		'parameters' => array_merge(array(''), $all_transition_effects),
+		'default' => '',
+		'data_type' => 'string',
 	),
-	'manual-speed' => (object) array(
+	'manual-speed' => array(
 		'name' => 'manual-speed', 
-		'title' => __( 'Manual Transition Effect', 'jsj-gallery-slideshow' ),
+		'title' => __( 'Manual Speed', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'The speed (in milliseconds) for transitions that are manually initiated, such as those caused by clicking a "next" button or a pager link', 'jsj-gallery-slideshow' ),
 		'type' => 'text',
 		'tab' => 'advanced',
-		'default' => false
+		'default' => '',
+		'data_type' => 'integer',
 	),
-	'manualTrump' => (object) array(
+	'manualTrump' => array(
 		'name' => 'manualTrump', 
 		'title' => __( 'Manual Trump', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'Determines whether or not transitions are interrupted to begin new ones if the new ones are the result of a user action (not timer)', 'jsj-gallery-slideshow' ),
 		'type' => 'boolean',
 		'convert_to_boolean' => true,
 		'tab' => 'advanced',
-		'default' => 1,
+		'default' => true,
+		'data_type' => 'boolean',
 	),
 	/**
 	 * NOT INCLUDED: next ++DETERMINED IN PHP CLASS
@@ -199,23 +212,25 @@ $jsj_gallery_slideshow_options_cycle = Array(
 	 * Set to true to allow pager events to bubble up the DOM. This is useful if you have an anchor inside your pager element and want the anchor to be followed when it is clicked.
 	 *
 	 */
-	'pause-on-hover' => (object) array(
+	'pause-on-hover' => array(
 		'name' => 'pause-on-hover', 
 		'title' => __( 'Pause on Hover', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'Determines whether or not transitions are interrupted to begin new ones if the new ones are the result of a user action (not timer)', 'jsj-gallery-slideshow' ),
 		'type' => 'boolean',
 		'convert_to_boolean' => true,
 		'tab' => 'simple',
-		'default' => 0,
+		'default' => false,
+		'data_type' => 'boolean',
 	),
-	'paused' => (object) array(
+	'paused' => array(
 		'name' => 'paused', 
 		'title' => __( 'Paused on Start', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'If true the slideshow will begin in a paused state.', 'jsj-gallery-slideshow' ),
 		'type' => 'boolean',
 		'convert_to_boolean' => true,
 		'tab' => 'simple',
-		'default' => 0,
+		'default' => false,
+		'data_type' => 'boolean',
 	),
 	/**
 	 * NOT INCLUDED: prev ++DETERMINED IN PHP CLASS
@@ -237,23 +252,25 @@ $jsj_gallery_slideshow_options_cycle = Array(
 	 * Identifies an element in the DOM which holds a JSON array representing the slides to be progressively loaded into the slideshow. Example.
 	 *
 	 */
-	'random' => (object) array(
+	'random' => array(
 		'name' => 'random', 
 		'title' => __( 'Random', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'If true the order of the slides will be randomized', 'jsj-gallery-slideshow' ),
 		'type' => 'boolean',
 		'convert_to_boolean' => true,
 		'tab' => 'simple',
-		'default' => 0,
+		'default' => false,
+		'data_type' => 'boolean',
 	),
-	'reverse' => (object) array(
+	'reverse' => array(
 		'name' => 'reverse', 
 		'title' => __( 'Reverse', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'If true the slideshow will proceed in reverse order and transitions that support this option will run a reverse animation', 'jsj-gallery-slideshow' ),
 		'type' => 'boolean',
 		'convert_to_boolean' => true,
 		'tab' => 'simple',
-		'default' => 0,
+		'default' => false,
+		'data_type' => 'boolean',
 	),
 	/**
 	 * NOT INCLUDED: slide-active-class ++DETERMINED IN PHP CLASS
@@ -280,13 +297,15 @@ $jsj_gallery_slideshow_options_cycle = Array(
 	 * By default, Cycle2 finds all image elements that are immediate children of the slideshow container.
 	 *
 	 */
-	'speed' => (object) array(
+	'speed' => array(
 		'name' => 'speed', 
 		'title' => __( 'Speed', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'The speed of the transition effect in milliseconds', 'jsj-gallery-slideshow' ),
 		'type' => 'text',
 		'tab' => 'simple',
-		'default' => '350'
+		'default' => 350,
+		'cycle_default' => 500,
+		'data_type' => 'integer',
 	),
 	/**
 	 * NOT INCLUDED: starting-slide
@@ -294,40 +313,45 @@ $jsj_gallery_slideshow_options_cycle = Array(
 	 * The zero-based index of the slide that should be initially displayed
 	 *
 	 */
-	'swipe' => (object) array(
+	'swipe' => array(
 		'name' => 'swipe', 
 		'title' => __( 'Swipe', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'Enable gesture support for advancing the slideshow forward or back', 'jsj-gallery-slideshow' ),
 		'type' => 'boolean',
 		'convert_to_boolean' => true,
 		'tab' => 'simple',
-		'default' => 1,
+		'default' => true,
+		'data_type' => 'boolean',
 	),
-	'swipe-fx' => (object) array(
+	'swipe-fx' => array(
 		'name' => 'swipe-fx', 
 		'title' => __( 'Swipe Transition Effect', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'The transition effect to use for swipe-triggered transitions', 'jsj-gallery-slideshow' ),
 		'type' => 'select',
 		'tab' => 'advanced',
-		'parameters' => array_merge(array('false'), $all_transition_effects),
-		'default' => false
+		'parameters' => array_merge(array(''), $all_transition_effects),
+		'default' => '',
+		'data_type' => 'string',
 	),
-	'sync' => (object) array(
+	'sync' => array(
 		'name' => 'sync', 
 		'title' => __( 'Sync', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'If true then animation of the incoming and outgoing slides will be synchronized', 'jsj-gallery-slideshow' ),
 		'type' => 'boolean',
 		'convert_to_boolean' => true,
 		'tab' => 'advanced',
-		'default' => 1,
+		'default' => true,
+		'data_type' => 'boolean',
 	),
-	'timeout' => (object) array(
+	'timeout' => array(
 		'name' => 'timeout', 
 		'title' => __( 'Timeout', 'jsj-gallery-slideshow' ),
 		'descp' => __( 'The time between slide transitions in milliseconds', 'jsj-gallery-slideshow' ),
 		'type' => 'text',
 		'tab' => 'simple',
-		'default' => '0'
+		'default' => 0,
+		'cycle_default' => 4000,
+		'data_type' => 'integer',
 	),
 	/**
 	 * NOT INCLUDED: tmpl-regex

@@ -31,22 +31,23 @@
 		public function enqueue_client_scripts(){
 			global $post;
 
-			if( $this->settings->other['checkForShortCode']->value == 'false' || $this->settings->other['checkForShortCode']->value == 'true' && has_shortcode( $post->post_content, 'gallery' ) ) {
+			if( $this->settings->other['checkForShortCode']['value'] == 'false' || $this->settings->other['checkForShortCode']['value'] == 'true' && has_shortcode( $post->post_content, 'gallery' ) ) {
 				// Determines if Javascript code will be inserted into the page
 				$this->scripts_enqueued = true; 
 
 				//	Parse Settings so that they come out in their most simple form
-				$jsj_gallery__slideshow_options_for_javascript = array(); 
+				$jsj_gallery_slideshow_options_for_javascript = array(); 
 				foreach($this->settings->cycle as $key => $setting){
-					if($setting->value != $setting->default || $key == "speed"){
-						$jsj_gallery__slideshow_options_for_javascript[$key] = $setting->value;
+					// Check if a cycle default is defined
+					if($this->settings->appendValue($setting)){
+						$jsj_gallery_slideshow_options_for_javascript[$key] = $this->settings->getValue($setting);
 					}
 				}
 
 				// Settings to be localized
 				$settings = array(
-					'settings' => $jsj_gallery__slideshow_options_for_javascript,
-					'scripts_enqueued' => $this->scripts_enqueued
+					'settings'         => $jsj_gallery_slideshow_options_for_javascript,
+					'scripts_enqueued' => $this->scripts_enqueued,
 				);
 
 				if(!wp_script_is('jquery')){
