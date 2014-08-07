@@ -2,8 +2,8 @@
 	<!-- Navigation -->
 	<div class='gallery-navigation'>
 		<a id='<?php echo $name_space; ?>-gallery-prev-<?php echo $id; ?>' class='gallery-prev gallery-button <?php echo $prev_class; ?>' href='#'><?php echo $previous_text; ?></a>
-		 / <a id='<?php echo $name_space; ?>-gallery-next-<?php echo $id; ?>' class='gallery-next gallery-button <?php echo $next_class; ?>' href='#'><?php echo $next_text; ?></a> ///
-		<span id='<?php echo $name_space; ?>-gallery-numbering-<?php $id; ?>' class='gallery-numbering' data-numbering-translation-of='<?php echo $number_translation; ?>'></span>
+		 / <a id='<?php echo $name_space; ?>-gallery-next-<?php echo $id; ?>' class='gallery-next gallery-button <?php echo $next_class; ?>' href='#'><?php echo $next_text; ?></a> 
+		<span id='<?php echo $name_space; ?>-gallery-numbering-<?php echo $id; ?>' class='gallery-numbering' data-total="<?php echo $count; ?>" data-numbering-translation-of='<?php echo $number_translation; ?>'></span>
 	</div>
 
 	<!-- Start Gallery -->
