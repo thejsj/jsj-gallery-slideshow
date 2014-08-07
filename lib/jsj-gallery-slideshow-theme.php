@@ -62,6 +62,12 @@
 				'cycle_default' => '> .cycle-pager',
 				'data_type'     => 'jquery-selector',
 			),
+			'pagerTemplate' => array(
+				'name'          => 'pager-template', 
+				'value'         => "<li class='slideshow-thumbnail' style='background-image: url({{slideNum}}-{{slideCount}}-{{busy}}-{{currSlide}}-{{paused}});''></li>",
+				'cycle_default' => '<span>&bull;</span>',
+				'data_type'     => 'string',
+			),
 			'pager-active-class' => array(
 				'name'          => 'pager-active-class', 
 				'value'         => 'jsj-gs-active',

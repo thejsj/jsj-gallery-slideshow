@@ -1,3 +1,4 @@
+/*jslint nomen: true  */
 /*global window: false, document: false */
 
 (function ($) {
@@ -6,25 +7,36 @@
     window.createJSJGallerySlideshow = (function () {
 
         var settings = window.jsjGallerySlideshowOptions.settings,
-            self = {};
-
-        console.log('createJSJGallerySlideshow');
+            slideshow_initialized = false,
+            self = {},
+            __self = {};
 
         // Re-write defaults
-        $.fn.cycle.defaults = $.extend($.fn.cycle.defaults, settings);
+        $.fn.cycle.defaults = self.settings = $.extend($.fn.cycle.defaults, settings);
+        console.log(settings.pagerTemplate);
 
         // Query all galleries
-        self.$galleries = $($.fn.cycle.defaults.autoSelector);
+        self.$el = $(self.settings.autoSelector);
 
         // Initialize Utilities
-        self.utilities = new window.JSJ_Gallery_SlideShow_Utilities();
+        self.utilities = new window.JSJ_Gallery_SlideShow_Utilities(self.settings);
 
         self.init = function () {
-            console.log('initSlideshows');
+            if (!slideshow_initialized) {
+                slideshow_initialized = true;
+            } else {
+                if (self.settings.log) {
+                    __self.log('Re-Initializing Slideshow. jQuery elements were not required. Slideshows destroyed and re-initiated');
+                }
+            }
             if (window.jsjGallerySlideshowOptions.scripts_enqueued) {
-                self.$galleries.cycle('destroy').cycle(settings); // Append Settings to Cycle Object
+                self.$el.cycle('destroy').cycle(settings); // Append Settings to Cycle Object
             }
             return self;
+        };
+
+        __self.log = function (message) {
+            console.log('[JSJ Gallery Slideshow] ' + message);
         };
 
         // Re-init all slideshows on init

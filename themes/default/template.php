@@ -1,4 +1,4 @@
-<div id='<?php echo $name_space; ?>-gallery-container--<?php echo $id; ?>' class='gallery-container <?php echo $name_space; ?>-gallery-container'>
+<div id='<?php echo $name_space; ?>-gallery-container-<?php echo $id; ?>' class='gallery-container <?php echo $name_space; ?>-gallery-container'>
 	<!-- Navigation -->
 	<div class='gallery-navigation'>
 		<a id='<?php echo $name_space; ?>-gallery-prev-<?php echo $id; ?>' class='gallery-prev gallery-button <?php echo $prev_class; ?>' href='#'><?php echo $previous_text; ?></a>
