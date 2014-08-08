@@ -1,4 +1,12 @@
-.gallery_container_jsj-gallery-slideshow {
+@mixin no-transitions () {
+	-webkit-transition: none !important;
+	-moz-transition: none !important;
+	-o-transition: none !important;
+	-ms-transition: none !important;
+	transition: none !important;
+}
+
+.jsj-gallery-slideshow-gallery-container {
 
 	// Navigation
 
@@ -21,23 +29,17 @@
 
 	// Gallery
 
-	.gallery {
+	.jsj-gs-gallery {
 		margin-top: 10px;
 		margin-bottom: 10px; 
-		-webkit-transition: none !important;
-		-moz-transition: none !important;
-		-o-transition: none !important;
-		-ms-transition: none !important;
-		transition: none !important;
+		overflow: hidden;
+
+		@include no-transitions();
 
 		img {
 			border: 0px;
 			margin: 0px;
-			-webkit-transition: none !important;
-			-moz-transition: none !important;
-			-o-transition: none !important;
-			-ms-transition: none !important;
-			transition: none !important;
+			@include no-transitions();
 		}
 	}
 
@@ -46,16 +48,12 @@
 		margin: 10px;
 		text-align: center;
 		width: auto;
-		-webkit-transition: none !important;
-		-moz-transition: none !important;
-		-o-transition: none !important;
-		-ms-transition: none !important;
-		transition: none !important;
+		@include no-transitions();
 	}
 
 	// Pager
 
-	.gallery-pager {
+	.jsj-gs-pager {
 		width: 600px;
 		li {
 			padding: 0px;
@@ -65,13 +63,14 @@
 			display: inline-block;
 			height: 75px; 
 			width: 75px; 
+			cursor: pointer;
+
 			background-clip: content-box;
 			background-size: cover;
 			background-repeat: no-repeat; 
-			background-position: center center;
-			cursor: pointer; 
+			background-position: center center; 
 			border: solid 1px #ccc;
-			
+
 			&.activeSlide_gallery_cycle {
 				border: solid 1px #000;
 			}

@@ -1,4 +1,6 @@
-.gallery_container_jsj-gallery-slideshow {
+.jsj-gallery-slideshow-gallery-container {
+
+	background: green;
 
 	// Navigation
 
@@ -21,7 +23,7 @@
 
 	// Gallery
 
-	.gallery {
+	.jsj-gs-gallery {
 		margin-top: 10px;
 		margin-bottom: 10px; 
 		-webkit-transition: none !important;
@@ -55,7 +57,7 @@
 
 	// Pager
 
-	.gallery-pager {
+	.jsj-gs-pager {
 		width: 600px;
 		li {
 			padding: 0px;

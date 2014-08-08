@@ -108,45 +108,46 @@
 			/**
 			 * Define all our variables to be used in our templates
 			 */
-			$template_variables = array();
+			$template_variables = array(
+				// Main Variables
+				'name_space'         => $this->name_space,
+				'instance'           => $instance,
+				'id'                 => $instance,
+				'totalCount'         => count($attachments),
+				'count'              => count($attachments),
+				
+				// Cycle Variables (We're copying these one by one so that all template tags are here)
+				'selector'           => $this->theme['cycle_options']['autoSelector']['css_class'],
+				'caption_class'      => $this->theme['cycle_options']['caption']['css_class'],
+				'next_class'         => $this->theme['cycle_options']['next']['css_class'],
+				'pager_class'        => $this->theme['cycle_options']['pager']['css_class'],
+				'prev_class'         => $this->theme['cycle_options']['prev']['css_class'],
+				'numbering_class'    => $this->theme['cycle_options']['numbering']['css_class'],
 
-			// Main Variables
-			$template_variables['name_space']         = $this->name_space;
-			$template_variables['instance']           = $instance;
-			$template_variables['id']                 = $instance;
-			$template_variables['totalCount']         = count($attachments);
-			$template_variables['count']              = $template_variables['totalCount'];
-			
-			// Cycle Variables (We're copying these one by one so that all template tags are here)
-			$template_variables['selector']           = $this->theme['cycle_options']['autoSelector']['css_class'];
-			$template_variables['caption_class']      = $this->theme['cycle_options']['caption']['css_class'];
-			$template_variables['next_class']         = $this->theme['cycle_options']['next']['css_class'];
-			$template_variables['pager_class']        = $this->theme['cycle_options']['pager']['css_class'];
-			$template_variables['prev_class']         = $this->theme['cycle_options']['prev']['css_class'];
+				// Variables Used by Cycle
+				'caption_template'   => $this->theme['cycle_options']['caption-template']['value'],
+				'disabled_class'     => $this->theme['cycle_options']['disabled-class']['value'],
+				'pager_active_class' => $this->theme['cycle_options']['pager-active-class']['value'],
+				'slide_active_class' => $this->theme['cycle_options']['slide-active-class']['value'],
+				'slide_class'        => $this->theme['cycle_options']['slide-class']['value'],
 
-			// Variables Used by Cycle
-			$template_variables['caption_template']   = $this->theme['cycle_options']['caption-template']['value'];
-			$template_variables['disabled_class']     = $this->theme['cycle_options']['disabled-class']['value'];
-			$template_variables['pager_active_class'] = $this->theme['cycle_options']['pager-active-class']['value'];
-			$template_variables['slide_active_class'] = $this->theme['cycle_options']['slide-active-class']['value'];
-			$template_variables['slide_class']        = $this->theme['cycle_options']['slide-class']['value'];
+				// Worpdress Variables
+				'itemtag'            => tag_escape($itemtag),
+				'captiontag'         => tag_escape($captiontag),
+				'columns'            => intval($columns),
+				'itemwidth'          => $columns > 0 ? floor(100/$columns) : 100,
+				'float'              => is_rtl() ? 'right' : 'left',
+				'size_class'         => $size_class = sanitize_html_class( $size ),
 
-			// Worpdress Variables
-			$template_variables['itemtag']            = tag_escape($itemtag);
-			$template_variables['captiontag']         = tag_escape($captiontag);
-			$template_variables['columns']            = intval($columns);
-			$template_variables['itemwidth']          = $columns > 0 ? floor(100/$columns) : 100;
-			$template_variables['float']              = is_rtl() ? 'right' : 'left';
-			$template_variables['size_class']         = $size_class = sanitize_html_class( $size );
-
-			// Text Variables
-			$template_variables['previous_text']           = __( 'Previous', 'jsj-gallery-slideshow' );
-			$template_variables['next_text']               = __( 'Next Image', 'jsj-gallery-slideshow' );
-			$template_variables['number_translation'] = __( 'of', '1 of 10','jsj-gallery-slideshow' );
-			
-			// Slideshow Specific Variables		
-			$template_variables['images']             = $this->getImages($attachments, $size, $instance);
-			
+				// Text Variables
+				'previous_text'           => __( 'Previous', 'jsj-gallery-slideshow' ),
+				'next_text'               => __( 'Next Image', 'jsj-gallery-slideshow' ),
+				'number_translation' => __( 'of', '1 of 10','jsj-gallery-slideshow' ),
+				
+				
+				// Slideshow Specific Variables		
+				'images'             => $this->getImages($attachments, $size, $instance),
+			);
 			// Render Template
 			$output   = $this->renderTemplate($this->theme['template_file_location'], $template_variables);
 

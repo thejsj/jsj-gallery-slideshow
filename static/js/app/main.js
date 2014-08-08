@@ -13,7 +13,14 @@
 
         // Re-write defaults
         $.fn.cycle.defaults = self.settings = $.extend($.fn.cycle.defaults, settings);
-        console.log(settings.pagerTemplate);
+
+        __self.log = function (message) {
+            if (self.settings.log) {
+                console.log('[JSJ Gallery Slideshow] ' + message);
+            }
+        };
+
+        __self.log('Initializing createJSJGallerySlideshow');
 
         // Query all galleries
         self.$el = $(self.settings.autoSelector);
@@ -25,18 +32,14 @@
             if (!slideshow_initialized) {
                 slideshow_initialized = true;
             } else {
-                if (self.settings.log) {
-                    __self.log('Re-Initializing Slideshow. jQuery elements were not required. Slideshows destroyed and re-initiated');
-                }
+                __self.log('Re-Initializing Slideshow. jQuery elements were not required. Slideshows destroyed and re-initiated');
             }
             if (window.jsjGallerySlideshowOptions.scripts_enqueued) {
                 self.$el.cycle('destroy').cycle(settings); // Append Settings to Cycle Object
+            } else {
+                __self.log('scripts_enqueued is set in settings. Not initializing slideshows.');
             }
             return self;
-        };
-
-        __self.log = function (message) {
-            console.log('[JSJ Gallery Slideshow] ' + message);
         };
 
         // Re-init all slideshows on init

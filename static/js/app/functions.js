@@ -9,16 +9,17 @@
         var self = {}, __self = {};
 
         __self.settings = settings;
+        __self.tmpl = $.fn.cycle.API.tmpl;
 
-        self.updateNumbers = function (zeroBasedSlideIndex, slideElement) {
-            var galleryId, string;
-            if (slideElement.src !== undefined) {
-                galleryId = $("img[src$='" + slideElement.src + "']").data("galleryid");
-                self.update_pagination_string(galleryId, zeroBasedSlideIndex);
-            } else {
-                string = "";
-            }
-            $("#galleryNumbering-" + galleryId).html(string);
+        self.addImagePagination = function ($el, $pager) {
+            var all_images = $.map($el.find('img'), function (el) { console.log(el); return el.src; });
+
+            $pager.find('.slideshow-thumbnail').each(function (i) {
+                $(this)
+                    .css('background-image', 'url(' +  all_images[i] + ')');
+            });
+
+            return self;
         };
 
         self.updatePaginationString = function ($numbering_el, new_slide_number) {
@@ -33,14 +34,17 @@
                 string = "(" + 1 + " " + __self.of_string + " " + __self.total + ")"; // (1 of 6)
             }
             $numbering_el.html(string);
+
+            return self;
         };
 
-        self.updateGalleryHeight = function (imageEl, galleryEl) {
-            if (imageEl.height > 0) {
-                $(galleryEl).clearQueue().animate({
-                    height: imageEl.height
+        self.updateGalleryHeight = function ($el, image_el) {
+            if (image_el.height > 0) {
+                $el.clearQueue().animate({
+                    height: image_el.height
                 }, __self.settings.speed);
             }
+            return self;
         };
 
         self.setInitialHeight = function ($el) {
@@ -69,6 +73,7 @@
                     }
                 };
             }
+            return self;
         };
         return self;
     };

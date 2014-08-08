@@ -55,6 +55,13 @@
 				'cycle_default' => '> .cycle-next',
 				'data_type'     => 'jquery-selector',
 			),
+			'numbering' => array(
+				'name'          => 'numbering', 
+				'value'         => '.jsj-gs-numbering',
+				'css_class'     => 'jsj-gs-numbering',
+				'cycle_default' => '> .cycle-numbering',
+				'data_type'     => 'jquery-selector',
+			),
 			'pager' => array(
 				'name'          => 'pager', 
 				'value'         => '.jsj-gs-pager',
@@ -64,7 +71,7 @@
 			),
 			'pagerTemplate' => array(
 				'name'          => 'pager-template', 
-				'value'         => "<li class='slideshow-thumbnail' style='background-image: url({{slideNum}}-{{slideCount}}-{{busy}}-{{currSlide}}-{{paused}});''></li>",
+				'value'         => "<li class='slideshow-thumbnail'></li>",
 				'cycle_default' => '<span>&bull;</span>',
 				'data_type'     => 'string',
 			),
