@@ -14,18 +14,17 @@
                 $this_pager = $this_gallery.parent().find(settings.pager); // settings.pager is the css class used for our page. Find it in our gallerie's container
 
             utilities
-                .updateNumberingString($this_gallery, $this_numbering, 0) // Pass on our first slide);
+                .updateNumberingString($this_gallery, $this_numbering, optionHash) // Pass on our first slide);
                 .setInitialHeight($this_gallery)
                 .addImagePagination($this_gallery, $this_pager);
         })
         .on('cycle-before', settings.autoSelector, function (event, optionHash, outgoingSlideEl, incomingSlideEl, forwardFlag) {
             var $this_gallery = $(this),
-                $this_numbering = $this_gallery.parent().find(settings.numbering), // settings.numbering is the css class used for our numbering. Find it in our gallerie's container
-                next_slide_index = optionHash.nextSlide;
+                $this_numbering = $this_gallery.parent().find(settings.numbering); // settings.numbering is the css class used for our numbering. Find it in our gallerie's container
 
             utilities
                 .updateGalleryHeight($this_gallery, incomingSlideEl)
-                .updateNumberingString($this_gallery, $this_numbering, next_slide_index);
+                .updateNumberingString($this_gallery, $this_numbering, optionHash);
         });
 
 }(window.jQuery));

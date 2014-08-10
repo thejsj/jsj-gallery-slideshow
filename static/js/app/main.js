@@ -25,6 +25,9 @@
             // Re-write defaults
             $.fn.cycle.defaults = self.settings = $.extend($.fn.cycle.defaults, settings);
 
+            // Turn off default captions (You can overwrite this in your theme if you want)
+            $.fn.cycle.defaults.captionModule = false;
+
             // Initialize Utilities
             self.utilities = new window.JSJGallerySlideShowUtilities(self.settings);
 

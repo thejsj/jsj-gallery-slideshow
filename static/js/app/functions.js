@@ -11,7 +11,7 @@
         __self.settings = settings;
         __self.tmpl = $.fn.cycle.API.tmpl;
 
-        self.addImagePagination = function ($el, $pager) {
+        self.addImagePagination = function ($el, $pager_el) {
 
             var all_images = $.map($el.find('img'), function (el) {
                 if (el.className.indexOf('sentinel') === -1) {
@@ -19,7 +19,7 @@
                 }
             });
 
-            $pager.find('.slideshow-thumbnail').each(function (i) {
+            $pager_el.find('.slideshow-thumbnail').each(function (i) {
                 $(this)
                     .css('background-image', 'url(' +  all_images[i] + ')');
             });
@@ -27,23 +27,34 @@
             return self;
         };
 
-        self.updateNumberingString = function ($el, $numbering_el, new_slide_number) {
+        self.updateNumberingString = function ($el, $numbering_el, optionHash) {
             var html,
                 $container = $el.parent();
 
             __self.of_string = __self.of_string || $container.data("numbering-translation-of");
-            __self.total     = __self.total     || Number($container.data('total'));
+            optionHash.slideNum = optionHash.slideNum || 1;
 
-            if (new_slide_number === undefined || new_slide_number <= 0) {
-                new_slide_number = 0;
-            }
-
-            html = __self.tmpl(__self.settings.numberingTemplate, {
-                'slideNum' : new_slide_number + 1,
+            html = __self.tmpl(__self.settings.numberingTemplate, $.extend({
                 'ofString' : __self.of_string,
-                'slideCount' : __self.total,
-            });
+            }, optionHash));
             $numbering_el.html(html);
+
+            return self;
+        };
+
+        self.updateCaption = function ($el, $caption_el, optionHash, options) {
+
+            var current_slice_index = options && (options.use_current_slide) ? (optionHash.currSlide || 0) : optionHash.nextSlide || 0,
+                current_slide       = optionHash.slides[current_slice_index],
+                attachment_id       = +(current_slide.id.replace('attachment-image-', '')),
+                html;
+
+            html = __self.tmpl(__self.settings.captionTemplate, $.extend({
+                'ofString'   : __self.of_string,
+                'attachment' : window.jsj_gallery_slideshow_images[attachment_id]
+            }, optionHash));
+
+            $caption_el.html(html);
 
             return self;
         };

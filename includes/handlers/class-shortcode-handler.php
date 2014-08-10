@@ -143,7 +143,7 @@
 				'numbering_class'    => $this->theme['cycle_options']['numbering']['css_class'],
 
 				// Variables Used by Cycle
-				'caption_template'   => $this->theme['cycle_options']['caption-template']['value'],
+				'caption_template'   => $this->theme['cycle_options']['captionTemplate']['value'],
 				'disabled_class'     => $this->theme['cycle_options']['disabled-class']['value'],
 				'pager_active_class' => $this->theme['cycle_options']['pager-active-class']['value'],
 				'slide_active_class' => $this->theme['cycle_options']['slide-active-class']['value'],

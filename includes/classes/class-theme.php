@@ -36,10 +36,10 @@
 				'cycle_default' => '> .cycle-caption',
 				'data_type'     => 'jquery-selector',
 			),
-			'caption-template' => array(
+			'captionTemplate' => array(
 				'name'          => 'caption-template', 
-				'value'         => '{{caption}}',
-				'cycle_default' => '{{slideNum}} / {{slideCount}}',
+				'value'         => '{{attachment.metadata.caption}}',
+				'cycle_default' => '{{slideNum}} !! / {{slideCount}}',
 				'data_type'     => 'string',
 			),
 			'disabled-class' => array(

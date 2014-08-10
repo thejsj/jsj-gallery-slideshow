@@ -11,20 +11,23 @@
         .on('cycle-initialized', settings.autoSelector, function (event, optionHash) {
             // Init
             var $this_gallery = $(this),
-                $this_numbering = $this_gallery.parent().find(settings.numbering); // settings.numbering is the css class used for our numbering. Find it in our gallerie's container
+                $this_numbering = $this_gallery.parent().find(settings.numbering), // settings.numbering is the css class used for our numbering. Find it in our gallerie's container
+                $this_caption = $this_gallery.parent().find(settings.caption); // settings.numbering is the css class used for our numbering. Find it in our gallerie's container
 
             utilities
-                .updateNumberingString($this_gallery, $this_numbering, 0) // Pass on our first slide);
+                .updateNumberingString($this_gallery, $this_numbering, optionHash) // Pass on our first slide);
+                .updateCaption($this_gallery, $this_caption, optionHash, {'use_current_slide': true})
                 .setInitialHeight($this_gallery);
         })
         .on('cycle-before', settings.autoSelector, function (event, optionHash, outgoingSlideEl, incomingSlideEl, forwardFlag) {
             var $this_gallery = $(this),
                 $this_numbering = $this_gallery.parent().find(settings.numbering), // settings.numbering is the css class used for our numbering. Find it in our gallerie's container
-                next_slide_index = optionHash.nextSlide;
+                $this_caption = $this_gallery.parent().find(settings.caption);
 
             utilities
                 .updateGalleryHeight($this_gallery, incomingSlideEl)
-                .updateNumberingString($this_gallery, $this_numbering, next_slide_index);
+                .updateCaption($this_gallery, $this_caption, optionHash)
+                .updateNumberingString($this_gallery, $this_numbering, optionHash);
         });
     /*jslint unparam: false*/
 

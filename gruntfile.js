@@ -30,6 +30,8 @@ module.exports = function (grunt) {
                         'static/js/libs/functional/jquery.cycle2.center.js',
                         'static/js/libs/functional/jquery.cycle2.swiper.js',
                         'static/js/libs/functional/jquery.cycle2.video.js',
+                        // Cycle 2 Overwrites
+                        'static/js/app/jquery.cycl2.overwrites.js',
                         // JSJ Gallery Slideshow Files
                         'static/js/app/functions.js',
                         'static/js/app/main.js',
@@ -77,7 +79,7 @@ module.exports = function (grunt) {
                 tasks: ['compass'],
             },
             js: {
-                files: ['./static/js/app/*.js', './themes/**/jsj-*.js'],
+                files: ['./static/js/**/*.js', './themes/**/jsj-*.js'],
                 tasks: ['uglify'],
             }
         },
