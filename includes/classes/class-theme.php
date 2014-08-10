@@ -38,7 +38,7 @@
 			),
 			'caption-template' => array(
 				'name'          => 'caption-template', 
-				'value'         => '{{slideNum}} / {{slideCount}}',
+				'value'         => '{{caption}}',
 				'cycle_default' => '{{slideNum}} / {{slideCount}}',
 				'data_type'     => 'string',
 			),
@@ -59,8 +59,14 @@
 				'name'          => 'numbering', 
 				'value'         => '.jsj-gs-numbering',
 				'css_class'     => 'jsj-gs-numbering',
-				'cycle_default' => '> .cycle-numbering',
+				'cycle_default' => '', // Not part of Cycle 2
 				'data_type'     => 'jquery-selector',
+			),
+			'numberingTemplate' => array(
+				'name'          => 'numberingTemplate', 
+				'value'         => '({{slideNum}} {{ofString}} {{slideCount}})',
+				'cycle_default' => '', // Not part of Cycle 2
+				'data_type'     => 'string',
 			),
 			'pager' => array(
 				'name'          => 'pager', 

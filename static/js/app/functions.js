@@ -4,7 +4,7 @@
 (function ($) {
     'use strict';
 
-    window.JSJ_Gallery_SlideShow_Utilities = function (settings) {
+    window.JSJGallerySlideShowUtilities = function (settings) {
 
         var self = {}, __self = {};
 
@@ -27,18 +27,23 @@
             return self;
         };
 
-        self.updatePaginationString = function ($numbering_el, new_slide_number) {
-            var string;
+        self.updateNumberingString = function ($el, $numbering_el, new_slide_number) {
+            var html,
+                $container = $el.parent();
 
-            __self.of_string = __self.of_string || $numbering_el.data("numbering-translation-of");
-            __self.total     = __self.total     || Number($numbering_el.data('total'));
+            __self.of_string = __self.of_string || $container.data("numbering-translation-of");
+            __self.total     = __self.total     || Number($container.data('total'));
 
-            if (new_slide_number !== undefined && new_slide_number > 0) {
-                string = "(" + (new_slide_number + 1) + " " + __self.of_string + " " + __self.total + ")"; // (1 of 6)
-            } else {
-                string = "(" + 1 + " " + __self.of_string + " " + __self.total + ")"; // (1 of 6)
+            if (new_slide_number === undefined || new_slide_number <= 0) {
+                new_slide_number = 0;
             }
-            $numbering_el.html(string);
+
+            html = __self.tmpl(__self.settings.numberingTemplate, {
+                'slideNum' : new_slide_number + 1,
+                'ofString' : __self.of_string,
+                'slideCount' : __self.total,
+            });
+            $numbering_el.html(html);
 
             return self;
         };

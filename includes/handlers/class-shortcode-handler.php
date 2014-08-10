@@ -2,19 +2,37 @@
 
 	class JSJGallerySlideshowShortcodeHandler {
 
-		public function __construct($name_space, &$settings, &$theme) {
+		public function __construct($name_space, &$settings, &$theme, $scripts) {
 			$this->name_space = $name_space;
 			$this->settings   = $settings;
 			$this->theme      = $theme;
+			$this->scripts    = $scripts;
+			$this->all_images = array();
 		}
 
 		/**
 		 * Update our theme variable
 		 *
 		 * I'm only adding this because passing by reference wasn't working for me
+		 *
+		 * @return void
 		 */
 		public function updateTheme($theme) {
 			$this->theme = $theme;
+		}
+
+		/**
+		 * Add an array of all used images with their respective alt text, caption, descrption... etc
+		 *
+		 * @return void
+		 */
+		public function enqueueImagesArray () {
+			// Localize Settings
+			wp_localize_script( 
+				$this->scripts['main'],
+				'jsj_gallery_slideshow_images', 
+				$this->all_images
+			);
 		}
 
 		/**
@@ -24,7 +42,7 @@
 		 * 
 		 * @return string
 		 */
-		public function gallery_shortcode($attr){
+		public function galleryShortcode($attr){
 
 			// Copy pasted from the WordPress core source
 			global $post, $wp_locale;
@@ -144,12 +162,12 @@
 				'next_text'               => __( 'Next Image', 'jsj-gallery-slideshow' ),
 				'number_translation' => __( 'of', '1 of 10','jsj-gallery-slideshow' ),
 				
-				
 				// Slideshow Specific Variables		
 				'images'             => $this->getImages($attachments, $size, $instance),
 			);
+
 			// Render Template
-			$output   = $this->renderTemplate($this->theme['template_file_location'], $template_variables);
+			$output = $this->renderTemplate($this->theme['template_file_location'], $template_variables);
 
 			return $output;
 		}
@@ -161,20 +179,14 @@
 		 * @return <string> - HTML with images
 		 */
 		public function getImages($attachments, $size, $instance) {
-			// Set our {{ images }} tag
-			$i = 0;
+			require_once( plugin_dir_path( dirname(__FILE__) ) . '/classes/class-image.php');
+
 			$images_html = "";
 			foreach ( $attachments as $id => $attachment ) {
-				$i++;
-				  // This comes from line 770 of wp-includes/media.php
-				$image_src = wp_get_attachment_image_src( $id, $size );
-				$attributes = array(
-					'data-galleryid' => $instance,
-					'data-link'      => $image_src[0],
-					'data-width'     => $image_src[1],
-					'data-height'    => $image_src[2],
-					);
-				$images_html .= wp_get_attachment_image( $id, $size, false, $attributes);
+				if (!array_key_exists($id, $this->all_images)) {
+					$this->all_images[$id] = new JSJGallerySlideshowImage($id);
+				}
+				$images_html .= $this->all_images[$id]->getHTML($size);
 			}
 			return $images_html;
 		}

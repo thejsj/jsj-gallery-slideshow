@@ -10,14 +10,14 @@
 	
 	// Require the default theme class, in order to extend it
 	if (!class_exists('JSJGallerySlideshowTheme')) {
-		require( plugin_dir_path( dirname(dirname(__FILE__)) ) . '/lib/jsj-gallery-slideshow-theme.php');
+		require_once( plugin_dir_path( dirname(dirname(__FILE__)) ) . '/includes/classes/class-theme.php');
 	}
 
 	// Extend the default Theme Class
 	class JSJGallerySlideshowDefaultTheme extends JSJGallerySlideshowTheme {
 
-		public $name = 'Default'; // Change the name of your theme that will appear in the admin
-		public $slug = 'jsj-gallery-slideshow-default';
+		public $name = 'Classic'; // Change the name of your theme that will appear in the admin
+		public $slug = 'jsj-gallery-slideshow-classic';
 
 		public function __construct(){
 			 // Get this file's directory

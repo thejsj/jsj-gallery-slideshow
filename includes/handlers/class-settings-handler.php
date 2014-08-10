@@ -4,9 +4,6 @@
 
 		public function __construct($name_space) {
 			$this->name_space = $name_space;
-
-			// Call register settings function
-			add_action( 'admin_init', array($this, 'admin_init') );
 		}
 
 		/**
@@ -14,9 +11,9 @@
 		 */
 		public function initSettings() {
 			
-			require( plugin_dir_path( __FILE__ ) . 'settings/jsj-gallery-slideshow-settings-themes.php');
-			require( plugin_dir_path( __FILE__ ) . 'settings/jsj-gallery-slideshow-settings-cycle.php');
-			require( plugin_dir_path( __FILE__ ) . 'settings/jsj-gallery-slideshow-settings-other.php');
+			require_once( plugin_dir_path( dirname(__FILE__) ) . 'settings/settings-themes.php');
+			require_once( plugin_dir_path( dirname(__FILE__) ) . 'settings/settings-cycle.php');
+			require_once( plugin_dir_path( dirname(__FILE__) ) . 'settings/settings-other.php');
 
 			$this->themes = $jsj_gallery_slideshow_options_themes;
 			$this->cycle  = $jsj_gallery_slideshow_options_cycle;
@@ -62,7 +59,7 @@
 		 *
 		 * @return void
 		 */
-		public function admin_init() {
+		public function admintInit() {
 			foreach($this as $group_key => $setttings_group){
 				if (is_array($setttings_group)){
 					foreach($setttings_group as $setting){

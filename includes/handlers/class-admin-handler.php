@@ -7,9 +7,6 @@
 			$this->settings   = $settings;
 			$this->title      = $title;
 			$this->all_themes = $all_themes;
-
-			// Hook for adding admin menus
-			add_action('admin_menu',  array($this, 'add_options_menu'));
 		}
 
 		/**
@@ -18,8 +15,8 @@
 		 *
 		 * @return void
 		 */
-		public function add_options_menu(){
-			add_options_page(__( 'JSJ Gallery Slideshow Options', 'jsj-gallery-slideshow' ), 'JSJ Gallery Slideshow', 'manage_options', 'jsj-gallery-slideshow', array($this, 'options_page'));
+		public function addOptionsMenu(){
+			add_options_page(__( 'JSJ Gallery Slideshow Options', 'jsj-gallery-slideshow' ), 'JSJ Gallery Slideshow', 'manage_options', 'jsj-gallery-slideshow', array($this, 'optionsPage'));
 		}
 
 		/**
@@ -36,7 +33,7 @@
 		 *
 		 * @return void
 		 */
-		public function options_page(){
+		public function optionsPage(){
 
 			if($_GET && isset($_GET['tab'])){
 				$options_tab = $_GET['tab'];
@@ -194,7 +191,7 @@
 		 *
 		 * @return string
 		 */
-		private function get_admin_color($key = 3){
+		private function getAdminColor($key = 3){
 			if(!isset($this->colors)){
 				global $_wp_admin_css_colors;
 				$current_color = get_user_option( 'admin_color' );

@@ -8,7 +8,7 @@
 
         console.log('RUN createJSJGallerySlideshow');
 
-        var settings = window.jsjGallerySlideshowOptions.settings,
+        var settings = window.jsj_gallery_slideshow_options.settings,
             slideshow_initialized = false,
             self = {},
             __self = {};
@@ -26,7 +26,7 @@
             $.fn.cycle.defaults = self.settings = $.extend($.fn.cycle.defaults, settings);
 
             // Initialize Utilities
-            self.utilities = new window.JSJ_Gallery_SlideShow_Utilities(self.settings);
+            self.utilities = new window.JSJGallerySlideShowUtilities(self.settings);
 
             // Re-init all slideshows on init
             $(window)
@@ -64,7 +64,7 @@
                 slideshow_initialized = true;
             } else {
                 __self.log('Re-Initializing Slideshow. jQuery elements were not required. Slideshows destroyed and re-initiated');
-                if (window.jsjGallerySlideshowOptions.scripts_enqueued) {
+                if (window.jsj_gallery_slideshow_options.scripts_enqueued) {
                     self.get$el().cycle('reinit'); // Append Settings to Cycle Object
                 } else {
                     __self.log('scripts_enqueued is set in settings. Not initializing slideshows.');

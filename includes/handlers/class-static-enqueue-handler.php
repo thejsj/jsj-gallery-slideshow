@@ -2,16 +2,11 @@
 
 	class JSJGallerySlideshowStaticEnqueue {
 
-		public function __construct ($name_space, &$settings, &$theme) {
+		public function __construct ($name_space, &$settings, &$theme, $scripts) {
 			$this->name_space = $name_space;
 			$this->settings   = $settings;
 			$this->theme      = $theme;
-
-			// Add JS scripts
-			add_action( 'wp_enqueue_scripts', array($this, 'enqueue_client_scripts') );
-
-			// Admin: Enqueue CSS
-			add_action( 'admin_enqueue_scripts', array($this, 'enqueue_admin_scripts') );
+			$this->scripts    = $scripts;
 		}
 
 		/**
@@ -28,7 +23,7 @@
 		 *
 		 * @return void
 		 */
-		public function enqueue_client_scripts(){
+		public function enqueueClientScripts(){
 			global $post;
 
 			if( $this->settings->other['checkForShortCode']['value'] == 'false' || $this->settings->other['checkForShortCode']['value'] == 'true' && has_shortcode( $post->post_content, 'gallery' ) ) {
@@ -47,15 +42,15 @@
 				// Settings to be localized
 				$settings = array(
 					'settings'         => $jsj_gallery_slideshow_options_for_javascript,
-					'scripts_enqueued' => $this->scripts_enqueued,
+					'scripts_enqueued' => $this->scripts_enqueued
 				);
 
 				if(!wp_script_is('jquery')){
 					wp_enqueue_script( 'jquery' );
 				}
 				wp_enqueue_script(
-					'jsjGallerySlideshowScripts-jQueryCycle',
-					plugins_url( 'static/js/jsj-gallery-slideshow.min.js' , dirname(__FILE__) ),
+					$this->scripts['main'],
+					plugins_url( 'static/js/jsj-gallery-slideshow.min.js' , dirname(dirname(__FILE__)) ),
 					array( 'jquery' ), // Deps
 					"", // Version
 					true // Footer
@@ -63,8 +58,8 @@
 
 				// Localize Settings
 				wp_localize_script( 
-					'jsjGallerySlideshowScripts-jQueryCycle', 
-					'jsjGallerySlideshowOptions', 
+					$this->scripts['main'],
+					'jsj_gallery_slideshow_options', 
 					$settings
 				);
 
@@ -72,16 +67,16 @@
 
 				if($this->theme['css_url']){
 					wp_enqueue_style(
-						"jsj-gallery-slideshow-theme-style", 
+						$this->theme['slug'], 
 						$this->theme['css_url']
 					);
 				}
 
 				if($this->theme['js_url']){
 					wp_enqueue_script(
-						'jsjGallerySlideshowScripts-theme-script',
+						$this->theme['slug'], 
 						$this->theme['js_url'],
-						array( 'jquery', 'jsjGallerySlideshowScripts-jQueryCycle' ), // Deps
+						array( 'jquery', $this->scripts['main'] ), // Deps
 						"", // Version
 						true // Footer
 					);
@@ -97,11 +92,11 @@
 		 *
 		 * @return void
 		 */
-		public function enqueue_admin_scripts(){
+		public function enqueueAdminScripts(){
 			// Add CSS
 			wp_enqueue_style(
 				"jsj-gallery-slideshow-admin-style", 
-				plugins_url( 'static/css/jsj-gallery-slideshow-admin-style.css' , dirname(__FILE__) )
+				plugins_url( 'static/css/jsj-gallery-slideshow-admin-style.css' , dirname(dirname(__FILE__)) )
 			);
 		}
 
