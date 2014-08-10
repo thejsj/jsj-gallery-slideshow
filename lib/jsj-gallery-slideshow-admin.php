@@ -60,9 +60,15 @@
 				<!-- Display All Tabs -->
 				<div id="nav" class="tab-nav">
 					<h2 class="themes-php">
-						<a class="nav-tab" href="?page=<?php echo $this->name_space; ?>&amp;tab=themes"><?php _e('Themes', 'jsj-gallery-slideshow' ); ?></a>
-						<a class="nav-tab" href="?page=<?php echo $this->name_space; ?>&amp;tab=simple"><?php _e('Simple', 'jsj-gallery-slideshow' ); ?></a>
-						<a class="nav-tab" href="?page=<?php echo $this->name_space; ?>&amp;tab=advanced"><?php _e('Advanced', 'jsj-gallery-slideshow' ); ?></a>
+						<a class="nav-tab <?php if($options_tab == 'themes'){ echo 'nav-tab-active'; } ?>" href="?page=<?php echo $this->name_space; ?>&amp;tab=themes ">
+							<?php _e('Themes', 'jsj-gallery-slideshow' ); ?>
+						</a>
+						<a class="nav-tab <?php if($options_tab == 'simple'){ echo 'nav-tab-active'; } ?>" href="?page=<?php echo $this->name_space; ?>&amp;tab=simple">
+							<?php _e('Simple', 'jsj-gallery-slideshow' ); ?>
+						</a>
+						<a class="nav-tab <?php if($options_tab == 'advanced'){ echo 'nav-tab-active'; } ?>" href="?page=<?php echo $this->name_space; ?>&amp;tab=advanced">
+							<?php _e('Advanced', 'jsj-gallery-slideshow' ); ?>
+						</a>
 					</h2>
 				</div>
 

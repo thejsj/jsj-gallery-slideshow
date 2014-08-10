@@ -6,6 +6,23 @@
 	transition: none !important;
 }
 
+// Media Queries
+@mixin mediaQuery($width: 0, $height: false) {
+    @if $height and $width {
+        @media ( min-width: + $width ) and ( min-height: + $height ) {
+            @content;
+        }
+    } @else if $width {
+        @media ( min-width: + $width ) {
+            @content;
+        }
+    } @else if $height {
+        @media ( min-height: + $height ) {
+            @content;
+        }
+    }
+}
+
 .jsj-gallery-slideshow-gallery-container {
 
 	// Navigation
@@ -54,15 +71,19 @@
 	// Pager
 
 	.jsj-gs-pager {
-		width: 600px;
+		
+		max-width: 600px;
+
 		li {
 			padding: 0px;
 			float: left;
 			list-style: none;
 			margin: -3px 7px 7px -3px;
 			display: inline-block;
-			height: 75px; 
-			width: 75px; 
+			
+			height: 50px; 
+			width: 50px; 
+
 			cursor: pointer;
 
 			background-clip: content-box;
@@ -70,6 +91,11 @@
 			background-repeat: no-repeat; 
 			background-position: center center; 
 			border: solid 1px #ccc;
+
+			@include mediaQuery(600px) {
+				height: 75px; 
+				width: 75px; 
+			}
 
 			&.activeSlide_gallery_cycle {
 				border: solid 1px #000;

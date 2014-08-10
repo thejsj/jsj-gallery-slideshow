@@ -12,7 +12,12 @@
         __self.tmpl = $.fn.cycle.API.tmpl;
 
         self.addImagePagination = function ($el, $pager) {
-            var all_images = $.map($el.find('img'), function (el) { console.log(el); return el.src; });
+
+            var all_images = $.map($el.find('img'), function (el) {
+                if (el.className.indexOf('sentinel') === -1) {
+                    return el.src;
+                }
+            });
 
             $pager.find('.slideshow-thumbnail').each(function (i) {
                 $(this)

@@ -683,6 +683,7 @@ $.fn.cycle.defaults = {
 
 // automatically find and run slideshows
 $(document).ready(function() {
+    console.log("automatically find and run slideshows");
     $( $.fn.cycle.defaults.autoSelector ).cycle();
 });
 
