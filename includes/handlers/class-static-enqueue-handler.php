@@ -57,9 +57,21 @@
 					'scripts_enqueued' => $this->scripts_enqueued
 				);
 
+				//  Enqueue Modernizr, if not there
+				if(!wp_script_is('modernizr')){
+					wp_enqueue_script(
+						'modernizr',
+						'//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js',
+						array( ), // Deps
+						"2.8.2" // Version
+					);
+				}	
+
+				// Enqueue jQuery if not there
 				if(!wp_script_is('jquery')){
 					wp_enqueue_script( 'jquery' );
 				}
+
 				wp_enqueue_script(
 					$this->scripts['main'],
 					plugins_url( 'static/js/jsj-gallery-slideshow.min.js' , dirname(dirname(__FILE__)) ),
@@ -136,6 +148,19 @@
 					);
 				}
 			}
+
+			// Enqueue Theme Options
+			$enqueued_themes_cycle_options = array();
+
+			foreach($this->all_enqueued_themes as $theme) {
+				$enqueued_themes_cycle_options[$theme['slug']] = $theme['cycle_options'];
+			}
+
+			wp_localize_script( 
+				$this->scripts['main'],
+				'jsj_gallery_slideshow_theme_options', 
+				$enqueued_themes_cycle_options
+			);
 		}
 
 	}

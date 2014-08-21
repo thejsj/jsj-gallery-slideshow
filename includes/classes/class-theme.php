@@ -21,7 +21,7 @@
 		 * These will be passed on to our template and to our Cycle2 slideshow
 		 */
 
-		public $cycle_options = array(
+		private $cycle_options = array(
 			'autoSelector' => array(
 				'name'          => 'autoSelector', 
 				'value'         => '.jsj-gs-gallery',
@@ -77,7 +77,7 @@
 			),
 			'pagerTemplate' => array(
 				'name'          => 'pager-template', 
-				'value'         => "<li class='slideshow-thumbnail'></li>",
+				'value'         => "<li class='slideshow-thumbnail'><span></span></li>",
 				'cycle_default' => '<span>&bull;</span>',
 				'data_type'     => 'string',
 			),
