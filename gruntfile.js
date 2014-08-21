@@ -2,6 +2,8 @@ module.exports = function (grunt) {
 
     'use strict';
 
+    var plugin_name = 'jsj-gallery-slideshow';
+
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -31,7 +33,7 @@ module.exports = function (grunt) {
                         'static/js/libs/functional/jquery.cycle2.swiper.js',
                         'static/js/libs/functional/jquery.cycle2.video.js',
                         // Cycle 2 Overwrites
-                        'static/js/app/jquery.cycl2.overwrites.js',
+                        'static/js/app/jquery.cycle2.overwrites.js',
                         // JSJ Gallery Slideshow Files
                         'static/js/app/functions.js',
                         'static/js/app/main.js',
@@ -40,15 +42,15 @@ module.exports = function (grunt) {
             },
             default_theme: {
                 files: {
-                    'themes/default/js/main.js' : [
-                        'themes/default/js/jsj-gallery-slideshow-default.js'
+                    'themes/default/js/main.min.js' : [
+                        'themes/default/js/main.js'
                     ]
                 }
             },
             default_captions_theme: {
                 files: {
-                    'themes/default-captions/js/main.js' : [
-                        'themes/default-captions/js/jsj-gallery-slideshow-default-caption.js'
+                    'themes/default-captions/js/main.min.js' : [
+                        'themes/default-captions/js/main.js'
                     ]
                 }
             }
@@ -90,7 +92,7 @@ module.exports = function (grunt) {
                 },
                 command: [
                     'php ~/Sites/scripts/makepot/makepot.php wp-plugin .',
-                    'mv jsj-gallery-slideshow.pot ./languages/jsj-gallery-slideshow.pot'
+                    'mv ' + plugin_name + ' .pot ./languages/' + plugin_name + '.pot'
                 ].join('&&')
             },
         },
@@ -104,7 +106,7 @@ module.exports = function (grunt) {
         checkwpversion: {
             options: {
                 readme: 'readme.txt',
-                plugin: 'jsj-gallery-slideshow.php',
+                plugin: plugin_name + '.php',
             },
             check: { //Check plug-in version and stable tag match
                 version1: 'plugin',

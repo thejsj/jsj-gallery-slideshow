@@ -39,9 +39,10 @@ class JSJGallerySlideshow {
 
 		/* * * Bind Plugin to WordPress Hooks * * */
 
-		$this->all_themes = array();
-		$this->theme      = false;
-		$this->scripts    = array(
+		$this->all_themes          = array();
+		$this->all_enqueued_themes = array();
+		$this->theme               = false;
+		$this->scripts             = array(
 			'main'  => $this->name_space + '-main',
 		);
 
@@ -67,6 +68,7 @@ class JSJGallerySlideshow {
 			$this->name_space, 
 			$this->settings,
 			$this->theme,
+			$this->all_themes,
 			$this->scripts
 		);
 
@@ -86,7 +88,9 @@ class JSJGallerySlideshow {
 		add_action( 'admin_enqueue_scripts', array($this->static_enqueue, 'enqueueAdminScripts') );
 
 		// Add an array of all used images
-		add_action( 'wp_footer', array($this->shortcode_handler, 'enqueueImagesArray') );
+		add_action( 'wp_footer', array($this, 'getAllEnqueuedThemes'), 5 );
+		add_action( 'wp_footer', array($this->static_enqueue, 'enqueueAllExtraThemes'), 5);
+		add_action( 'wp_footer', array($this->shortcode_handler, 'enqueueImagesArray'));
 
 		// Add our shortcode
 		remove_shortcode('gallery');
@@ -132,9 +136,21 @@ class JSJGallerySlideshow {
 
 		// Update our $all_themes in Admin
 		$this->settings->appendThemeSettings($this->theme);
-		$this->admin->updateThemes($this->all_themes);
+
+		$this->admin->updateAllThemes($this->all_themes);
+		$this->shortcode_handler->updateAllThemes($this->all_themes);
+
 		$this->static_enqueue->updateTheme($this->theme);
 		$this->shortcode_handler->updateTheme($this->theme);
+	}
+
+	/** 
+	 * Query our shortcode_handler for all used themes. Pass them on to the our static_enqueue handler
+	 * 
+	 * @return void
+	 */
+	public function getAllEnqueuedThemes () {
+		$this->static_enqueue->updateAllEnqueuedThemes($this->shortcode_handler->all_enqueued_themes);
 	}
 
 } ?>
