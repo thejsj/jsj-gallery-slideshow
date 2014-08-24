@@ -140,7 +140,9 @@
 			/**
 			 * See if a theme is defined, if so, check if exists and make it our current theme
 			 */
-			if($attr['theme'] 
+			if(is_array($attr)
+				&& array_key_exists('theme', $attr)
+				&& $attr['theme'] 
 				&& $this->getTheme($attr['theme'])
 				&& $this->getTheme($attr['theme'])['slug'] !== $this->theme['slug']) {
 				$theme = $this->getTheme($attr['theme']);
