@@ -151,6 +151,27 @@ module.exports = function (grunt) {
                 },
             }
         },
+        compress: {
+            main: {
+                options: {
+                    archive: './build/' + plugin_name + '.zip'
+                },
+                files: [
+                    {src: ['build/' + plugin_name + '/**'] }, // includes files in path and its subdirs
+                ]
+            }
+        },
+        'sftp-deploy': {
+            deploy: {
+                auth: {
+                    host: '107.170.18.175',
+                    port: 22,
+                    authKey: 'do'
+                },
+                src: './build',
+                dest: '/var/www/thejsj.com/public_html/2014/jsj-plugins-repo/',
+            }
+        }
     });
 
     // Load the plugin that provides the "uglify" task.
@@ -161,6 +182,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
+    grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-sftp-deploy');
+
     grunt.loadNpmTasks('grunt-checkwpversion');
     grunt.loadNpmTasks('grunt-wp-readme-to-markdown');
     grunt.loadNpmTasks('grunt-wp-deploy');
@@ -169,7 +193,8 @@ module.exports = function (grunt) {
     // Default task(s).
     grunt.registerTask('default', ['uglify', 'compass']);
     grunt.registerTask('build', ['compass', 'uglify', 'checkwpversion', 'shell:generatePot', 'wp_readme_to_markdown', 'clean', 'copy']);
-    grunt.registerTask('deploy', [ 'wp_readme_to_markdown', 'clean', 'copy', 'wp_deploy' ]);
+    grunt.registerTask('deploy', [ 'wp_readme_to_markdown', 'clean', 'copy', 'wp_deploy', 'compress', 'sftp-deploy' ]);
+    grunt.registerTask('wp_deploy', [ 'wp_readme_to_markdown', 'clean', 'copy', 'compress', 'sftp-deploy', 'wp_deploy' ]);
 
 
 };
