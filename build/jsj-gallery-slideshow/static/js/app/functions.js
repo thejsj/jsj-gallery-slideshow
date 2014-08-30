@@ -71,33 +71,23 @@
         };
 
         self.setInitialHeight = function ($el) {
-            // Set Height
-            // Plan A: Get it directly...
-            setTimeout(function () {
-                var el = $el.get(0),
-                    images = $el.find('img'),
-                    height = el.children[0].height,
-                    loader_image;
-
-                if (height > 1) {
+            var animateElementHeight = function (height) {
                     $el.clearQueue().animate({
                         height: height
                     }, 200);
-                } else {
-                    // Plan B: Try Another way...
-                    loader_image = new Image();
-                    loader_image.name = images.get(0).src;
-                    loader_image.src = images.get(0).src;
-                    loader_image.onload = function () {
-                        var image_height = this.height;
-                        if (image_height > 0) {
-                            $el.clearQueue().animate({
-                                height: image_height
-                            }, 200);
-                        }
-                    };
-                }
-            }, 1);
+                },
+                numberOfTimesPolled = 0,
+                pollHeight = function () {
+                    var el = $el.get(0),
+                        height = el.children[0].height;
+
+                    if (height && height > 1) {
+                        animateElementHeight(height);
+                    } else if (numberOfTimesPolled  < 10) {
+                        setTimeout(pollHeight, numberOfTimesPolled * 50);
+                    }
+                };
+            setTimeout(pollHeight, 1);
             return self;
         };
         return self;

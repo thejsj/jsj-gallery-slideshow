@@ -32,3 +32,6 @@ Thumbs.db
 .ftppass
 
 **.zip
+
+# Ignore Build
+build
