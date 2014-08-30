@@ -321,6 +321,7 @@ $jsj_gallery_slideshow_options_cycle = array(
 		'convert_to_boolean' => true,
 		'tab' => 'simple',
 		'default' => true,
+		'cycle_default' => false,
 		'data_type' => 'boolean',
 	),
 	'swipe-fx' => array(
