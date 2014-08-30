@@ -4,12 +4,23 @@
 (function ($) {
     'use strict';
 
-    window.createJSJGallerySlideshow = (function () {
+    window.createJSJGallerySlideshow = (function (theme_selector, theme_settings) {
 
         var settings = window.jsj_gallery_slideshow_options.settings,
             slideshow_initialized = false,
             self = {},
             __self = {};
+
+        if (theme_selector !== undefined && theme_settings !== undefined) {
+            // Make sure we only select 
+            __self.selector = settings.autoSelector + '.' + theme_selector;
+            __self.theme_instance = true;
+            // Overwrite local settings with theme settings
+            settings = $.extend(settings, theme_settings);
+        } else {
+            __self.selector = settings.autoSelector;
+            __self.theme_instance = false;
+        }
 
         /**
          * Our private init function, that runs when when this object is being initialized
@@ -20,11 +31,15 @@
             // Set document_ready as false
             __self.document_ready = false;
 
-            // Re-write defaults
-            $.fn.cycle.defaults = self.settings = $.extend($.fn.cycle.defaults, settings);
+            // Set our settings
+            self.settings = $.extend($.fn.cycle.defaults, settings);
 
-            // Turn off default captions (You can overwrite this in your theme if you want)
-            $.fn.cycle.defaults.captionModule = false;
+            if (!__self.theme_instance) {
+                // Re-write defaults
+                $.fn.cycle.defaults = self.settings;
+                // Turn off default captions (You can overwrite this in your theme if you want)
+                $.fn.cycle.defaults.captionModule = false;
+            }
 
             // Initialize Utilities
             self.utilities = new window.JSJGallerySlideShowUtilities(self.settings);
@@ -59,7 +74,7 @@
         __self.documentReadyHandler = function () {
             __self.document_ready = true;
             // Query all galleries
-            __self.$el = self.$el = $(self.settings.autoSelector);
+            __self.$el = self.$el = $(__self.selector);
             self.init();
         };
 
@@ -91,7 +106,7 @@
             if (__self.document_ready) {
                 return __self.$el;
             }
-            return $(self.settings.autoSelector);
+            return $(__self.selector);
         };
 
         /**

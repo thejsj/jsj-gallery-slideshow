@@ -156,9 +156,9 @@ module.exports = function (grunt) {
                 options: {
                     archive: './build/' + plugin_name + '.zip'
                 },
-                files: [
-                    {src: ['build/' + plugin_name + '/**'] }, // includes files in path and its subdirs
-                ]
+                cwd: './build/' + plugin_name,
+                src: ['**/*'],
+                // dest: './build/'
             }
         },
         'sftp-deploy': {
