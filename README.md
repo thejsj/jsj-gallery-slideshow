@@ -4,23 +4,30 @@
 **Tags:** slideshow, gallery, simple, jquery, easing, animation, cargo, cycle, jsj  
 **Requires at least:** 3.3  
 **Tested up to:** 3.9  
-**Stable tag:** 1.2.9  
+**Stable tag:** 2.0.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
-JSJ Gallery Slideshow immediately improves all your WordPress galleries, with a simple, elegant and easy-to-use slideshow. 
+JSJ Gallery Slideshow immediately improves all your WordPress galleries, with simple, elegant and easy-to-use slideshows. 
 
 ## Description ##
 
-JSJ Gallery Slideshow immediately improves all your WordPress galleries, with a simple, elegant and easy-to-use slideshow. It does this completely automatically (really, it’s that simple!). You only have to install the plugin and all your slideshows will be automatically converted to something like [this](http://thejsj.com/#/uncategorized/jsj-%C2%B7-gallery-slideshow-example/).
+JSJ Gallery Slideshow immediately improves all your WordPress galleries, with simple, elegant and easy-to-use slideshows. It does this completely automatically (really, it’s that simple!). You only have to install the plugin and all your slideshows will be automatically converted to something like [this](http://thejsj.com/#/uncategorized/jsj-%C2%B7-gallery-slideshow-example/).
+
+### Themes ###
+
+Since version 2.0.0., you can now change between different themes, including 'Classic', 'Classic with Captions' and [premium themes](http://plugins.thejsj.com/all-themes/) (More to come soon!). Themes make JSJ Gallery Slideshow the perfect plugin for total beginners (plug-and-play and no configuration), as well as for advanced Front-End developers who want to create their own pixel-perfect themes (Hooks for registering plugins!).
+
+### Options ###
 
 You can change the way the slideshow is displayed through changing settings such as speed, transition effect and timeout between transition. 
 
-The plugin is based on the excellent [Jquery Cycle](http://jquery.malsup.com/cycle/options.html), one of the best jQuery slideshow plugins out there. The plugin options are also based in the [Jquery Cycle Options](http://jquery.malsup.com/cycle/options.html).
+The plugin is based on the excellent [Jquery Cycle 2](http://jquery.malsup.com/cycle2/), one of the best jQuery slideshow plugins out there.
+
 
 Plugin by [Jorge Silva-Jetter](http://thejsj.com)
 
-Build with [Jquery Cycle](http://jquery.malsup.com/cycle/)
+Build with [jQuery Cycle 2](http://jquery.malsup.com/cycle2/)
 
 Inspired by [Cargo](http://cargocollective.com/) 
 
@@ -30,33 +37,42 @@ Inspired by [Cargo](http://cargocollective.com/)
 
 1. Upload the entire jsj-gallery-slideshow folder to the /wp-content/plugins/ directory or simply use the Plugin upload interface in the admin.
 2. Activate the plugin through the ‘Plugins’ menu in WordPress. At that moment, all your slideshows will be automatically converted into JSJ Gallery Slideshows.
-3. Optional. If you want to change any of the options for the plugin, go to Settings -> JSJ Gallery Slideshow.
+3. Optional. If you want to change any of the options for the plugin or change the default theme, go to Settings -> JSJ Gallery Slideshow.
 
 ## Frequently asked questions ##
 
 If you have any questions, please try to add a ticket in the WordPress support forum for this plugin (http://wordpress.org/support/plugin/jsj-gallery-slideshow). 
 
-If you have any feedback or suggestions, email me at jorge dot silva at thejsj dot com.
+If you have bought any premium plugins related to JSJ Gallery Slideshow, email support@thejsj.com.
 
 ## Screenshots ##
 
 ### 1. Example <http://thejsj.com/uncategorized/jsj-gallery-slideshow-example/> ###
 ![Example <http://thejsj.com/uncategorized/jsj-gallery-slideshow-example/>](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-1.png)
 
-### 2. Example <http://thejsj.com/pieces/anything-worth-saying-exhibition/> ###
-![Example <http://thejsj.com/pieces/anything-worth-saying-exhibition/>](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-2.png)
+### 2. Example using the 'Classic' theme ###
+![Example using the 'Classic' theme](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-2.png)
 
-### 3. Example <http://thejsj.com/pieces/n-possible-routes/> ###
-![Example <http://thejsj.com/pieces/n-possible-routes/>](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-3.png)
+### 3. Responsive design and swiping support for mobile devices ###
+![Responsive design and swiping support for mobile devices](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-3.png)
 
-### 4. Example <http://thejsj.com/pieces/anything-worth-saying-interactive/> ###
-![Example <http://thejsj.com/pieces/anything-worth-saying-interactive/>](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-4.png)
+### 4. Example using the 'Classic with Caption' theme ###
+![Example using the 'Classic with Caption' theme](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-4.png)
 
-### 5. Options Page  ###
-![Options Page ](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-5.png)
+### 5. Example using the 'Classic' theme ###
+![Example using the 'Classic' theme](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-5.png)
 
-### 6. Options Page (Advanced Options) ###
-![Options Page (Advanced Options)](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-6.png)
+### 6. Slidshow usign the premium 'Moa' theme. <http://plugins.thejsj.com/themes/moa/> ###
+![Slidshow usign the premium 'Moa' theme. <http://plugins.thejsj.com/themes/moa/>](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-6.png)
+
+### 7. Theme Options Page (Admin) ###
+![Theme Options Page (Admin)](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-7.png)
+
+### 8. Simple Options Page (Admin) ###
+![Simple Options Page (Admin)](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-8.png)
+
+### 9. Advanced Options Page (Admin) ###
+![Advanced Options Page (Admin)](http://s.wordpress.org/extend/plugins/jsj-gallery-slideshow/screenshot-9.png)
 
 
 ## Changelog ##
@@ -108,6 +124,12 @@ Adding default image/thumbnail size as a gallery option. (Advanced Options)
 ### 1.2.9 ###
 Fixing small image/thumbnail related error.
 
+### 2.0.0 ###
+Added themes!
+**Added two new themes:** Classic and Classic with Caption.  
+Slideshows are now responsive thanks to Cycle 2.
+Added swipe capability for touch screens.
+
 ## Upgrade notice ##
 
 ### 1.0 ###
@@ -147,51 +169,22 @@ Adding default image/thumbnail size as a gallery option. (Advanced Options)
 ### 1.2.9 ###
 Fixing small image/thumbnail related error.
 
+### 2.0.0 ###
+Please make sure to test that the new version of this plugins is working. There are a lot of new options that might not be the same as the old ones.
+
+
 ## Online Examples ##
 
 You can see some online examples here:
 
+1. <http://plugins.thejsj.com/themes/classic/>
+
+1. <http://plugins.thejsj.com/themes/classic-with-caption/>
+
+1. <http://plugins.thejsj.com/themes/moa/>
+
+1. <http://plugins.thejsj.com/themes/volga/>
+
 1. <http://thejsj.com/#/uncategorized/jsj-gallery-slideshow-example/>
 
 1. <http://thejsj.com/#/pieces/anything-worth-saying-exhibition/>
-
-1. <http://thejsj.com/#/uncategorized/jsj-gallery-slideshow-example/>
-
-1. <http://thejsj.com/#/pieces/anything-worth-saying-exhibition/>
-
-1. <http://thejsj.com/#/pieces/n-possible-routes/>
-
-1. <http://thejsj.com/#/pieces/anything-worth-saying-interactive/>
-
-## Available Options ##
-
-Simple
-
-* Transition Effect : Select transition effect for slideshow
-* Speed : Speed of slide transition (in milliseconds)
-* Timeout : Milliseconds between slide transitions (0 to disable auto advance)
-* Pause On Hover : Pause slideshow when hovering over slide
-* Pause On Pager Hover : Pause slideshow when hovering over pager thumbnails
-
-Advanced
-
-* Fit Slides : Force slides to fit container
-* Slide Height : Container height (if the "Fit Slides" is enabled, slides will also be resized).
-* Slide Width Container width (if the "Fit Slides" is enabled, slides will also be resized)
-* Slide Resize : Force slide width/height to a fixed width/height before every transition
-* Container Resize : Resize container to fit largest slide
-* No Wrapping Prevent slideshow from wrapping
-* Auto Stop : End slideshow after X transitions (X == Auto Stop Count)
-* Auto Stop Count Number of transitions (See Auto Stop)
-* Starting Slide # : Zero-based index of the first slide to be displayed
-* Start Backwards Start slideshow at last slide and move backwards through the stack
-* Random Slides : Transition slides randomly (not applicable to shuffle fx)
-* Delay : Additional delay (in ms) for first transition (hint: can be negative)
-* Re-queue Timeout : Delay for re-queue (in milliseconds)
-* Re-queue OnImageNotLoaded : Re-queue the slideshow if any images have not been loaded
-* Manual Trump : Causes manual transition to stop an active transition, instead of being ignored
-* Reverse Animation : Causes animations to transition in reverse (for effects that support it such as scrollHorz/scrollVert/shuffle)
-* Synchronize Slides : In/out transitions should occur simultaneously
-* Active Pager Class : Class name used for the active pager element
-* Clear Type No Background : Disable extra cleartype fixing (leave false to force background color setting on slides)
-* Check For Shortcode Only load plugin if [gallery] shortcode is being used in content. Deactivate if using Ajax.

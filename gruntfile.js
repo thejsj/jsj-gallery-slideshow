@@ -30,7 +30,7 @@ module.exports = function (grunt) {
                         // Functional
                         'static/js/libs/functional/jquery.cycle2.caption2.js',
                         'static/js/libs/functional/jquery.cycle2.center.js',
-                        'static/js/libs/functional/jquery.cycle2.swiper.js',
+                        'static/js/libs/functional/jquery.cycle2.swipe.js',
                         'static/js/libs/functional/jquery.cycle2.video.js',
                         // Cycle 2 Overwrites
                         'static/js/app/jquery.cycle2.overwrites.js',
@@ -121,7 +121,7 @@ module.exports = function (grunt) {
         },
         clean: {
             //Clean up build folder
-            main: ['build/jsj-gallery-slideshow']
+            main: ['build/**/*']
         },
         copy: {
             // Copy the plugin to a versioned release directory
@@ -138,8 +138,20 @@ module.exports = function (grunt) {
                     '!*~',
                     '!README.md',
                     '!config.rb',
+                    '!screenshots',
+                    '!screenshots/**/*',
                 ],
                 dest: 'build/jsj-gallery-slideshow/',
+            },
+            screenshots: { // Copy screenshots into the main directory
+                src:  [
+                    '*',
+                ],
+                cwd: './screenshots/',
+                flatten: false,
+                expand: true,
+                dest: './build/jsj-gallery-slideshow/',
+                filter: 'isFile'
             }
         },
         wp_deploy: {
@@ -191,10 +203,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-shell');
 
     // Default task(s).
-    grunt.registerTask('default', ['uglify', 'compass']);
-    grunt.registerTask('build', ['compass', 'uglify', 'checkwpversion', 'shell:generatePot', 'wp_readme_to_markdown', 'clean', 'copy']);
-    grunt.registerTask('deploy', [ 'wp_readme_to_markdown', 'clean', 'copy', 'wp_deploy', 'compress', 'sftp-deploy' ]);
-    grunt.registerTask('wp_deploy', [ 'wp_readme_to_markdown', 'clean', 'copy', 'compress', 'sftp-deploy', 'wp_deploy' ]);
+    grunt.registerTask('default', ['compile']);
+    grunt.registerTask('compile', ['compass', 'uglify']);
+    grunt.registerTask('build', ['compile', 'checkwpversion', 'shell:generatePot', 'wp_readme_to_markdown', 'clean', 'copy', 'compress']);
+    grunt.registerTask('push', [ 'build', 'sftp-deploy']);
+    grunt.registerTask('deploy', [ 'build', 'push', 'wp_deploy' ]);
 
 
 };
