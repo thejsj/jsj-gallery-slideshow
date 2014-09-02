@@ -143,23 +143,14 @@ module.exports = function (grunt) {
                 ],
                 dest: 'build/jsj-gallery-slideshow/',
             },
-            screenshots: { // Copy screenshots into the main directory
-                src:  [
-                    '*',
-                ],
-                cwd: './screenshots/',
-                flatten: false,
-                expand: true,
-                dest: './build/jsj-gallery-slideshow/',
-                filter: 'isFile'
-            }
         },
         wp_deploy: {
             deploy: {
                 options: {
                     plugin_slug: 'jsj-gallery-slideshow',
                     svn_user: 'jorge.silva',
-                    build_dir: 'build/jsj-gallery-slideshow/' //relative path to your build directory
+                    build_dir: 'build/jsj-gallery-slideshow/', //relative path to your build directory
+                    assets_dir: 'screenshots/' //relative path to your build directory
                 },
             }
         },
