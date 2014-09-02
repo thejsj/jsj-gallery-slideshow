@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the JSJ Gallery Slideshow package.
 msgid ""
 msgstr ""
-"Project-Id-Version: JSJ Gallery Slideshow 2.0.0\n"
+"Project-Id-Version: JSJ Gallery Slideshow 2.0.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/jsj-gallery-slideshow\n"
-"POT-Creation-Date: 2014-09-02 01:54:22+00:00\n"
+"POT-Creation-Date: 2014-09-02 12:08:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -118,17 +118,17 @@ msgid "Inspired by %sCargo%s"
 msgstr ""
 
 #: build/jsj-gallery-slideshow/includes/handlers/class-shortcode-handler.php:190
-#: includes/handlers/class-shortcode-handler.php:190
+#: includes/handlers/class-shortcode-handler.php:181
 msgid "Previous"
 msgstr ""
 
 #: build/jsj-gallery-slideshow/includes/handlers/class-shortcode-handler.php:191
-#: includes/handlers/class-shortcode-handler.php:191
+#: includes/handlers/class-shortcode-handler.php:182
 msgid "Next Image"
 msgstr ""
 
 #: build/jsj-gallery-slideshow/includes/handlers/class-shortcode-handler.php:192
-#: includes/handlers/class-shortcode-handler.php:192
+#: includes/handlers/class-shortcode-handler.php:183
 msgid "of"
 msgstr ""
 

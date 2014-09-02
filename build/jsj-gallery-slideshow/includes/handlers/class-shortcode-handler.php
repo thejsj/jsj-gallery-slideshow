@@ -140,16 +140,7 @@
 			/**
 			 * See if a theme is defined, if so, check if exists and make it our current theme
 			 */
-			if(is_array($attr)
-				&& array_key_exists('theme', $attr)
-				&& $attr['theme'] 
-				&& $this->getTheme($attr['theme'])
-				&& $this->getTheme($attr['theme'])['slug'] !== $this->theme['slug']) {
-				$theme = $this->getTheme($attr['theme']);
-				array_push($this->all_enqueued_themes, $theme);
-			} else {
-				$theme = $this->theme;
-			}
+			$theme = $this->setTheme($attr);
 
 			/**
 			 * Define all our variables to be used in our templates
@@ -199,6 +190,25 @@
 			$output = $this->renderTemplate($theme['template_file_location'], $template_variables);
 
 			return $output;
+		}
+
+		/**
+		 * Check if themes needs to be appended 
+		 *
+		 * @return <object>
+		 */
+		private function setTheme($attr) {
+			if(is_array($attr)
+				&& array_key_exists('theme', $attr)
+				&& $attr['theme'] 
+				&& $this->getTheme($attr['theme'])) {
+				$theme = $this->getTheme($attr['theme']);
+				if ($theme['slug'] !== $this->theme['slug']){
+					array_push($this->all_enqueued_themes, $theme);
+					return $theme;
+				}
+			}
+			return $this->theme;
 		}
 
 		/**
