@@ -12,7 +12,7 @@
             __self = {};
 
         if (theme_selector !== undefined && theme_settings !== undefined) {
-            // Make sure we only select 
+            // Make sure we only select
             __self.selector = settings.autoSelector + '.' + theme_selector;
             __self.theme_instance = true;
             // Overwrite local settings with theme settings
@@ -79,17 +79,12 @@
         };
 
         /**
-         * Initializes the galleries 
+         * Initializes the galleries
          */
         self.init = function () {
             __self.log('Re-Initializing Slideshow. jQuery elements were not required. Slideshows destroyed and re-initiated');
             if (window.jsj_gallery_slideshow_options.scripts_enqueued) {
-                if (!slideshow_initialized) {
-                    slideshow_initialized = true;
-                    self.get$el().cycle();
-                } else {
-                    self.get$el().cycle('reinit'); // Append Settings to Cycle Object
-                }
+                self.get$el(true).cycle();
             } else {
                 __self.log('scripts_enqueued is set in settings. Not initializing slideshows.');
             }
@@ -98,15 +93,18 @@
 
         /**
          * Returns the jQuery element(s) for the queried galleries
-         * 
+         *
          * If document.ready has been fired, this element is cached
          * If not, it will return the result of the latest query
          */
-        self.getJQueryElement = function () {
-            if (__self.document_ready) {
-                return __self.$el;
+        self.getJQueryElement = function (force_requery) {
+            if (force_requery === undefined) {
+                force_requery = false;
             }
-            return $(__self.selector);
+            if (!__self.document_ready || force_requery === true) {
+                __self.$el = self.$el = $(__self.selector);
+            }
+            return __self.$el;
         };
 
         /**
@@ -114,7 +112,7 @@
          */
         self.get$el = self.getJQueryElement;
 
-        // Return the object so that it can be used by 
+        // Return the object so that it can be used by
         __self.init();
         return function (initalize) {
             if (initalize === undefined) {
@@ -128,5 +126,3 @@
     }());
 
 }(window.jQuery));
-
-
