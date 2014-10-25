@@ -6,7 +6,8 @@
 
     window.JSJGallerySlideShowUtilities = function (settings) {
 
-        var self = {}, __self = {};
+        var self = {},
+            __self = {};
 
         __self.settings = settings;
         __self.tmpl = $.fn.cycle.API.tmpl;
@@ -21,7 +22,7 @@
 
             $pager_el.find('.slideshow-thumbnail').each(function (i) {
                 $(this)
-                    .css('background-image', 'url(' +  all_images[i] + ')');
+                    .css('background-image', 'url(' + all_images[i] + ')');
             });
 
             return self;
@@ -35,7 +36,7 @@
             optionHash.slideNum = optionHash.slideNum || 1;
 
             html = __self.tmpl(__self.settings.numberingTemplate, $.extend({
-                'ofString' : __self.of_string,
+                'ofString': __self.of_string,
             }, optionHash));
             $numbering_el.html(html);
 
@@ -46,13 +47,13 @@
         self.updateCaption = function ($el, $caption_el, optionHash, options) {
 
             var current_slice_index = options && (options.use_current_slide) ? (optionHash.currSlide || 0) : optionHash.nextSlide || 0,
-                current_slide       = optionHash.slides[current_slice_index],
-                attachment_id       = +(current_slide.id.replace('attachment-image-', '')),
+                current_slide = optionHash.slides[current_slice_index],
+                attachment_id = +(current_slide.id.replace('attachment-image-', '')),
                 html;
 
             html = __self.tmpl(__self.settings.captionTemplate, $.extend({
-                'ofString'   : __self.of_string,
-                'attachment' : window.jsj_gallery_slideshow_images[attachment_id]
+                'ofString': __self.of_string,
+                'attachment': window.jsj_gallery_slideshow_images[attachment_id]
             }, optionHash));
 
             $caption_el.html(html);
@@ -83,7 +84,7 @@
 
                     if (height && height > 1) {
                         animateElementHeight(height);
-                    } else if (numberOfTimesPolled  < 10) {
+                    } else if (numberOfTimesPolled < 10) {
                         setTimeout(pollHeight, numberOfTimesPolled * 50);
                     }
                 };

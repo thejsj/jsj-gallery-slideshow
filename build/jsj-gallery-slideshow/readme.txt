@@ -4,7 +4,7 @@ Donate link: http://thejsj.com
 Tags: slideshow, gallery, simple, jquery, easing, animation, cargo, cycle, jsj
 Requires at least: 3.3
 Tested up to: 3.9
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,10 @@ Added themes!
 Added two new themes: Classic and Classic with Caption.
 Slideshows are now responsive thanks to Cycle 2.
 Added swipe capability for touch screens.
+
+= 2.0.2 =
+Added ability to re-query DOM in order for AJAX to work
+Added span to slash between previous and next.
 
 == Upgrade notice ==
 

@@ -42,14 +42,14 @@ module.exports = function (grunt) {
             },
             default_theme: {
                 files: {
-                    'themes/default/js/main.min.js' : [
+                    'themes/default/js/main.min.js': [
                         'themes/default/js/main.js'
                     ]
                 }
             },
             default_captions_theme: {
                 files: {
-                    'themes/default-captions/js/main.min.js' : [
+                    'themes/default-captions/js/main.min.js': [
                         'themes/default-captions/js/main.js'
                     ]
                 }
@@ -126,7 +126,7 @@ module.exports = function (grunt) {
         copy: {
             // Copy the plugin to a versioned release directory
             main: {
-                src:  [
+                src: [
                     '**',
                     '!node_modules/**',
                     '!build/**',
@@ -197,8 +197,8 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['compile']);
     grunt.registerTask('compile', ['compass', 'uglify']);
     grunt.registerTask('build', ['compile', 'checkwpversion', 'shell:generatePot', 'wp_readme_to_markdown', 'clean', 'copy', 'compress']);
-    grunt.registerTask('push', [ 'build', 'sftp-deploy']);
-    grunt.registerTask('deploy', [ 'build', 'push', 'wp_deploy' ]);
+    grunt.registerTask('push', ['build', 'sftp-deploy']);
+    grunt.registerTask('deploy', ['push', 'wp_deploy']);
 
 
 };

@@ -3,8 +3,8 @@
 /*
 Plugin Name: JSJ Gallery Slideshow
 Plugin URI: http://wordpress.org/plugins/jsj-gallery-slideshow/
-Description: A plugin to immediately improve all your WordPress galleries, with a simple, easy-to-use slideshow. 
-Version: 2.0.1
+Description: A plugin to immediately improve all your WordPress galleries, with a simple, easy-to-use slideshow.
+Version: 2.0.2
 Author: Jorge Silva Jetter
 Author URI: http://thejsj.com
 License: GPL2
@@ -24,15 +24,15 @@ $jsj_gallery_slideshow_object = new JSJGallerySlideshow();
 
 class JSJGallerySlideshow {
 
-	private $defined = true; 
+	private $defined = true;
 	private $title = 'JSJ Gallery Slideshow';
 	private $name_space = 'jsj-gallery-slideshow';
 	private $titleLowerCase = '';
 	private $instructions = '';
-	
+
 	/**
 	 * Bind Plugin to WordPress hooks
-	 * 
+	 *
 	 * @return void
 	 */
 	public function __construct(){
@@ -51,21 +51,21 @@ class JSJGallerySlideshow {
 		);
 
 		$this->static_enqueue = new JSJGallerySlideshowStaticEnqueue(
-			$this->name_space, 
+			$this->name_space,
 			$this->settings,
 			$this->theme,
 			$this->scripts
 		);
 
 		$this->admin = new JSJGallerySlideshowAdmin(
-			$this->name_space, 
-			$this->settings, 
-			$this->title, 
+			$this->name_space,
+			$this->settings,
+			$this->title,
 			$this->all_themes
 		);
 
 		$this->shortcode_handler = new JSJGallerySlideshowShortcodeHandler(
-			$this->name_space, 
+			$this->name_space,
 			$this->settings,
 			$this->theme,
 			$this->all_themes,
@@ -100,7 +100,7 @@ class JSJGallerySlideshow {
 
 	/**
 	 * Init Plugin and get all settings
-	 * 
+	 *
 	 * @return void
 	 */
 	public function init(){
@@ -144,9 +144,9 @@ class JSJGallerySlideshow {
 		$this->shortcode_handler->updateTheme($this->theme);
 	}
 
-	/** 
+	/**
 	 * Query our shortcode_handler for all used themes. Pass them on to the our static_enqueue handler
-	 * 
+	 *
 	 * @return void
 	 */
 	public function getAllEnqueuedThemes () {
