@@ -43,9 +43,9 @@
             }
             if (selector.jquery)
                 return selector;
-            
+
             return $(selector);
         },
-    })
+    });
 
 }(window.jQuery));

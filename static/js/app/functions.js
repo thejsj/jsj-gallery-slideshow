@@ -75,15 +75,18 @@
             var animateElementHeight = function (height) {
                     $el.clearQueue().animate({
                         height: height
-                    }, 200);
+                    }, 100);
                 },
                 numberOfTimesPolled = 0,
                 pollHeight = function () {
                     var el = $el.get(0),
-                        height = el.children[0].height;
+                        height = el.children[0].height,
+                        width = el.children[0].width,
+                        elWidth = $el.width();
 
                     if (height && height > 1) {
-                        animateElementHeight(height);
+                        var resultHeight = (height / width) * elWidth;
+                        animateElementHeight(resultHeight);
                     } else if (numberOfTimesPolled < 10) {
                         setTimeout(pollHeight, numberOfTimesPolled * 50);
                     }
